@@ -1,0 +1,168 @@
+<html>
+ <head>
+  <title>
+   CustomerRegistration
+  </title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
+  <style>
+   body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgb(124, 214, 155);
+            background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%, rgba(219, 235, 27, 0.3029586834733894) 100%);
+
+        }
+        .navbar {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #000;
+            background-color: #b27cd6;
+        }
+        .navbar .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .navbar .user-icon {
+            font-size: 20px;
+            color: #fff;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .logo img {
+            width: 300px;
+            height: auto;
+        }
+        .card {
+            width: 400px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-left: 20px;
+            animation: fadeIn 1s;
+        }
+        .card h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .card label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .card input[type="text"],
+        .card input[type="email"],
+        .card input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #000;
+            border-radius: 5px;
+        }
+        .card button[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: green;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .card button[type="submit"]:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+  </style>
+ </head>
+ <body>
+  <div class="navbar">
+   <div class="logo">
+    GoCoders
+   </div>
+   <div class="user-icon">
+    <i class="fas fa-user">
+    </i>
+   </div>
+  </div>
+  <div class="container">
+   <div class="logo">
+    <img alt="GoCoder logo with a stylized face wearing glasses and the text 'GO CODER' below it" height="300" src="https://storage.googleapis.com/a1aa/image/HPUxl1KOo8eX59koVsuOqUNt4bv2IpV8ZXqE75GDXMQ.jpg" width="300"/>
+   </div>
+   <div class="card animate__animated animate__fadeIn">
+    <h2>
+     Customer Registration
+    </h2>
+    <form onsubmit="showPopup(event)">
+     <div class="form-group">
+      <label for="name">
+       Name
+      </label>
+      <input class="form-control" id="name" name="name" type="text" required="required" oninput="checkForm()"/>
+     </div>
+     <div class="form-group">
+      <label for="email">
+       Email ID
+      </label>
+      <input class="form-control" id="email" name="email" type="email" required="required" oninput="checkForm()"/>
+     </div>
+     <div class="form-group">
+      <label for="password">
+       Password
+      </label>
+      <input class="form-control" id="password" name="password" type="password" required="required" oninput="checkForm()"/>
+     </div>
+     <button class="btn btn-success btn-block" type="submit" id="submitBtn" disabled="disabled">
+      Submit
+     </button>
+    </form>
+   </div>
+  </div>
+  <script>
+   function checkForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const submitBtn = document.getElementById('submitBtn');
+            
+            if (name && email && password) {
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.disabled = true;
+            }
+        }
+
+        function showPopup(event) {
+            event.preventDefault();
+            alert("Congratulations! You have registered successfully.");
+        }
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
+  </script>
+ </body>
+</html>
