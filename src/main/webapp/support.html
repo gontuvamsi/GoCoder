@@ -1,0 +1,227 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoCoder Support Center</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@material-ui/core@4.11.0/umd/material-ui.production.min.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #E0F7FA;
+            color: #004D40;
+            padding: 20px;
+        }
+        header {
+            text-align: center;
+            padding: 20px;
+            background-color: #00796B;
+            color: white;
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        .search-container {
+            margin-top: 20px;
+        }
+        .search-bar {
+            width: 80%;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #004D40;
+            border-radius: 5px;
+        }
+        .quick-links a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .quick-links a:hover {
+            color: #B2DFDB;
+        }
+        .faq-section h2, .contact-section h2, .resources-section h2 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #00796B;
+        }
+        .faq-categories {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+        .category {
+            background-color: #ffffff;
+            border: 1px solid #004D40;
+            border-radius: 10px;
+            padding: 15px;
+            width: 45%;
+            margin-bottom: 15px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .category:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .category h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+            color: #00796B;
+        }
+        .category ul {
+            list-style-type: none;
+        }
+        .category ul li {
+            margin: 5px 0;
+            font-size: 1.1rem;
+        }
+        .contact-options a, .contact-options button {
+            display: inline-block;
+            margin: 10px 20px;
+            padding: 10px 15px;
+            background-color: #00796B;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .contact-options a:hover, .contact-options button:hover {
+            background-color: #004D40;
+            transform: scale(1.05);
+        }
+        .contact-options form {
+            display: block;
+            margin: 20px 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-options input, .contact-options select, .contact-options textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #004D40;
+            border-radius: 5px;
+        }
+        .chat-section button {
+            padding: 10px 20px;
+            background-color: #004D40;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .chat-section button:hover {
+            background-color: #00251A;
+            transform: scale(1.05);
+        }
+        .resources-section ul {
+            list-style-type: none;
+            text-align: center;
+        }
+        .resources-section ul li {
+            margin: 10px;
+            font-size: 1.1rem;
+        }
+        .resources-section ul li a {
+            text-decoration: none;
+            color: #00796B;
+            transition: color 0.3s;
+        }
+        .resources-section ul li a:hover {
+            color: #004D40;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <h1>GoCoder Support Center</h1>
+        <div class="search-container">
+            <input class="search-bar" type="text" placeholder="How can we help you today?">
+        </div>
+        <div class="quick-links">
+            <a href="#contact-section">Submit a Ticket</a> | 
+            <a href="#faq-section">FAQs</a> | 
+            | 
+            <a href="#">Contact Us</a>
+        </div>
+    </header>
+
+    <!-- FAQ Section -->
+    <div id="faq-section" class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-categories">
+            <div class="category">
+                <h3>Account & Login</h3>
+                <ul>
+                    <li>How do I reset my password?</li>
+                    <li>Why can’t I log in?</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Projects & Bids</h3>
+                <ul>
+                    <li>How do I post a project?</li>
+                    <li>How do I withdraw a bid?</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Payments</h3>
+                <ul>
+                    <li>When will I receive my payment?</li>
+                    <li>How do I update my payment method?</li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>Technical Issues</h3>
+                <ul>
+                    <li>The page isn’t loading. What should I do?</li>
+                    <li>How do I report a bug?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Support Section -->
+    <div id="contact-section" class="contact-section">
+        <h2>Need More Help? Contact Us</h2>
+        <div class="contact-options">
+            <div class="text-center">
+                <p>Email: support@gocoder.com</p>
+                <button class="btn btn-primary">Email Us</button>
+            </div>
+            <div class="text-center">
+                <p>Phone: +1 (800) 123-4567</p>
+                <button class="btn btn-primary">Call Us</button>
+            </div>
+
+            <form action="/submit-ticket" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <select name="issue-type" required>
+                    <option value="">Select Issue Type</option>
+                    <option value="technical">Technical Issue</option>
+                    <option value="payment">Payment Issue</option>
+                    <option value="account">Account Issue</option>
+                </select>
+                <textarea name="message" placeholder="Describe your issue..." required></textarea>
+                <button type="submit" class="btn btn-primary btn-block">Submit Ticket</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
