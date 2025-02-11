@@ -121,7 +121,7 @@
       </div>
       <div class="card animate__animated animate__fadeIn">
         <h2>LOGIN</h2>
-        <form onsubmit="showPopup(event)">
+        <form action="LoginServlet" method="POST" >
           <div class="form-group">
             <label for="name">Name</label>
             <input class="form-control" id="name" name="name" oninput="checkForm()" required="required" type="text"/>
@@ -165,25 +165,18 @@
         }
       }
 
-      function showPopup(event) {
-        event.preventDefault();  // Prevent the form from submitting normally
-
-        // Get the selected role
-        const role = document.getElementById('role').value;
-
-        // Show the alert popup
-        alert("Congratulations! You have logged in successfully.");
-
-        // Redirect based on the selected role
-        if (role === 'coder') {
-          window.location.href = 'coderdashboard.html';  // Redirect to Coder dashboard
-        } else if (role === 'customer') {
-          window.location.href = 'customerdashboard.html';  // Redirect to Customer dashboard
-        } else {
-          window.location.href = 'admindashboard.html';  // Redirect to Admin dashboard
-        }
-      }
+    
     </script>
+    <script>
+  window.onload = function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorMessage = urlParams.get('error');
+    if (errorMessage) {
+      alert(errorMessage); // Display error message in an alert
+    }
+  };
+</script>
+    
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
