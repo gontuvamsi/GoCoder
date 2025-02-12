@@ -18,7 +18,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String selectedRole = request.getParameter("role"); // Get role from form input
+        String selectedRole = request.getParameter("role");
 
         try {
             // Database Connection
@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
             // Query to check user credentials
-            String query = "SELECT role FROM users WHERE email = ? AND password = ?";
+            String query = "SELECT name, role FROM users WHERE email = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, email);
             ps.setString(2, password);
@@ -34,15 +34,17 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                String name = rs.getString("name");
                 String roleFromDB = rs.getString("role");
 
                 if (roleFromDB.equalsIgnoreCase(selectedRole)) {
-                    // Store user info in session
+                    // Store user details in session
                     HttpSession session = request.getSession();
                     session.setAttribute("userEmail", email);
+                    session.setAttribute("userName", name);
                     session.setAttribute("userRole", roleFromDB);
 
-                    // Redirect based on role
+                    // Redirect to the appropriate dashboard
                     if ("coder".equalsIgnoreCase(roleFromDB)) {
                         response.sendRedirect("coderdashboard.html");
                     } else if ("customer".equalsIgnoreCase(roleFromDB)) {

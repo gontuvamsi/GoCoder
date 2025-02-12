@@ -43,7 +43,8 @@
             <div class="h4 font-weight-bold">GoCoders Admin</div>
             <div class="d-flex gap-3">
                 
-                <a href="#" class="text-white">Projects</a>
+                <a href="#" class="text-white" onclick="loadProjects()">Projects</a>
+
                 <a href="#" class="text-white">Dashboard</a>
                 <a href="#" onclick="window.location.href='support.html'" class="text-white" >Support</a>
             </div>
@@ -129,6 +130,29 @@
             </div>
         </div>
     </div>
+    <div id="projectsSection" class="container mt-4" style="display: none;">
+    <h3 class="text-center font-weight-bold mb-4">Projects List</h3>
+    <table class="table table-hover bg-white shadow-sm">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Technology</th>
+                <th>Category</th>
+                <th>Deadline</th>
+                <th>Budget Range</th>
+                <th>Visibility</th>
+                <th>Posted By</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="projectsTable">
+            <!-- Data will be inserted dynamically -->
+        </tbody>
+    </table>
+</div>
+    
     <script>
 document.addEventListener("DOMContentLoaded", function() {
     loadUsers(); // Load users when page loads
@@ -199,6 +223,35 @@ function updateStatus(userId, newStatus) {
     .catch(error => console.error("Error updating user status:", error));
 }
 </script>
+<script>
+function loadProjects() {
+    fetch("AdminProjectServlet") // Call the servlet to fetch project data
+    .then(response => response.text()) // Get response as text (HTML table rows)
+    .then(data => {
+        document.getElementById("projectsTable").innerHTML = data; // Insert data into table
+        document.getElementById("projectsSection").style.display = "block"; // Show projects section
+    })
+    .catch(error => console.error("Error loading projects:", error));
+}
+</script>
+<script>
+function deleteProject(projectId) {
+    if (confirm("Are you sure you want to delete this project?")) {
+        fetch("DeleteProjectServlet", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "projectId=" + projectId
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result); // Show success/failure message
+            loadProjects(); // Refresh project list
+        })
+        .catch(error => console.error("Error deleting project:", error));
+    }
+}
+</script>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
