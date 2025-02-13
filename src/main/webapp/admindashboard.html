@@ -63,11 +63,12 @@
 </div>
 
                 <div class="col-md-3">
-                    <div class="card text-center p-4 shadow-sm">
-                        <div class="text-muted">Active Projects:</div>
-                        <div class="h2 font-weight-bold">45</div>
-                    </div>
-                </div>
+    <div class="card text-center p-4 shadow-sm">
+        <div class="text-muted">Active Projects:</div>
+        <div class="h2 font-weight-bold" id="activeProjectsCount">Loading...</div>
+    </div>
+</div>
+
                 <div class="col-md-3">
                     <div class="card text-center p-4 shadow-sm">
                         <div class="text-muted">Pending Payments:</div>
@@ -250,6 +251,21 @@ function deleteProject(projectId) {
         .catch(error => console.error("Error deleting project:", error));
     }
 }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    loadActiveProjects(); // Load active project count dynamically
+});
+
+function loadActiveProjects() {
+    fetch("GetActiveProjectsServlet") // Call the servlet to get active project count
+    .then(response => response.text()) // Get response as text (count)
+    .then(data => {
+        document.getElementById("activeProjectsCount").innerText = data; // Update the HTML
+    })
+    .catch(error => console.error("Error loading active projects count:", error));
+}
+
 </script>
 
 
