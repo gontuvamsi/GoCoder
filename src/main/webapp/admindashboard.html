@@ -76,11 +76,12 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="card text-center p-4 shadow-sm">
-                        <div class="text-muted">Open Tickets:</div>
-                        <div class="h2 font-weight-bold">12</div>
-                    </div>
-                </div>
+    <div class="card text-center p-4 shadow-sm">
+        <div class="text-muted">Open Tickets:</div>
+        <div class="h2 font-weight-bold" id="activeTicketsCount">Loading...</div>
+    </div>
+</div>
+                
             </div>
 
             <div class="text-center h3 font-weight-bold mb-4">User Status</div>
@@ -96,14 +97,14 @@
         </tr>
     </thead>
     <tbody id="userStatusTable"> 
-        <!-- Data will be inserted here dynamically -->
+        
     </tbody>
 </table>
             
         </div>
     </div>
 
-    <!-- User Status Modal -->
+    
     <div class="modal fade" id="userStatusModal" tabindex="-1" aria-labelledby="userStatusModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -123,7 +124,7 @@
         </tr>
     </thead>
     <tbody id="userStatusTable"> 
-        <!-- Data will be inserted here dynamically -->
+       
     </tbody>
 </table>
                   
@@ -149,26 +150,48 @@
             </tr>
         </thead>
         <tbody id="projectsTable">
-            <!-- Data will be inserted dynamically -->
+           
         </tbody>
     </table>
 </div>
+<h3 class="text-center font-weight-bold mt-4">Support Tickets</h3>
+<div id="ticketsSection" class="container mt-4">
+    <table class="table table-hover bg-white shadow-sm">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Issue Type</th>
+                <th>Message</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="ticketsTableBody">
+            <tr>
+                <td colspan="7" class="text-center">Loading...</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
     
     <script>
 document.addEventListener("DOMContentLoaded", function() {
-    loadUsers(); // Load users when page loads
+    loadUsers(); 
 });
 
 function loadUsers() {
-    fetch("AdminUserServlet") // Call the servlet
-    .then(response => response.text()) // Get response as text (HTML table rows)
+    fetch("AdminUserServlet") 
+    .then(response => response.text()) 
     .then(data => {
-        document.getElementById("userStatusTable").innerHTML = data; // Insert data into table
+        document.getElementById("userStatusTable").innerHTML = data; 
     })
     .catch(error => console.error("Error loading user data:", error));
 }
 
-// Function to update user status
+
 function updateStatus(userId, newStatus) {
     fetch("UpdateUserStatusServlet", {
         method: "POST",
@@ -177,39 +200,38 @@ function updateStatus(userId, newStatus) {
     })
     .then(response => response.text())
     .then(result => {
-        alert(result); // Show success/failure message
-        loadUsers(); // Refresh table
+        alert(result); 
+        loadUsers(); 
     })
     .catch(error => console.error("Error updating user status:", error));
 }
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    loadUsers(); // Load users when page loads
-    loadUserCount(); // Load total user count dynamically
+    loadUsers(); 
+    loadUserCount(); 
 });
 
-// Function to load users and display in the table
 function loadUsers() {
-    fetch("AdminUserServlet") // Call the servlet to fetch user data
-    .then(response => response.text()) // Get response as text (HTML table rows)
+    fetch("AdminUserServlet") 
+    .then(response => response.text()) 
     .then(data => {
-        document.getElementById("userStatusTable").innerHTML = data; // Insert data into table
+        document.getElementById("userStatusTable").innerHTML = data; 
     })
     .catch(error => console.error("Error loading user data:", error));
 }
 
-// Function to fetch total user count
+
 function loadUserCount() {
-    fetch("GetUserCountServlet") // Call the servlet to get the user count
-    .then(response => response.text()) // Get response as text (total user count)
+    fetch("GetUserCountServlet") 
+    .then(response => response.text()) 
     .then(data => {
-        document.getElementById("totalUsersCount").innerText = data; // Display total user count in the box
+        document.getElementById("totalUsersCount").innerText = data; 
     })
     .catch(error => console.error("Error loading user count:", error));
 }
 
-// Function to update user status
+
 function updateStatus(userId, newStatus) {
     fetch("UpdateUserStatusServlet", {
         method: "POST",
@@ -218,19 +240,19 @@ function updateStatus(userId, newStatus) {
     })
     .then(response => response.text())
     .then(result => {
-        alert(result); // Show success/failure message
-        loadUsers(); // Refresh table
+        alert(result); 
+        loadUsers(); 
     })
     .catch(error => console.error("Error updating user status:", error));
 }
 </script>
 <script>
 function loadProjects() {
-    fetch("AdminProjectServlet") // Call the servlet to fetch project data
-    .then(response => response.text()) // Get response as text (HTML table rows)
+    fetch("AdminProjectServlet") 
+    .then(response => response.text()) 
     .then(data => {
-        document.getElementById("projectsTable").innerHTML = data; // Insert data into table
-        document.getElementById("projectsSection").style.display = "block"; // Show projects section
+        document.getElementById("projectsTable").innerHTML = data; 
+        document.getElementById("projectsSection").style.display = "block"; 
     })
     .catch(error => console.error("Error loading projects:", error));
 }
@@ -245,8 +267,8 @@ function deleteProject(projectId) {
         })
         .then(response => response.text())
         .then(result => {
-            alert(result); // Show success/failure message
-            loadProjects(); // Refresh project list
+            alert(result); 
+            loadProjects(); 
         })
         .catch(error => console.error("Error deleting project:", error));
     }
@@ -254,21 +276,64 @@ function deleteProject(projectId) {
 </script>
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    loadActiveProjects(); // Load active project count dynamically
+    loadActiveProjects();
 });
 
 function loadActiveProjects() {
-    fetch("GetActiveProjectsServlet") // Call the servlet to get active project count
-    .then(response => response.text()) // Get response as text (count)
+    fetch("GetActiveProjectsServlet") 
+    .then(response => response.text()) 
     .then(data => {
-        document.getElementById("activeProjectsCount").innerText = data; // Update the HTML
+        document.getElementById("activeProjectsCount").innerText = data; 
     })
     .catch(error => console.error("Error loading active projects count:", error));
 }
 
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    loadActiveTickets(); 
+});
 
+function loadActiveTickets() {
+    fetch("GetActiveTicketsServlet") 
+    .then(response => response.text()) 
+    .then(data => {
+        document.getElementById("activeTicketsCount").innerText = data; 
+    })
+    .catch(error => console.error("Error loading active tickets count:", error));
+}
 
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    loadTickets(); 
+});
+
+function loadTickets() {
+    fetch("AdminTicketServlet") 
+    .then(response => response.text()) 
+    .then(data => {
+        document.getElementById("ticketsTableBody").innerHTML = data; 
+    })
+    .catch(error => console.error("Error loading tickets:", error));
+}
+
+function updateTicketStatus(ticketId) {
+    if (confirm("Are you sure you want to close this ticket?")) {
+        fetch("UpdateTicketStatusServlet", {
+            method: "POST",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: "ticketId=" + ticketId
+        })
+        .then(response => response.text())
+        .then(result => {
+            alert(result); 
+            loadTickets(); 
+        })
+        .catch(error => console.error("Error updating ticket status:", error));
+    }
+}
+</script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
