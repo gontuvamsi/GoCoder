@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -6,6 +5,8 @@
   <title>Post a new Project</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Roboto', sans-serif;
@@ -15,26 +16,28 @@
 <body class="bg-light p-4">
   <div class="container bg-white p-5 rounded shadow-sm">
     <header class="d-flex justify-content-between align-items-center mb-4 bg-primary p-3 rounded">
-      <span class="h4 text-white mb-0">GoCoders</span>
-      <nav>
-        <a class="text-white text-decoration-none me-3" href="customerdashboard.html">Dashboard</a>
-        <a class="text-white text-decoration-none me-3" href="#">My Projects</a>
+      <div class="d-flex align-items-center">
+        <span class="h4 text-white mb-0">GoCoders</span>
+      </div>
+      <nav class="d-flex gap-3">
+        <a class="text-white text-decoration-none" href="customerdashboard.html">Dashboard</a>
+        <a class="text-pink-300 text-decoration-none" href="#">My Projects</a>
         <a class="text-white text-decoration-none" href="home.html">Logout</a>
       </nav>
     </header>
     <h1 class="h3 text-center mb-4">Post a new Project</h1>
-    <form id="project-form">
+    <form id="project-form" action="ProjectPostingServlet" method="POST">
       <div class="mb-3">
-        <label class="form-label" for="project-title">Project Title:</label>
-        <input class="form-control" id="project-title" name="title" type="text" required/>
+        <label class="form-label" for="title">Project Title :</label>
+        <input class="form-control" name="title" id="title" type="text" required/>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="project-description">Project Description:</label>
-        <textarea class="form-control" id="project-description" name="description" rows="4" required></textarea>
+        <label class="form-label" for="description">Project Description :</label>
+        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="technology">Technology/Stack Required:</label>
-        <select class="form-select" id="technology" name="technology" required>
+        <label class="form-label" for="technology">Technology/Stack Required :</label>
+        <select class="form-select" name="technology" id="technology" required>
           <option>Java</option>
           <option>Python</option>
           <option>UI/UX</option>
@@ -44,8 +47,8 @@
         </select>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="category">Project Category:</label>
-        <select class="form-select" id="category" name="category" required>
+        <label class="form-label" for="category">Project Category :</label>
+        <select class="form-select" name="category" id="category" required>
           <option>Web Development</option>
           <option>Android Development</option>
           <option>DevOps</option>
@@ -54,58 +57,72 @@
         </select>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="deadline">Target Deadline:</label>
-        <input class="form-control" id="deadline" name="deadline" type="date" required/>
+        <label class="form-label" for="deadline">Target Deadline :</label>
+        <div class="input-group">
+          <input class="form-control" name="deadline" id="deadline" type="date" required/>
+        </div>
       </div>
       <div class="mb-3">
-        <label class="form-label">Budget Range:</label>
+        <label class="form-label">Budget Range :</label>
         <div class="row">
           <div class="col">
-            <label class="form-label" for="min-budget">Min</label>
-            <input class="form-control" id="min-budget" name="minBudget" type="number" required/>
+            <label class="form-label" for="min_budget">Min</label>
+            <input class="form-control" name="min_budget" id="min_budget" type="number" required/>
           </div>
           <div class="col">
-            <label class="form-label" for="max-budget">Max</label>
-            <input class="form-control" id="max-budget" name="maxBudget" type="number" required/>
+            <label class="form-label" for="max_budget">Max</label>
+            <input class="form-control" name="max_budget" id="max_budget" type="number" required/>
           </div>
         </div>
       </div>
       <div class="mb-3">
-        <label class="form-label" for="visibility">Visibility:</label>
-        <select class="form-select" id="visibility" name="visibility" required>
+        <label class="form-label" for="visibility">Visibility :</label>
+        <select class="form-select" name="visibility" id="visibility" required>
           <option>Public</option>
           <option>Private</option>
         </select>
-      </div>
-      <div class="mb-3">
-        <label class="form-label" for="posted-by">Posted By:</label>
-        <input class="form-control" id="posted-by" name="postedBy" type="text" required/>
       </div>
       <div class="text-center">
         <button class="btn btn-success" type="submit">Submit</button>
       </div>
     </form>
-    <div id="success-message" class="alert alert-success mt-4 d-none">Project posted successfully!</div>
+    <div id="error-message" class="alert alert-danger mt-4 d-none" role="alert">
+      Please fix the errors above and try again.
+    </div>
+    <div id="success-message" class="alert alert-success mt-4 d-none" role="alert">
+      Project posted successfully!
+    </div>
   </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.getElementById('project-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      var formData = new FormData(this);
-      fetch("ProjectPostingServlet", {
-        method: "POST",
-        body: new URLSearchParams(formData)
-      })
-      .then(response => response.text())
-      .then(result => {
-        if (result === "success") {
-          document.getElementById('success-message').classList.remove('d-none');
-          alert('Project posted successfully!');
-        } else {
-          alert('Failed to post project. Please try again.');
-        }
-      })
-      .catch(error => console.error("Error posting project:", error));
-    });
+    document.getElementById("project-form").onsubmit = function(event) {
+      let isValid = true;
+
+      const title = document.getElementById("title").value;
+      const description = document.getElementById("description").value;
+      const technology = document.getElementById("technology").value;
+      const category = document.getElementById("category").value;
+      const deadline = document.getElementById("deadline").value;
+      const minBudget = document.getElementById("min_budget").value;
+      const maxBudget = document.getElementById("max_budget").value;
+      const visibility = document.getElementById("visibility").value;
+
+      if (!title || !description || !technology || !category || !deadline || !minBudget || !maxBudget || !visibility) {
+        isValid = false;
+        document.getElementById("error-message").classList.remove("d-none");
+      } else {
+        document.getElementById("error-message").classList.add("d-none");
+      }
+
+      if (parseFloat(minBudget) > parseFloat(maxBudget)) {
+        isValid = false;
+        alert("Min budget should be less than Max budget.");
+      }
+
+      if (!isValid) {
+        event.preventDefault();
+      }
+    }
   </script>
 </body>
 </html>
