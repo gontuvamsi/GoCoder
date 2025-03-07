@@ -8,12 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        .box {
-            transition: transform 0.3s ease-in-out;
-        }
-        .box:hover {
-            transform: scale(1.05);
-        }
+       
         /* Ensure dropdown is hidden by default */
         .dropdown-menu {
             display: none;
@@ -81,42 +76,25 @@
                 </div>
             </div>
         </div>
-        <div class="mb-4">
-            <h2 class="text-2xl font-bold mb-2">Bids Received</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Project Name</th>
-                        <th>Coder</th>
-                        <th>Bid Amount</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="box">
-                        <td>Build React App</td>
-                        <td>Ram</td>
-                        <td>$500</td>
-                        <td>Pending</td>
-                        <td>
-                            <button class="btn btn-success">Accept</button>
-                            <button class="btn btn-danger">Reject</button>
-                            <button class="btn btn-primary">View Profile</button>
-                        </td>
-                    </tr>
-                    <tr class="box">
-                        <td>Python Data Scraper</td>
-                        <td>Sham</td>
-                        <td>$200</td>
-                        <td>Accepted</td>
-                        <td>
-                            <button class="btn btn-primary">View Profile</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+<div class="mb-4">
+    <h2 class="text-2xl font-bold mb-2">Bids Received</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Project ID</th>
+                <th>User ID</th>
+                <th>Bid Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="bids-table-body">
+            <!-- Data will be populated here dynamically -->
+        </tbody>
+    </table>
+</div>
+
+
         <div class="mb-4">
             <h2 class="text-2xl font-bold mb-2">Awarded Projects</h2>
             <div class="border p-4 rounded mb-4 box">
@@ -217,6 +195,56 @@
              }
          });
     }
+</script>
+<script>
+$(document).ready(function () {
+    $.ajax({
+        url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
+        type: "POST",
+        success: function (response) {
+            if (response.status === "success") {
+                let bids = response.bids;
+                let html = "";
+                bids.forEach(function (bid) {
+                    html += `
+                    <tr class="box">
+                        <td>${bid.project_id}</td>
+                        <td>${bid.user_id}</td>
+                        <td>${bid.bid_amt}</td>
+                        <td>${bid.status}</td>
+                        <td>
+                            <button class="btn btn-success" onclick="acceptBid(${bid.id})">Accept</button>
+                            <button class="btn btn-danger" onclick="rejectBid(${bid.id})">Reject</button>
+                            </td>
+                    </tr>
+                    `;
+                });
+                $("#bids-table-body").html(html);
+            } else {
+                $("#bids-table-body").html("<tr><td colspan='5' class='text-danger'>No Bids Received</td></tr>");
+            }
+        },
+        error: function () {
+            $("#bids-table-body").html("<tr><td colspan='5' class='text-danger'>Failed to fetch bids</td></tr>");
+        }
+    });
+});
+
+function acceptBid(bidId) {
+    alert("Bid Accepted");
+    // Call Servlet with status change logic here
+}
+
+function rejectBid(bidId) {
+    alert("Bid Rejected");
+    // Call Servlet with status change logic here
+}
+
+function viewProfile(coderId) {
+    window.location.href = `coderprofile.html?userId=${coderId}`;
+}
+
+
 </script>
     
 </body>
