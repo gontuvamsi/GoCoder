@@ -23,11 +23,11 @@ public class GetActiveProjectsServlet extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            // Database connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // Query to count active projects (modify condition if needed)
+            
             String sql = "SELECT COUNT(*) FROM projects WHERE deadline >= CURDATE()";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();

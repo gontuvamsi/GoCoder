@@ -18,11 +18,11 @@ public class UpdateUserStatusServlet extends HttpServlet {
         String status = request.getParameter("status");
 
         try {
-            // Database Connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // Update user status
+            
             String query = "UPDATE users SET status = ? WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, status);

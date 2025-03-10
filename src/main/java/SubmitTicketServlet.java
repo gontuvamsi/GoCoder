@@ -16,7 +16,7 @@ public class SubmitTicketServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        // Get form data
+        
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String issueType = request.getParameter("issue-type");
@@ -24,19 +24,19 @@ public class SubmitTicketServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
 
-        // Database connection variables
-        String jdbcURL = "jdbc:mysql://localhost:3306/gocoder"; // Change database name if needed
-        String dbUser = "root"; // Change if needed
-        String dbPassword = "root"; // Change your MySQL password
+        
+        String jdbcURL = "jdbc:mysql://localhost:3306/gocoder"; 
+        String dbUser = "root"; 
+        String dbPassword = "root"; 
 
         try {
-            // Load JDBC driver
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-            // Connect to database
+            
             Connection conn = DriverManager.getConnection(jdbcURL, dbUser, dbPassword);
 
-            // Insert query
+            
             String sql = "INSERT INTO tickets (name, email, issue_type, message) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, name);

@@ -16,16 +16,16 @@ public class GetUserCountServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         try {
-            // Database connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // Query to count total users
+            
             String query = "SELECT COUNT(*) AS userCount FROM users";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            // Fetch user count from the result
+            
             int userCount = 0;
             if (rs.next()) {
                 userCount = rs.getInt("userCount");
@@ -33,7 +33,7 @@ public class GetUserCountServlet extends HttpServlet {
 
             con.close();
 
-            // Send the result back as plain text
+            
             response.getWriter().print(userCount);
 
         } catch (Exception e) {

@@ -21,11 +21,11 @@ public class LoginServlet extends HttpServlet {
         String selectedRole = request.getParameter("role");
 
         try {
-            // Database Connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // Query to check user credentials
+            
             String query = "SELECT name, role FROM users WHERE email = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, email);
@@ -38,13 +38,13 @@ public class LoginServlet extends HttpServlet {
                 String roleFromDB = rs.getString("role");
 
                 if (roleFromDB.equalsIgnoreCase(selectedRole)) {
-                    // Store user details in session
+                    
                     HttpSession session = request.getSession();
                     session.setAttribute("userEmail", email);
                     session.setAttribute("userName", name);
                     session.setAttribute("userRole", roleFromDB);
 
-                    // Redirect to the appropriate dashboard
+                    
                     if ("coder".equalsIgnoreCase(roleFromDB)) {
                         response.sendRedirect("coderdashboard.html");
                     } else if ("customer".equalsIgnoreCase(roleFromDB)) {
@@ -53,11 +53,11 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("admindashboard.html");
                     }
                 } else {
-                    // Role mismatch
+                    
                     response.sendRedirect("login.html?error=Role mismatch. Please select the correct role.");
                 }
             } else {
-                // Invalid credentials
+                
                 response.sendRedirect("login.html?error=Invalid email or password.");
             }
 

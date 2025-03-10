@@ -20,16 +20,16 @@ public class AdminUserServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            // Database Connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // Fetch user data
+            
             String query = "SELECT id, name, role, status FROM users";
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            // Generate dynamic table rows
+            
             StringBuilder tableRows = new StringBuilder();
             while (rs.next()) {
                 int id = rs.getInt("id");
@@ -42,11 +42,11 @@ public class AdminUserServlet extends HttpServlet {
                 tableRows.append("<td>" + name + "</td>");
                 tableRows.append("<td>" + role + "</td>");
                 
-                // Status display with color coding
+                
                 String statusClass = status.equals("Active") ? "text-success" : "text-danger";
                 tableRows.append("<td class='" + statusClass + "'>" + status + "</td>");
 
-                // Action buttons
+                
                 tableRows.append("<td>");
                 if (status.equals("Active")) {
                     tableRows.append("<button class='btn btn-danger btn-sm' onclick='updateStatus(" + id + ", \"Inactive\")'><i class='fas fa-times'></i></button>");

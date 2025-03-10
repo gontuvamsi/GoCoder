@@ -36,7 +36,7 @@ public class SubmitBidServlet extends HttpServlet {
 			String sql = "INSERT INTO bids (project_id, user_id, bid_amt, completion_date, bid_desc) VALUES (?, ?, ?, ?, ?)";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			stmt.setInt(1, 1); // Hardcoded project_id
+			stmt.setInt(1, 1); 
 			stmt.setInt(2, Integer.parseInt(userId));
 			stmt.setDouble(3, Double.parseDouble(bidAmt));
 			stmt.setString(4, completionDate);

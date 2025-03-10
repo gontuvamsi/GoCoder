@@ -19,16 +19,16 @@ public class AdminProjectServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
-            // Database connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // SQL Query
+            
             String query = "SELECT * FROM projects";
             PreparedStatement pst = con.prepareStatement(query);
             ResultSet rs = pst.executeQuery();
 
-            // Loop through projects and generate HTML table rows
+            
             while (rs.next()) {
                 out.println("<tr>");
                 out.println("<td>" + rs.getInt("id") + "</td>");
@@ -44,7 +44,7 @@ public class AdminProjectServlet extends HttpServlet {
                 out.println("</tr>");
             }
 
-            // Close resources
+            
             rs.close();
             pst.close();
             con.close();

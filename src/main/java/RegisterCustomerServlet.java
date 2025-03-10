@@ -17,25 +17,25 @@ public class RegisterCustomerServlet extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        // Get form parameters
+        
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
 
-        // Database credentials
+        
         String jdbcURL = "jdbc:mysql://localhost:3306/gocoder";
-        String jdbcUser = "root"; // Change this to your database username
-        String jdbcPassword = "root"; // Change this to your database password
+        String jdbcUser = "root"; 
+        String jdbcPassword = "root"; 
 
         try {
-            // Load JDBC driver
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Establish connection
+            
             Connection conn = DriverManager.getConnection(jdbcURL, jdbcUser, jdbcPassword);
 
-            // Insert user data into the database
+            
             String sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, name);
@@ -50,7 +50,7 @@ public class RegisterCustomerServlet extends HttpServlet {
                 out.println("<script>alert('Error in registration!'); window.location='signup.html';</script>");
             }
 
-            // Close resources
+            
             stmt.close();
             conn.close();
 

@@ -20,11 +20,11 @@ public class DeleteProjectServlet extends HttpServlet {
         int projectId = Integer.parseInt(request.getParameter("projectId"));
 
         try {
-            // Database connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
 
-            // Delete project query
+           
             String query = "DELETE FROM projects WHERE id = ?";
             PreparedStatement pst = con.prepareStatement(query);
             pst.setInt(1, projectId);
@@ -36,7 +36,7 @@ public class DeleteProjectServlet extends HttpServlet {
                 out.print("Failed to delete project.");
             }
 
-            // Close resources
+            
             pst.close();
             con.close();
         } catch (Exception e) {

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
        
-        /* Ensure dropdown is hidden by default */
+        
         .dropdown-menu {
             display: none;
         }
@@ -38,7 +38,7 @@
                 </div>
             </div>
         </div>
-        <!-- The rest of your content remains the same -->
+        
         <div class="d-flex justify-content-between align-items-center mb-4">
             <input type="text" placeholder="Search Projects" class="form-control w-30">
             <select class="form-control w-30">
@@ -89,7 +89,7 @@
             </tr>
         </thead>
         <tbody id="bids-table-body">
-            <!-- Data will be populated here dynamically -->
+            
         </tbody>
     </table>
 </div>
@@ -98,9 +98,9 @@
         <div class="mb-4">
             <h2 class="text-2xl font-bold mb-2">Awarded Projects</h2>
             <div class="border p-4 rounded mb-4 box">
-                <h3 class="text-xl font-bold mb-2">Python Data Scrapper</h3>
-                <p>Coder : Ram</p>
-                <p>Deadline : March 5, 2025 Status: In Progress</p>
+                <h3 class="text-xl font-bold mb-2"> Freelance Website</h3>
+                <p>Coder : 02 </p>
+                <p>Deadline : 2025-03-28 Status: In Progress</p>
                 <div class="d-flex space-x-2 mt-2">
                     <button class="btn btn-outline-secondary"  onclick="window.location.href='projectstatus.html'">Track Progress</button>
                     <button class="btn btn-outline-secondary"  onclick="window.location.href='payments.html'">Make Payment</button>
@@ -120,13 +120,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Function to toggle the dropdown visibility
+        
         function toggleDropdown() {
             const dropdownMenu = document.getElementById("dropdownMenu");
             dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
         }
 
-        // Function to redirect based on the clicked item
+        
         function redirectToPage(page) {
             window.location.href = page;
         }
@@ -232,12 +232,12 @@ $(document).ready(function () {
 
 function acceptBid(bidId) {
     alert("Bid Accepted");
-    // Call Servlet with status change logic here
+ 
 }
 
 function rejectBid(bidId) {
     alert("Bid Rejected");
-    // Call Servlet with status change logic here
+
 }
 
 function viewProfile(coderId) {

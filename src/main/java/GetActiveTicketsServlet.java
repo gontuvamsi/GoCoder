@@ -19,28 +19,28 @@ public class GetActiveTicketsServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         try {
-            // Database connection
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
             
-            // Query to count only "open" tickets
+            
             String sql = "SELECT COUNT(*) FROM tickets WHERE status = 'open'";
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             
             if (rs.next()) {
                 int count = rs.getInt(1);
-                out.print(count); // Send the count as response
+                out.print(count); 
             } else {
-                out.print("0"); // If no open tickets found, return 0
+                out.print("0"); 
             }
             
-            // Close resources
+            
             rs.close();
             ps.close();
             con.close();
         } catch (Exception e) {
-            out.print("Error"); // In case of an error
+            out.print("Error"); 
             e.printStackTrace();
         }
     }

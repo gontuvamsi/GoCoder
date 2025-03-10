@@ -43,7 +43,7 @@ public class AdminTicketServlet extends HttpServlet {
                 tableRows.append("<td>").append(message).append("</td>");
                 tableRows.append("<td>").append(status.equals("open") ? "<span class='text-danger'>Open</span>" : "<span class='text-success'>Closed</span>").append("</td>");
                 
-                // Action Button
+                
                 if (status.equals("open")) {
                     tableRows.append("<td><button class='btn btn-sm btn-danger' onclick='updateTicketStatus(")
                         .append(id).append(")'>Close</button></td>");

@@ -164,15 +164,13 @@
           submitBtn.disabled = true;
         }
       }
-
-    
     </script>
     <script>
   window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     const errorMessage = urlParams.get('error');
     if (errorMessage) {
-      alert(errorMessage); // Display error message in an alert
+      alert(errorMessage); 
     }
   };
 </script>
