@@ -66,7 +66,7 @@
                                 <th class="py-2 px-4 border-b">Technology</th>
                                 <th class="py-2 px-4 border-b">Deadline</th>
                                 <th class="py-2 px-4 border-b">Budget</th>
-                                <th class="py-2 px-4 border-b">Action</th>
+                                
                             </tr>
                         </thead>
                         <tbody id="project-table-body">
@@ -149,52 +149,52 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
-            type: "POST",
-            success: function (response) {
-                if (response.status === "success") {
-                    let projects = response.projects;
-                    let html = "";
-                    projects.forEach(function (project) {
-                        html += `
-                            <tr>
-                                <td>${project.title}</td>
-                                <td>${project.technology}</td>
-                                <td>${project.deadline}</td>
-                                <td>${project.min_budget} - ${project.max_budget}</td>
-                                <td><button class="btn btn-primary" onclick="window.location.href='customerdashboard.html'">view</button></td>
-                            </tr>
-                        `;
-                    });
-                    $("#project-table-body").html(html);
-                } else {
-                    $("#project-list").html("<p class='text-danger'>No Projects Found</p>");
-                }
-            },
-            error: function () {
-                $("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
-            }
-        });
-    });
+	$(document).ready(function () {
+	    $.ajax({
+	        url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
+	        type: "POST",
+	        success: function (response) {
+	            if (response.status === "success") {
+	                let projects = response.projects;
+	                let html = "";
+	                projects.forEach(function (project) {
+	                    html += `
+	                        <tr>
+	                            <td>${project.title}</td>
+	                            <td>${project.technology}</td>
+	                            <td>${project.deadline}</td>
+	                            <td>${project.min_budget} - ${project.max_budget}</td>
+	                        </tr>
+	                    `;
+	                });
+	                $("#project-table-body").html(html);
+	            } else {
+	                $("#project-list").html("<p class='text-danger'>No Projects Found</p>");
+	            }
+	        },
+	        error: function () {
+	            $("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
+	        }
+	    });
+	});
 
-    function openMyfunction(id) {
-    	 $.ajax({
-             url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
-             type: "POST",
-             success: function (response) {
-                 if (response.status === "success") {
-                     
-                 } else {
-                     
-                 }
-             },
-             error: function () {
-                 
-             }
-         });
-    }
+	function openMyfunction(id) {
+	    $.ajax({
+	        url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
+	        type: "POST",
+	        success: function (response) {
+	            if (response.status === "success") {
+	                // Handle success
+	            } else {
+	                // Handle failure
+	            }
+	        },
+	        error: function () {
+	            // Handle error
+	        }
+	    });
+	}
+
 </script>
 <script>
 var handledProjects = new Set(); // Store projects that are either accepted or rejected
