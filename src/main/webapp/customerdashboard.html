@@ -197,7 +197,13 @@
     }
 </script>
 <script>
+var handledProjects = new Set(); // Store projects that are either accepted or rejected
+
 $(document).ready(function () {
+    fetchBids();
+});
+
+function fetchBids() {
     $.ajax({
         url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
         type: "POST",
@@ -207,19 +213,30 @@ $(document).ready(function () {
                 let html = "";
                 bids.forEach(function (bid) {
                     html += `
-                    <tr class="box">
+                    <tr class="box" id="row-${bid.id}" data-project="${bid.project_id}">
                         <td>${bid.project_id}</td>
                         <td>${bid.user_id}</td>
                         <td>${bid.bid_amt}</td>
                         <td>${bid.status}</td>
                         <td>
-                            <button class="btn btn-success" onclick="acceptBid(${bid.id})">Accept</button>
-                            <button class="btn btn-danger" onclick="rejectBid(${bid.id})">Reject</button>
-                            </td>
+                            ${handledProjects.has(bid.project_id) ? 
+                                `<button class="btn btn-secondary" disabled>${handledProjects.get(bid.project_id)}</button>` 
+                                : 
+                                `<button class="btn btn-success action-btn" data-project="${bid.project_id}" data-action="accept">Accept</button>
+                                 <button class="btn btn-danger action-btn" data-project="${bid.project_id}" data-action="reject">Reject</button>`
+                            }
+                        </td>
                     </tr>
                     `;
                 });
                 $("#bids-table-body").html(html);
+
+                // Attach event listeners for accept and reject buttons
+                $(".action-btn").click(function () {
+                    let projectId = $(this).data("project");
+                    let action = $(this).data("action");
+                    handleBid(projectId, action);
+                });
             } else {
                 $("#bids-table-body").html("<tr><td colspan='5' class='text-danger'>No Bids Received</td></tr>");
             }
@@ -228,17 +245,19 @@ $(document).ready(function () {
             $("#bids-table-body").html("<tr><td colspan='5' class='text-danger'>Failed to fetch bids</td></tr>");
         }
     });
-});
-
-function acceptBid(bidId) {
-    alert("Bid Accepted");
- 
 }
 
-function rejectBid(bidId) {
-    alert("Bid Rejected");
+function handleBid(projectId, action) {
+    let statusText = action === "accept" ? "Accepted" : "Rejected";
 
+    handledProjects.add(projectId); // Mark project as handled
+
+    // Update both buttons for this project
+    $(`tr[data-project='${projectId}'] td:last-child`).html(`<button class="btn btn-secondary" disabled>${statusText}</button>`);
+
+    alert(`Bid ${statusText}`);
 }
+
 
 function viewProfile(coderId) {
     window.location.href = `coderprofile.html?userId=${coderId}`;
