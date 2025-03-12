@@ -21,8 +21,14 @@ public class ProjectPostingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
-        String title = request.getParameter("title");
+    	HttpSession session = request.getSession(false);
+    	if(session == null ||  session.getAttribute("userId")==null) {
+    		response.getWriter().println("alert('Session Expired Login Again!')");
+    		response.sendRedirect("login.html");
+    		return;
+    	}
+    	int user_id = (int) session.getAttribute("userId");
+    	String title = request.getParameter("title");
         String description = request.getParameter("description");
         String technology = request.getParameter("technology");
         String category = request.getParameter("category");
@@ -32,8 +38,8 @@ public class ProjectPostingServlet extends HttpServlet {
         String visibility = request.getParameter("visibility");
 
         
-        HttpSession session = request.getSession();
-        String postedBy = "Vamsi"; 
+       
+        
 
         
 
@@ -64,7 +70,7 @@ System.out.println(sqlDeadline);
             Class.forName("com.mysql.cj.jdbc.Driver"); 
             try (Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
                     PreparedStatement preparedStatement = connection.prepareStatement(
-                            "INSERT INTO projects (title, description, technology, category, deadline, min_budget, max_budget, visibility, posted_by) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+                            "INSERT INTO projects (title, description, technology, category, deadline, min_budget, max_budget, visibility, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
 
                 
                 preparedStatement.setString(1, title);
@@ -75,7 +81,7 @@ System.out.println(sqlDeadline);
                 preparedStatement.setDouble(6, minBudget);
                 preparedStatement.setDouble(7, maxBudget);
                 preparedStatement.setString(8, visibility);
-                preparedStatement.setString(9, postedBy);
+                preparedStatement.setInt(9, user_id);
 
                 
                 int rowsAffected = preparedStatement.executeUpdate();

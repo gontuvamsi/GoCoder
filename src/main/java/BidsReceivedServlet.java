@@ -28,8 +28,20 @@ public class BidsReceivedServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
-            String query = "SELECT project_id, user_id, bid_amt, completion_date, bid_desc, status, created_at FROM bids WHERE status = ?";
+            con = JDBCApp.getConnection();
+            String query = "SELECT \r\n"
+            		+ "    projects.id,\r\n"
+            		+ "    projects.title,\r\n"
+            		+ "    users.name AS Coder_Name,\r\n"
+            		+ "    bids.user_id AS Coder_Id,\r\n"
+            		+ "    bids.*\r\n"
+            		+ "FROM\r\n"
+            		+ "    bids\r\n"
+            		+ "        JOIN\r\n"
+            		+ "    projects ON bids.project_id = projects.id\r\n"
+            		+ "        JOIN\r\n"
+            		+ "    users ON bids.user_id = users.id\r\n"
+            		+ "    where projects.user_id = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, "active");
             rs = ps.executeQuery();

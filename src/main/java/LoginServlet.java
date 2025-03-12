@@ -1,6 +1,5 @@
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -18,15 +17,11 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String selectedRole = request.getParameter("role");
 
         try {
+            Connection con = JDBCApp.getConnection();
             
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/gocoder", "root", "root");
-
-            
-            String query = "SELECT name, role FROM users WHERE email = ? AND password = ?";
+            String query = "SELECT id, name, role FROM users WHERE email = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, email);
             ps.setString(2, password);
@@ -34,30 +29,31 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                int userId = rs.getInt("id");
                 String name = rs.getString("name");
                 String roleFromDB = rs.getString("role");
 
-                if (roleFromDB.equalsIgnoreCase(selectedRole)) {
-                    
-                    HttpSession session = request.getSession();
-                    session.setAttribute("userEmail", email);
-                    session.setAttribute("userName", name);
-                    session.setAttribute("userRole", roleFromDB);
+                HttpSession session = request.getSession();
+                session.setAttribute("userId", userId);
+                session.setAttribute("userEmail", email);
+                session.setAttribute("userName", name);
+                session.setAttribute("userRole", roleFromDB);
 
-                    
-                    if ("coder".equalsIgnoreCase(roleFromDB)) {
+                // Redirect based on role
+                switch (roleFromDB.toLowerCase()) {
+                    case "coder":
                         response.sendRedirect("coderdashboard.html");
-                    } else if ("customer".equalsIgnoreCase(roleFromDB)) {
+                        break;
+                    case "customer":
                         response.sendRedirect("customerdashboard.html");
-                    } else if ("admin".equalsIgnoreCase(roleFromDB)) {
+                        break;
+                    case "admin":
                         response.sendRedirect("admindashboard.html");
-                    }
-                } else {
-                    
-                    response.sendRedirect("login.html?error=Role mismatch. Please select the correct role.");
+                        break;
+                    default:
+                        response.sendRedirect("login.html?error=Unknown role. Contact admin.");
                 }
             } else {
-                
                 response.sendRedirect("login.html?error=Invalid email or password.");
             }
 

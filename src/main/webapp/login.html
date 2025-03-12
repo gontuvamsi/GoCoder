@@ -72,8 +72,7 @@
       }
       .card input[type="text"],
       .card input[type="email"],
-      .card input[type="password"],
-      .card select {
+      .card input[type="password"] {
         width: 100%;
         padding: 10px;
         margin-bottom: 20px;
@@ -121,11 +120,7 @@
       </div>
       <div class="card animate__animated animate__fadeIn">
         <h2>LOGIN</h2>
-        <form action="LoginServlet" method="POST" >
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input class="form-control" id="name" name="name" oninput="checkForm()" required="required" type="text"/>
-          </div>
+        <form action="LoginServlet" method="POST">
           <div class="form-group">
             <label for="email">Email ID</label>
             <input class="form-control" id="email" name="email" oninput="checkForm()" required="required" type="text"/>
@@ -133,15 +128,6 @@
           <div class="form-group">
             <label for="password">Password</label>
             <input class="form-control" id="password" name="password" oninput="checkForm()" required="required" type="password"/>
-          </div>
-          <div class="form-group">
-            <label for="role">Role</label>
-            <select class="form-control" id="role" name="role" oninput="checkForm()" required="required">
-              <option value="">Select Role</option>
-              <option value="customer">Customer</option>
-              <option value="coder">Coder</option>
-              <option value="admin">Admin</option>
-            </select>
           </div>
           <button class="btn btn-primary btn-block" disabled="disabled" id="submitBtn" type="submit">
             Submit
@@ -152,29 +138,27 @@
 
     <script>
       function checkForm() {
-        const name = document.getElementById('name').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        const role = document.getElementById('role').value;
         const submitBtn = document.getElementById('submitBtn');
 
-        if (name && email && password && role) {
+        if (email && password) {
           submitBtn.disabled = false;
         } else {
           submitBtn.disabled = true;
         }
       }
     </script>
+
     <script>
-  window.onload = function () {
-    const urlParams = new URLSearchParams(window.location.search);
-    const errorMessage = urlParams.get('error');
-    if (errorMessage) {
-      alert(errorMessage); 
-    }
-  };
-</script>
-    
+      window.onload = function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = urlParams.get('error');
+        if (errorMessage) {
+          alert(errorMessage);
+        }
+      };
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
