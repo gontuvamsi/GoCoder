@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,266 +8,206 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     
     <style>
-       
-        
-        .dropdown-menu {
-            display: none;
-        }
         .table th, .table td {
-    font-size: 1.125rem; /* Larger text for better readability */
-    padding: 1.5rem; /* More padding for spaciousness */
-    border: 1px solid #e2e8f0; /* Subtle border */
-}
-
-.table-striped tbody tr:nth-child(odd) {
-    background-color: #f9fafb; /* Light background for odd rows */
-}
-
-.table-striped tbody tr:hover {
-    background-color: #f1f5f9; /* Light hover effect */
-}
-span.text-white {
-    margin-left: 10px; /* Adjust space between icons and the Hi User text */
-    font-size: 1rem; /* You can change this to adjust font size */
-    font-weight: normal; /* Adjust font weight as needed */
-}
-        
+            font-size: 1rem;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+        }
+        .table-striped tbody tr:nth-child(odd) {
+            background-color: #f9fafb;
+        }
+        .table-striped tbody tr:hover {
+            background-color: #f1f5f9;
+        }
+        .navbar {
+            background-color: #007bff;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .navbar a {
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        .navbar .dropdown-menu {
+            right: 0;
+            left: auto;
+        }
     </style>
 </head>
 <body class="bg-gray-100 p-4">
- <div class="container bg-white p-4 shadow-md">
-    <div class="d-flex justify-content-between align-items-center mb-4 bg-primary p-4 rounded">
-        <div class="d-flex align-items-center space-x-4">
-            <a href="#" class="text-xl font-bold text-white">GoCoders</a>
-            <a href="projectposting.html" class="text-white">Post Project</a>
-            <a href="ProjectProgress.html" class="text-white">Project Status</a>
-            <a href="#" class="text-white">My Projects</a>
-        </div>
-        <div class="d-flex align-items-center space-x-4">
-            <!-- Replace the User Icon with Hi User text -->
-            <span class="text-white" id="user-name"></span>
-            <!-- More options icon -->
-            <div class="dropdown">
-                <i class="material-icons text-white dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="toggleDropdown()">more_vert</i>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton" id="dropdownMenu">
-                    <a class="dropdown-item" href="#" onclick="redirectToPage('editcustprof.html')">Edit Profile</a>
-                    <a class="dropdown-item" href="#" onclick="redirectToPage('support.html')">Help</a>
-                    <a class="dropdown-item" href="#" onclick="redirectToPage('home.html')">Logout</a>
-                </div>
+    
+    <div class="container bg-white p-4 shadow-md rounded-lg">
+        <nav class="navbar d-flex justify-content-between align-items-center">
+            <div>
+                <a href="#">GoCoders</a>
+                <a href="projectposting.html">Post Project</a>
+                <a href="ProjectProgress.html">Project Status</a>
+                
             </div>
-        </div>
+            <div class="d-flex align-items-center">
+    <span class="text-white" id="user-name"></span>
+    <div class="dropdown ml-3">
+    <!-- White Button without Background -->
+    <button class="btn btn-white border" id="dropdownMenuButton" onclick="toggleDropdown()">
+        <i class="material-icons text-dark">more_vert</i>
+    </button>
+
+    <!-- Normal Dropdown with Black Text & White Background -->
+    <div class="dropdown-menu dropdown-menu-right shadow" id="dropdownMenu">
+        <!-- <a class="dropdown-item text-dark" href="editcustprof.html">Edit Profile</a>-->
+        <a class="dropdown-item text-dark" href="support.html">Help</a>
+        <a class="dropdown-item text-danger font-weight-bold" onclick="Logout()">Logout</a>
     </div>
 </div>
+        </nav>
+    </div>
 
-        
-       
-<div class="mt-4">
-    <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <h2 class="bg-gray-800 text-white text-lg px-4 py-2">Open Projects</h2>
-        <div class="p-4">
-            <!-- Add the table-striped class here -->
-            <table class="min-w-full bg-white table-striped">
+    <div class="container mt-4">
+        <div class="bg-white shadow-md rounded-lg p-4">
+            <h2 class="bg-gray-800 text-white text-lg p-2">Open Projects</h2>
+            <table class="table table-bordered table-striped mt-2">
                 <thead>
                     <tr>
-                        <th class="py-4 px-8 border-b text-xl font-semibold text-gray-800">Title</th>
-                        <th class="py-4 px-8 border-b text-xl font-semibold text-gray-800">Technology</th>
-                        <th class="py-4 px-8 border-b text-xl font-semibold text-gray-800">Deadline</th>
-                        <th class="py-4 px-8 border-b text-xl font-semibold text-gray-800">Budget (in $)</th>
+                        <th>Title</th>
+                        <th>Technology</th>
+                        <th>Deadline</th>
+                        <th>Budget (in $)</th>
                     </tr>
                 </thead>
-                <tbody id="project-table-body">
-                    <!-- Rows will be populated here -->
-                </tbody>
+                <tbody id="project-table-body"></tbody>
             </table>
         </div>
     </div>
-</div>
 
-<div class="mb-4">
-    <h2 class="text-2xl font-bold mb-2">Bids Received</h2>
-    <!-- Add the table-striped class here -->
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Project ID</th>
-                <th>User ID</th>
-                <th>Bid Amount (in $)</th>
-                <th>Status</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody id="bids-table-body">
-            
-        </tbody>
-    </table>
-</div>
+    <div class="container mt-4">
+        <h2 class="text-2xl font-bold">Bids Received</h2>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Project ID</th>
+                    <th>User ID</th>
+                    <th>Bid Amount (in $)</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="bids-table-body"></tbody>
+        </table>
+    </div>
 
-
-
-        <div class="mb-4">
-            <h2 class="text-2xl font-bold mb-2">Awarded Projects</h2>
-            <div class="border p-4 rounded mb-4 box">
-                <h3 class="text-xl font-bold mb-2"> Freelance Website</h3>
-                <p>Coder : 02 </p>
-                <p>Deadline : 2025-03-28 Status: In Progress</p>
-                <div class="d-flex space-x-2 mt-2">
-                    <button class="btn btn-outline-secondary"  onclick="window.location.href='projectstatus.html'">Track Progress</button>
-                    <button class="btn btn-outline-secondary"  onclick="window.location.href='payments.html'">Make Payment</button>
-                </div>
-            </div>
-        </div>
-        <div class="mb-4">
-            <h2 class="text-2xl font-bold mb-2">Payment Summary</h2>
-            <div class="border p-4 rounded mb-4 box">
-                <p>Total Spent : Loading</p>
-                <p>Pending Payments : Loading</p>
-            </div>
+    <div class="container mt-4">
+    <h2 class="text-2xl font-bold">Payments</h2>
+    <div class="border p-4 rounded bg-white shadow-sm">
+        <p>Total Spent: Loading...</p>
+        <p>Pending Payments: Loading...</p>
+        <div class="d-flex mt-2">
+            <button class="btn btn-outline-success mr-2" onclick="window.location.href='makepayment.html'">Make Payment</button>
+            <button class="btn btn-outline-primary" onclick="window.location.href='payments.html'">Payment Summary</button>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
 
-    <script>
-        
-        function toggleDropdown() {
-            const dropdownMenu = document.getElementById("dropdownMenu");
-            dropdownMenu.style.display = dropdownMenu.style.display === "block" ? "none" : "block";
-        }
 
-        
-        function redirectToPage(page) {
-            window.location.href = page;
-        }
-    </script>
-    
-    <script>
-    
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <div class="container mt-4">
+        <h2 class="text-2xl font-bold">Payment Summary</h2>
+        <div class="border p-4 rounded bg-white shadow-sm">
+            <p>Total Spent: Loading</p>
+            <p>Pending Payments: Loading</p>
+        </div>
+    </div>
 
-	<script>
-	$(document).ready(function () {
-		getUserDets()
-	    $.ajax({
-	        url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
-	        type: "POST",
-	        success: function (response) {
-	            if (response.status === "success") {
-	                let projects = response.projects;
-	                let html = "";
-	                projects.forEach(function (project) {
-	                    html += `
-	                        <tr>
-	                            <td>${project.title}</td>
-	                            <td>${project.technology}</td>
-	                            <td>${project.deadline}</td>
-	                            <td>${project.min_budget} - ${project.max_budget}</td>
-	                        </tr>
-	                    `;
-	                });
-	                $("#project-table-body").html(html);
-	            } else {
-	                $("#project-list").html("<p class='text-danger'>No Projects Found</p>");
-	            }
-	        },
-	        error: function () {
-	            $("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
-	        }
-	    });
-	});
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    function toggleDropdown() {
+        $("#dropdownMenu").toggle();
+    }
 
-	function getUserDets() {
-	    $.ajax({
-	        url: "http://localhost:7050/GoCoder/session/getId",
-	        type: "POST",
-	        success: function (response) {
-	            if (response.status === "success") {
-	            	$("#user-name").html(`Hii ${response.user_name}`)
-	            } else {
-	            	alert("No Login Details Found")
-	            	redirectToPage("login.html")
-	            }
-	        },
-	        error: function () {
-	            // Handle error
-	        }
-	    });
-	}
-
-</script>
-<script>
-var handledProjects = new Set(); // Store projects that are either accepted or rejected
-
-$(document).ready(function () {
-    fetchBids();
-});
-
-function fetchBids() {
-    $.ajax({
-        url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
-        type: "POST",
-        success: function (response) {
-            if (response.status === "success") {
-                let bids = response.bids;
-                let html = "";
-                bids.forEach(function (bid) {
-                    html += `
-                    <tr class="box" id="row-${bid.id}" data-project="${bid.project_id}">
-                        <td>${bid.project_id}</td>
-                        <td>${bid.user_id}</td>
-                        <td>${bid.bid_amt}</td>
-                        <td>${bid.status}</td>
-                        <td>
-                            ${handledProjects.has(bid.project_id) ? 
-                                `<button class="btn btn-secondary" disabled>${handledProjects.get(bid.project_id)}</button>` 
-                                : 
-                                `<button class="btn btn-success action-btn" data-project="${bid.project_id}" data-action="accept">Accept</button>
-                                 <button class="btn btn-danger action-btn" data-project="${bid.project_id}" data-action="reject">Reject</button>`
-                            }
-                        </td>
-                    </tr>
-                    `;
-                });
-                $("#bids-table-body").html(html);
-
-                // Attach event listeners for accept and reject buttons
-                $(".action-btn").click(function () {
-                    let projectId = $(this).data("project");
-                    let action = $(this).data("action");
-                    handleBid(projectId, action);
-                });
-            } else {
-                $("#bids-table-body").html("<tr><td colspan='5' class='text-danger'>No Bids Received</td></tr>");
-            }
-        },
-        error: function () {
-            $("#bids-table-body").html("<tr><td colspan='5' class='text-danger'>Failed to fetch bids</td></tr>");
+    // Close dropdown when clicking outside
+    $(document).click(function (event) {
+        if (!$(event.target).closest("#dropdownMenuButton, #dropdownMenu").length) {
+            $("#dropdownMenu").hide();
         }
     });
-}
-
-function handleBid(projectId, action) {
-    let statusText = action === "accept" ? "Accepted" : "Rejected";
-
-    handledProjects.add(projectId); // Mark project as handled
-
-    // Update both buttons for this project
-    $(`tr[data-project='${projectId}'] td:last-child`).html(`<button class="btn btn-secondary" disabled>${statusText}</button>`);
-
-    alert(`Bid ${statusText}`);
-}
-
-
-function viewProfile(coderId) {
-    window.location.href = `coderprofile.html?userId=${coderId}`;
-}
-
-
 </script>
-    
+    <script>
+        $(document).ready(function () {
+            getUserDets();
+            fetchProjects();
+            fetchBids();
+        });
+
+        function getUserDets() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/session/getId",
+                type: "POST",
+                success: function (response) {
+                    if (response.status === "success") {
+                        $("#user-name").html(`Hi ${response.user_name}`);
+                    } else {
+                        alert("No Login Details Found");
+                        window.location.href = "login.html";
+                    }
+                }
+            });
+        }
+
+        function fetchProjects() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
+                type: "POST",
+                success: function (response) {
+                    if (response.status === "success") {
+                        let projects = response.projects;
+                        let html = "";
+                        projects.forEach(function (project) {
+                            html += `
+                                <tr>
+                                    <td>${project.title}</td>
+                                    <td>${project.technology}</td>
+                                    <td>${project.deadline}</td>
+                                    <td>${project.min_budget} - ${project.max_budget}</td>
+                                </tr>`;
+                        });
+                        $("#project-table-body").html(html);
+                    }
+                }
+            });
+        }
+
+        function fetchBids() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
+                type: "POST",
+                success: function (response) {
+                    if (response.status === "success") {
+                        let bids = response.bids;
+                        let html = "";
+                        bids.forEach(function (bid) {
+                            html += `
+                                <tr>
+                                    <td>${bid.project_id}</td>
+                                    <td>${bid.user_id}</td>
+                                    <td>${bid.bid_amt}</td>
+                                    <td>${bid.status}</td>
+                                    <td>
+                                        <button class="btn btn-success">Accept</button>
+                                        <button class="btn btn-danger">Reject</button>
+                                    </td>
+                                </tr>`;
+                        });
+                        $("#bids-table-body").html(html);
+                    }
+                }
+            });
+            
+        }
+        
+     
+    </script>
+    <script src = "./js/main.js" defer>
+    </script>
 </body>
 </html>

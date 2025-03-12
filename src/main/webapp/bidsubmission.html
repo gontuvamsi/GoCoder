@@ -28,8 +28,7 @@ body {
 				class="flex justify-between items-center border-b pb-2 mb-4 bg-[#3822a7] text-white">
 				<div class="text-lg font-bold ml-4">GoCoders</div>
 				<div class="flex space-x-4">
-					<a href="#" class="text-white font-bold mr-2">Dashboard</a> <a
-						href="#" class="text-white font-bold mr-2">My Bids</a> <a
+					<a
 						href="home.html" class="text-white font-bold mr-2">Logout</a>
 				</div>
 			</div>
@@ -76,6 +75,12 @@ body {
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		const deadlineInput = document.getElementById("completion_date");
+		const today = new Date().toISOString().split("T")[0];
+		deadlineInput.setAttribute("min", today);
+	});
+
 		$(document).ready(function() {
 			$("#submitBid").click(function() {
 				var bidData = $("#bidForm").serialize(); 
