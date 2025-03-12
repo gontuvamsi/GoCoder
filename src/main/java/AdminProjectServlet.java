@@ -39,7 +39,7 @@ public class AdminProjectServlet extends HttpServlet {
                 out.println("<td>" + rs.getDate("deadline") + "</td>");
                 out.println("<td>$" + rs.getDouble("min_budget") + " - $" + rs.getDouble("max_budget") + "</td>");
                 out.println("<td>" + rs.getString("visibility") + "</td>");
-                out.println("<td>" + rs.getString("posted_by") + "</td>");
+                //out.println("<td>" + rs.getString("posted_by") + "</td>");
                 out.println("<td><button class='btn btn-danger btn-sm' onclick='deleteProject(" + rs.getInt("id") + ")'>Delete</button></td>");
                 out.println("</tr>");
             }
