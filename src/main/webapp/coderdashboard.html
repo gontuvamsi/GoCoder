@@ -181,7 +181,7 @@ body {
             </ul>
             <div class="d-flex align-items-center">
                 <!-- Replacing the user icon with "Hi User" styled like the other navbar links -->
-                <span class="nav-link text-white me-3">Hi User</span>
+                <span class="text-white" id="user-name"></span>
 
                 <!-- Dropdown menu -->
                 <div class="dropdown">
@@ -327,6 +327,56 @@ body {
 	</script>
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+	$(document).ready(function () {
+		getUserDets()
+	    $.ajax({
+	        url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
+	        type: "POST",
+	        success: function (response) {
+	            if (response.status === "success") {
+	                let projects = response.projects;
+	                let html = "";
+	                projects.forEach(function (project) {
+	                    html += `
+	                        <tr>
+	                            <td>${project.title}</td>
+	                            <td>${project.technology}</td>
+	                            <td>${project.deadline}</td>
+	                            <td>${project.min_budget} - ${project.max_budget}</td>
+	                        </tr>
+	                    `;
+	                });
+	                $("#project-table-body").html(html);
+	            } else {
+	                $("#project-list").html("<p class='text-danger'>No Projects Found</p>");
+	            }
+	        },
+	        error: function () {
+	            $("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
+	        }
+	    });
+	});
+
+	function getUserDets() {
+	    $.ajax({
+	        url: "http://localhost:7050/GoCoder/session/getId",
+	        type: "POST",
+	        success: function (response) {
+	            if (response.status === "success") {
+	            	$("#user-name").html(`Hii ${response.user_name}`)
+	            } else {
+	            	alert("No Login Details Found")
+	            	redirectToPage("login.html")
+	            }
+	        },
+	        error: function () {
+	            // Handle error
+	        }
+	    });
+	}
+
+</script>
 
 	<script>
     $(document).ready(function () {
