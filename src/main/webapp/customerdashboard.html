@@ -1,126 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <style>
-        .table th, .table td {
-            font-size: 1rem;
-            padding: 1rem;
-            border: 1px solid #e2e8f0;
-        }
-        .table-striped tbody tr:nth-child(odd) {
-            background-color: #f9fafb;
-        }
-        .table-striped tbody tr:hover {
-            background-color: #f1f5f9;
-        }
-        .navbar {
-            background-color: #007bff;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .navbar a {
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-        .navbar .dropdown-menu {
-            right: 0;
-            left: auto;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Customer Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<style>
+.table th, .table td {
+	font-size: 1rem;
+	padding: 1rem;
+	border: 1px solid #e2e8f0;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+	background-color: #f9fafb;
+}
+
+.table-striped tbody tr:hover {
+	background-color: #f1f5f9;
+}
+
+.navbar {
+	background-color: #007bff;
+	padding: 1rem;
+	border-radius: 8px;
+}
+
+.navbar a {
+	color: white;
+	font-weight: bold;
+	margin-right: 15px;
+}
+
+.navbar .dropdown-menu {
+	right: 0;
+	left: auto;
+}
+</style>
 </head>
 <body class="bg-gray-100 p-4">
-    
-    <div class="container bg-white p-4 shadow-md rounded-lg">
-        <nav class="navbar d-flex justify-content-between align-items-center">
-            <div>
-                <a href="#">GoCoders</a>
-                <a href="projectposting.html">Post Project</a>
-                <a href="ProjectProgress.html">Project Status</a>
-                
-            </div>
-            <div class="d-flex align-items-center">
-    <span class="text-white" id="user-name"></span>
-    <div class="dropdown ml-3">
-    <!-- White Button without Background -->
-    <button class="btn btn-white border" id="dropdownMenuButton" onclick="toggleDropdown()">
-        <i class="material-icons text-dark">more_vert</i>
-    </button>
 
-    <!-- Normal Dropdown with Black Text & White Background -->
-    <div class="dropdown-menu dropdown-menu-right shadow" id="dropdownMenu">
-        <!-- <a class="dropdown-item text-dark" href="editcustprof.html">Edit Profile</a>-->
-        <a class="dropdown-item text-dark" href="support.html">Help</a>
-        <a class="dropdown-item text-danger font-weight-bold" onclick="Logout()">Logout</a>
-    </div>
-</div>
-        </nav>
-    </div>
+	<div class="container bg-white p-4 shadow-md rounded-lg">
+		<nav class="navbar d-flex justify-content-between align-items-center">
+			<div>
+				<a href="#">GoCoders</a> <a href="projectposting.html">Post
+					Project</a> <a href="ProjectProgress.html">Project Status</a>
 
-    <div class="container mt-4">
-        <div class="bg-white shadow-md rounded-lg p-4">
-            <h2 class="bg-gray-800 text-white text-lg p-2">Open Projects</h2>
-            <table class="table table-bordered table-striped mt-2">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Technology</th>
-                        <th>Deadline</th>
-                        <th>Budget (in $)</th>
-                    </tr>
-                </thead>
-                <tbody id="project-table-body"></tbody>
-            </table>
-        </div>
-    </div>
+			</div>
+			<div class="d-flex align-items-center">
+				<span class="text-white" id="user-name"></span>
+				<div class="dropdown ml-3">
+					<!-- White Button without Background -->
+					<button class="btn btn-white border" id="dropdownMenuButton"
+						onclick="toggleDropdown()">
+						<i class="material-icons text-dark">more_vert</i>
+					</button>
 
-    <div class="container mt-4">
-        <h2 class="text-2xl font-bold">Bids Received</h2>
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Project ID</th>
-                    <th>User ID</th>
-                    <th>Bid Amount (in $)</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody id="bids-table-body"></tbody>
-        </table>
-    </div>
+					<!-- Normal Dropdown with Black Text & White Background -->
+					<div class="dropdown-menu dropdown-menu-right shadow"
+						id="dropdownMenu">
+						<!-- <a class="dropdown-item text-dark" href="editcustprof.html">Edit Profile</a>-->
+						<a class="dropdown-item text-dark" href="support.html">Help</a> <a
+							class="dropdown-item text-danger font-weight-bold"
+							onclick="Logout()">Logout</a>
+					</div>
+				</div>
+		</nav>
+	</div>
 
-    <div class="container mt-4">
-    <h2 class="text-2xl font-bold">Payments</h2>
-    <div class="border p-4 rounded bg-white shadow-sm">
-        <p>Total Spent: Loading...</p>
-        <p>Pending Payments: Loading...</p>
-        <div class="d-flex mt-2">
-            <button class="btn btn-outline-success mr-2" onclick="window.location.href='makepayment.html'">Make Payment</button>
-            <button class="btn btn-outline-primary" onclick="window.location.href='payments.html'">Payment Summary</button>
-        </div>
-    </div>
-</div>
+	<div class="container mt-4">
+		<div class="bg-white shadow-md rounded-lg p-4">
+			<h2 class="bg-gray-800 text-white text-lg p-2">Open Projects</h2>
+			<table class="table table-bordered table-striped mt-2">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Technology</th>
+						<th>Deadline</th>
+						<th>Budget (in $)</th>
+					</tr>
+				</thead>
+				<tbody id="project-table-body"></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="container mt-4">
+		<h2 class="text-2xl font-bold">Bids Received</h2>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Project Name</th>
+					<th>Coder Name</th>
+					<th>Bid Amount (in $)</th>
+					<th>Description</th>
+					<th>Completion Date</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody id="bids-table-body">
+
+			</tbody>
+		</table>
+	</div>
+
+	<div class="container mt-4">
+		<h2 class="text-2xl font-bold">Payments</h2>
+		<div class="border p-4 rounded bg-white shadow-sm">
+			<p>Total Spent: Loading...</p>
+			<p>Pending Payments: Loading...</p>
+			<div class="d-flex mt-2">
+				<button class="btn btn-outline-success mr-2"
+					onclick="window.location.href='makepayment.html'">Make
+					Payment</button>
+				<button class="btn btn-outline-primary"
+					onclick="window.location.href='payments.html'">Payment
+					Summary</button>
+			</div>
+		</div>
+	</div>
 
 
-    <div class="container mt-4">
-        <h2 class="text-2xl font-bold">Payment Summary</h2>
-        <div class="border p-4 rounded bg-white shadow-sm">
-            <p>Total Spent: Loading</p>
-            <p>Pending Payments: Loading</p>
-        </div>
-    </div>
+	<div class="container mt-4">
+		<h2 class="text-2xl font-bold">Payment Summary</h2>
+		<div class="border p-4 rounded bg-white shadow-sm">
+			<p>Total Spent: Loading</p>
+			<p>Pending Payments: Loading</p>
+		</div>
+	</div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
     function toggleDropdown() {
         $("#dropdownMenu").toggle();
     }
@@ -132,11 +150,13 @@
         }
     });
 </script>
-    <script>
+	<script>
         $(document).ready(function () {
+        	
             getUserDets();
             fetchProjects();
             fetchBids();
+            
         });
 
         function getUserDets() {
@@ -146,6 +166,7 @@
                 success: function (response) {
                     if (response.status === "success") {
                         $("#user-name").html(`Hi ${response.user_name}`);
+                        getAllBids(parseInt(response.user_id))
                     } else {
                         alert("No Login Details Found");
                         window.location.href = "login.html";
@@ -204,10 +225,51 @@
             });
             
         }
-        
+        function getAllBids(userId) {
+            
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/GetProjectBids",
+                type: "POST",
+                contentType: "application/x-www-form-urlencoded",
+                data: $.param({ user_id: userId }),
+                dataType: "json",
+                success: function(response) {
+                    let tableBody = $("#bids-table-body");
+                    tableBody.empty(); // Clear existing table data
+
+                    if (response.length === 0) {
+                        tableBody.append(`<tr><td colspan="7" class="text-center">No data found</td></tr>`);
+                        return;
+                    }
+
+                    response.forEach(bid => {
+                        let row = `
+                            <tr>
+                                <td>${bid.title}</td>
+                                <td>${bid.Coder_Name}</td>
+                                <td>$${bid.bid_amt}</td>
+                                <td>${bid.bid_desc}</td>
+                                <td>${bid.completion_date}</td>
+                                <td>${bid.status}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View</button>
+                                </td>
+                            </tr>
+                        `;
+                        tableBody.append(row);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error:", error);
+                    alert("Failed to fetch data. Please try again.");
+                }
+            });
+        }
+
+
      
     </script>
-    <script src = "./js/main.js" defer>
+	<script src="./js/main.js" defer>
     </script>
 </body>
 </html>
