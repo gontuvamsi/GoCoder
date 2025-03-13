@@ -1,323 +1,278 @@
 <html lang="en">
+
 <head>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CoderDashBoard</title>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link
-	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
-	rel="stylesheet">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CoderDashBoard</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-	crossorigin="anonymous">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<style>
-body {
-	font-family: 'Roboto', sans-serif;
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
-}
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<style>
+		body {
+			font-family: 'Roboto', sans-serif;
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			background: linear-gradient(135deg, #e0f7fa, #b3e5fc);
+		}
 
-.navbar {
-	border-bottom: 1px solid #ccc;
-	background: linear-gradient(135deg, #4fc3f7, #0288d1);
-}
+		.navbar {
+			border-bottom: 1px solid #ccc;
+			background: linear-gradient(135deg, #4fc3f7, #0288d1);
+		}
 
-.navbar-brand {
-	color: white;
-	font-size: 1.5rem;
-	font-weight: bold;
-}
+		.navbar-brand {
+			color: white;
+			font-size: 1.5rem;
+			font-weight: bold;
+		}
 
-.navbar-nav .nav-link {
-	color: white;
-	font-size: 1.2rem;
-	font-weight: bold;
-	margin-right: 15px;
-}
+		.navbar-nav .nav-link {
+			color: white;
+			font-size: 1.2rem;
+			font-weight: bold;
+			margin-right: 15px;
+		}
 
-.navbar-nav .nav-link.active {
-	color: white;
-}
+		.navbar-nav .nav-link.active {
+			color: white;
+		}
 
-.navbar-nav .nav-link:hover {
-	color: #bbdefb;
-}
+		.navbar-nav .nav-link:hover {
+			color: #bbdefb;
+		}
 
-.navbar .material-icons {
-	color: white;
-	font-size: 1.5rem;
-	margin-left: 15px;
-}
-/* Styling for the "Hi User" text */
-/* Optional: Further styling for the Hi User text */
-.nav-link {
-    font-size: 1rem; /* Set the font size to match navbar links */
-    font-weight: normal; /* You can adjust this if you want the text to be bold or not */
-    padding: 0.5rem 1rem; /* Adjust padding if necessary */
-}
+		.navbar .material-icons {
+			color: white;
+			font-size: 1.5rem;
+			margin-left: 15px;
+		}
 
+		/* Styling for the "Hi User" text */
+		/* Optional: Further styling for the Hi User text */
+		.nav-link {
+			font-size: 1rem;
+			/* Set the font size to match navbar links */
+			font-weight: normal;
+			/* You can adjust this if you want the text to be bold or not */
+			padding: 0.5rem 1rem;
+			/* Adjust padding if necessary */
+		}
 
+		.search-bar {
+			display: flex;
+			align-items: center;
+			margin: 20px;
+		}
 
-.search-bar {
-	display: flex;
-	align-items: center;
-	margin: 20px;
-}
+		.search-bar input[type="text"] {
+			padding: 5px;
+			margin-right: 10px;
+			border-radius: 10px;
+			border: 1px solid #ccc;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
 
-.search-bar input[type="text"] {
-	padding: 5px;
-	margin-right: 10px;
-	border-radius: 10px;
-	border: 1px solid #ccc;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+		.filters {
+			display: flex;
+			align-items: center;
+			margin: 20px;
+		}
 
-.filters {
-	display: flex;
-	align-items: center;
-	margin: 20px;
-}
+		.filters select {
+			padding: 5px;
+			margin-right: 10px;
+			border-radius: 10px;
+			border: 1px solid #ccc;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
 
-.filters select {
-	padding: 5px;
-	margin-right: 10px;
-	border-radius: 10px;
-	border: 1px solid #ccc;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+		.content {
+			display: flex;
+			justify-content: space-between;
+			margin: 20px;
+		}
 
-.content {
-	display: flex;
-	justify-content: space-between;
-	margin: 20px;
-}
+		.projects,
+		.bids,
+		.summary {
+			border: 1px solid #ccc;
+			padding: 20px;
+			width: 30%;
+			background: rgba(255, 255, 255, 0.8);
+			border-radius: 15px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			transition: transform 0.3s, box-shadow 0.3s;
+		}
 
-.projects, .bids, .summary {
-	border: 1px solid #ccc;
-	padding: 20px;
-	width: 30%;
-	background: rgba(255, 255, 255, 0.8);
-	border-radius: 15px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	transition: transform 0.3s, box-shadow 0.3s;
-}
+		.projects:hover,
+		.bids:hover,
+		.summary:hover {
+			transform: translateY(-10px);
+			box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+		}
 
-.projects:hover, .bids:hover, .summary:hover {
-	transform: translateY(-10px);
-	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+		.projects h2,
+		.bids h2,
+		.summary h2 {
+			margin-top: 0;
+		}
 
-.projects h2, .bids h2, .summary h2 {
-	margin-top: 0;
-}
+		.project,
+		.bid {
+			border: 1px solid #ccc;
+			padding: 10px;
+			margin-bottom: 10px;
+			background: rgba(255, 255, 255, 0.8);
+			border-radius: 10px;
+			transition: transform 0.3s, box-shadow 0.3s;
+		}
 
-.project, .bid {
-	border: 1px solid #ccc;
-	padding: 10px;
-	margin-bottom: 10px;
-	background: rgba(255, 255, 255, 0.8);
-	border-radius: 10px;
-	transition: transform 0.3s, box-shadow 0.3s;
-}
+		.project:hover,
+		.bid:hover {
+			transform: translateY(-5px);
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
 
-.project:hover, .bid:hover {
-	transform: translateY(-5px);
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+		.summary {
+			text-align: center;
+		}
 
-.summary {
-	text-align: center;
-}
+		.summary p {
+			margin: 10px 0;
+		}
 
-.summary p {
-	margin: 10px 0;
-}
+		.btn {
+			border-radius: 20px;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		}
 
-.btn {
-	border-radius: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+		@media (max-width : 768px) {
+			.content {
+				flex-direction: column;
+			}
 
-@media ( max-width : 768px) {
-	.content {
-		flex-direction: column;
-	}
-	.projects, .bids, .summary {
-		width: 100%;
-		margin-bottom: 20px;
-	}
-}
-</style>
+			.projects,
+			.bids,
+			.summary {
+				width: 100%;
+				margin-bottom: 20px;
+			}
+		}
+	</style>
 </head>
+
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">GoCoders</a>
-        <button class="navbar-toggler" type="button"
-            data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#"
-                    data-bs-toggle="modal" data-bs-target="#bidsModal">My Bids</a></li>
-                
-                <li class="nav-item"><a class="nav-link" href="#"
-                    onclick="window.location.href='support.html'">Support</a></li>
-                <li class="nav-item"><a class="nav-link" href="#"
-                    onclick="window.location.href='projectstatus.html'">Post Project Status</a></li>
-            </ul>
-            <div class="d-flex align-items-center">
-                <!-- Replacing the user icon with "Hi User" styled like the other navbar links -->
-                <span class="text-white" id="user-name"></span>
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">GoCoders</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+				aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal"
+							data-bs-target="#bidsModal">My Bids</a></li>
 
-                <!-- Dropdown menu -->
-                <div class="dropdown">
-                    <i class="material-icons" id="moreOptions"
-                        data-bs-toggle="dropdown" aria-expanded="false">more_vert</i>
-                    <ul class="dropdown-menu" aria-labelledby="moreOptions">
-                        <li><a class="dropdown-item"  id="logout" onclick="Logout()">Logout</a></li>
-                       
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+					<li class="nav-item"><a class="nav-link" href="#"
+							onclick="window.location.href='support.html'">Support</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"
+							onclick="window.location.href='projectstatus.html'">Post
+							Project Status</a></li>
+				</ul>
+				<div class="d-flex align-items-center">
+					<!-- Replacing the user icon with "Hi User" styled like the other navbar links -->
+					<span class="text-white" id="user-name"></span>
+
+					<!-- Dropdown menu -->
+					<div class="dropdown">
+						<i class="material-icons" id="moreOptions" data-bs-toggle="dropdown"
+							aria-expanded="false">more_vert</i>
+						<ul class="dropdown-menu" aria-labelledby="moreOptions">
+							<li><a class="dropdown-item" id="logout" onclick="Logout()">Logout</a></li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
 
 
 
 	<div class="mt-4 p-4 ms-4 me-4">
-    <div class="bg-white shadow-md rounded-lg overflow-hidden p-4 ms-4 me-4">
-        <h2 class="bg-gray-800 text-black text-lg px-4 py-2">Open Projects</h2>
-        <div class="p-4 ms-4 me-4"  >
-            <!-- Apply the table-striped class from Bootstrap -->
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th class="py-2 px-4 border-b">Project ID</th>
-                        <th class="py-2 px-4 border-b">Title</th>
-                        <th class="py-2 px-4 border-b">Description</th>
-                        <th class="py-2 px-4 border-b">Technology</th>
-                        <th class="py-2 px-4 border-b">Deadline</th>
-                        <th class="py-2 px-4 border-b">Budget (in $)</th>
-                        <th class="py-2 px-4 border-b">Action</th>
-                    </tr>
-                </thead>
-                <tbody id="project-table-body">
-                    <!-- Rows will be populated here -->
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="container-fluid p-4">
-    <div class="bids card" style="width: 100%;">
-        <h2 class="card-header">My Bids</h2>
-        <div class="card-body" style="width: 100%;">
-            <!-- Add the table-striped class here -->
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th scope="col">Project Name</th>
-                        <th scope="col">Bid Amount (in $)</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Build React App</td>
-                        <td>$500</td>
-                        <td>Pending</td>
-                        <td><button class="btn btn-danger">Withdraw</button></td>
-                    </tr>
-                    <tr>
-                        <td>Python Data Scrap</td>
-                        <td>$200</td>
-                        <td>Accepted</td>
-                        <td><button class="btn btn-info">View</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-
-		<div class="summary card container-fluid p-4">
-			<h2 class="card-header">Payment Summary</h2>
-			<div class="card-body">
-				<p class="card-text">Total Earnings: Loading</p>
-				<p class="card-text">Payments Pending: Loading</p>
-			</div>
-		</div>
-	</div>
-	</div>
-
-	<!-- Modal -->
-	<div class="modal fade" id="bidsModal" tabindex="-1"
-		aria-labelledby="bidsModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header"
-					style="background-color: #4fc3f7; color: white;">
-					<h5 class="modal-title" id="bidsModalLabel">My Bids</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<table class="table">
-						<thead>
-							<tr>
-								<th scope="col">Project Name</th>
-								<th scope="col">Bid Amount</th>
-								<th scope="col">Status</th>
-								<th scope="col">Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Build React App</td>
-								<td>$500</td>
-								<td>Pending</td>
-								<td><button class="btn btn-danger">Withdraw</button></td>
-							</tr>
-							<tr>
-								<td>Python Data Scrap</td>
-								<td>$200</td>
-								<td>Accepted</td>
-								<td><button class="btn btn-info">View</button></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary"
-						data-bs-dismiss="modal">Close</button>
-				</div>
+		<div class="bg-white shadow-md rounded-lg overflow-hidden p-4 ms-4 me-4">
+			<h2 class="bg-gray-800 text-black text-lg px-4 py-2">Open
+				Projects</h2>
+			<div class="p-4 ms-4 me-4">
+				<!-- Apply the table-striped class from Bootstrap -->
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th class="py-2 px-4 border-b">Project ID</th>
+							<th class="py-2 px-4 border-b">Title</th>
+							<th class="py-2 px-4 border-b">Description</th>
+							<th class="py-2 px-4 border-b">Technology</th>
+							<th class="py-2 px-4 border-b">Deadline</th>
+							<th class="py-2 px-4 border-b">Budget (in $)</th>
+							<th class="py-2 px-4 border-b">Action</th>
+						</tr>
+					</thead>
+					<tbody id="project-table-body">
+						<!-- Rows will be populated here -->
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+
+
+	<div class="mt-4 p-4 ms-4 me-4">
+		<div class="bg-white shadow-md rounded-lg overflow-hidden p-4 ms-4 me-4">
+			<h2 class="bg-gray-800 text-black text-lg px-4 py-2">My Bids</h2>
+			<div class="p-4 ms-4 me-4">
+				<!-- Apply the table-striped class from Bootstrap -->
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Project Name</th>
+							<th scope="col">Bid Amount</th>
+							<th scope="col">Status</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody id="bidsTableBody">
+						<tr>
+							<td colspan="4" class="text-center">Loading...</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="summary card container-fluid p-4">
+		<h2 class="card-header">Payment Summary</h2>
+		<div class="card-body">
+			<p class="card-text">Total Earnings: Loading</p>
+			<p class="card-text">Payments Pending: Loading</p>
+		</div>
+	</div>
+
+
+
+
+
+
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<script>
@@ -328,17 +283,18 @@ body {
 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	$(document).ready(function () {
-		getUserDets()
-	    $.ajax({
-	        url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
-	        type: "POST",
-	        success: function (response) {
-	            if (response.status === "success") {
-	                let projects = response.projects;
-	                let html = "";
-	                projects.forEach(function (project) {
-	                    html += `
+		$(document).ready(function () {
+			getUserDets()
+			
+			$.ajax({
+				url: "http://localhost:7050/GoCoder/ProjectServlet/getAllProject",
+				type: "POST",
+				success: function (response) {
+					if (response.status === "success") {
+						let projects = response.projects;
+						let html = "";
+						projects.forEach(function (project) {
+							html += `
 	                        <tr>
 	                            <td>${project.title}</td>
 	                            <td>${project.technology}</td>
@@ -346,49 +302,95 @@ body {
 	                            <td>${project.min_budget} - ${project.max_budget}</td>
 	                        </tr>
 	                    `;
-	                });
-	                $("#project-table-body").html(html);
-	            } else {
-	                $("#project-list").html("<p class='text-danger'>No Projects Found</p>");
-	            }
-	        },
-	        error: function () {
-	            $("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
-	        }
-	    });
-	});
+						});
+						$("#project-table-body").html(html);
+					} else {
+						$("#project-list").html("<p class='text-danger'>No Projects Found</p>");
+					}
+				},
+				error: function () {
+					$("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
+				}
+			});
+		});
 
-	function getUserDets() {
-	    $.ajax({
-	        url: "http://localhost:7050/GoCoder/session/getId",
-	        type: "POST",
-	        success: function (response) {
-	            if (response.status === "success") {
-	            	$("#user-name").html(`Hii ${response.user_name}`)
-	            } else {
-	            	alert("No Login Details Found")
-	            	redirectToPage("login.html")
-	            }
-	        },
-	        error: function () {
-	            // Handle error
-	        }
-	    });
-	}
 
-</script>
+		function fetchBids(userId) {
+			let xhr = new XMLHttpRequest();
+			let url = "http://localhost:7050/GoCoder/GetBids";
+
+			xhr.open("POST", url, true);
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState === 4) {
+					let tableBody = document.getElementById("bidsTableBody");
+					tableBody.innerHTML = "";
+
+					if (xhr.status === 200) {
+						let data = JSON.parse(xhr.responseText);
+
+						if (data.length === 0) {
+							tableBody.innerHTML = `<tr><td colspan="4" class="text-center">No bids found</td></tr>`;
+							return;
+						}
+
+						data.forEach(bid => {
+							let row = `<tr>
+                        <td>${bid.title}</td>
+                        <td>$${bid.bid_amt}</td>
+                        <td>${bid.status}</td>
+                        <td>
+                            ${bid.status === "Pending"
+									? `<button class="btn btn-danger">Withdraw</button>`
+									: `<button class="btn btn-info">View</button>`}
+                        </td>
+                    </tr>`;
+							tableBody.innerHTML += row;
+						});
+					} else {
+						console.error("Error fetching bids:", xhr.statusText);
+						tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Failed to load bids</td></tr>`;
+					}
+				}
+			};
+
+			let params = "user_id=" + encodeURIComponent(userId);
+			xhr.send(params);
+		}
+
+		function getUserDets() {
+			$.ajax({
+				url: "http://localhost:7050/GoCoder/session/getId",
+				type: "POST",
+				success: function (response) {
+					if (response.status === "success") {
+						$("#user-name").html(`Hii ${response.user_name}`)
+						fetchBids(response.user_id)
+					} else {
+						alert("No Login Details Found")
+						redirectToPage("login.html")
+					}
+				},
+				error: function () {
+					// Handle error
+				}
+			});
+		}
+
+	</script>
 
 	<script>
-    $(document).ready(function () {
-        $.ajax({
-            url: "http://localhost:7050/GoCoder/ProjectServlet/getProject",
-            type: "POST",
-            success: function (response) {
-                if (response.status === "success") {
-                    let projects = response.projects;
-                    let html = "";
-                    projects.forEach(function (project) {
-                        html += `
+		$(document).ready(function () {
+			$.ajax({
+				url: "http://localhost:7050/GoCoder/ProjectServlet/getProject",
+				type: "POST",
+				success: function (response) {
+					if (response.status === "success") {
+						let projects = response.projects;
+						let html = "";
+						projects.forEach(function (project) {
+							html += `
                             <tr>
                         		<td>${project.id}</td>
                                 <td>${project.title}</td>
@@ -399,22 +401,23 @@ body {
                                 <td><button class="btn btn-primary" onclick="window.location.href='bidsubmission.html'">BID</button></td>
                             </tr>
                         `;
-                    });
-                    $("#project-table-body").html(html);
-                } else {
-                    $("#project-list").html("<p class='text-danger'>No Projects Found</p>");
-                }
-            },
-            error: function () {
-                $("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
-            }
-        });
-    });
+						});
+						$("#project-table-body").html(html);
+					} else {
+						$("#project-list").html("<p class='text-danger'>No Projects Found</p>");
+					}
+				},
+				error: function () {
+					$("#project-list").html("<p class='text-danger'>Failed to fetch projects</p>");
+				}
+			});
+		});
 
-    
-</script>
-<script src = "./js/main.js" defer>
-    </script>
+
+	</script>
+	<script src="./js/main.js" defer>
+	</script>
 
 </body>
+
 </html>
