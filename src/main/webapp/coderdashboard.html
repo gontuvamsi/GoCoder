@@ -53,15 +53,13 @@
 			margin-left: 15px;
 		}
 
-		/* Styling for the "Hi User" text */
-		/* Optional: Further styling for the Hi User text */
+		
 		.nav-link {
 			font-size: 1rem;
-			/* Set the font size to match navbar links */
+			
 			font-weight: normal;
-			/* You can adjust this if you want the text to be bold or not */
 			padding: 0.5rem 1rem;
-			/* Adjust padding if necessary */
+			
 		}
 
 		.search-bar {
@@ -245,7 +243,7 @@
 							<th scope="col">Project Name</th>
 							<th scope="col">Bid Amount</th>
 							<th scope="col">Status</th>
-							<th scope="col">Action</th>
+							<!--  <th scope="col">Action</th>-->
 						</tr>
 					</thead>
 					<tbody id="bidsTableBody">
@@ -343,7 +341,7 @@
                         <td>
                             ${bid.status === "Pending"
 									? `<button class="btn btn-danger">Withdraw</button>`
-									: `<button class="btn btn-info">View</button>`}
+									: `<!--<button class="btn btn-info">View</button>-->`}
                         </td>
                     </tr>`;
 							tableBody.innerHTML += row;
@@ -373,7 +371,7 @@
 					}
 				},
 				error: function () {
-					// Handle error
+					
 				}
 			});
 		}

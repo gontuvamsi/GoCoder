@@ -24,7 +24,7 @@ public class ProjectStatusServlet extends HttpServlet {
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
-            // Bootstrap table
+            
             out.println("<table class='table table-bordered table-striped'>");
             out.println("<thead class='thead-dark'><tr>");
             out.println("<th>Project ID</th><th>Project Name</th><th>Project Status</th><th>Submitted By</th>");

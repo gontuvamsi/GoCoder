@@ -69,7 +69,7 @@ body {
 					</tr>
 				</thead>
 				<tbody id="transactionHistoryTable">
-					<!-- Transaction rows will be dynamically loaded here -->
+					
 				</tbody>
 			</table>
 
@@ -83,7 +83,7 @@ body {
             dataType: "json",
             success: function (data) {
                 let tableBody = $("#transactionHistoryTable");
-                tableBody.empty(); // Clear existing data
+                tableBody.empty(); 
 
                 $.each(data, function (index, transaction) {
                     let row = `<tr class="border-b">

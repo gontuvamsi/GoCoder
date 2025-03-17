@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("userName", name);
                 session.setAttribute("userRole", roleFromDB);
 
-                // Redirect based on role
+               
                 switch (roleFromDB.toLowerCase()) {
                     case "coder":
                         response.sendRedirect("coderdashboard.html");

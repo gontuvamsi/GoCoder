@@ -34,18 +34,18 @@ public class SaveProjectStatusServlet extends HttpServlet {
 
             conn = JDBCApp.getConnection();
 
-            // Check if project_id already exists
+            
             String checkQuery = "SELECT project_id FROM project_status WHERE project_id = ?";
             pst = conn.prepareStatement(checkQuery);
             pst.setInt(1, projectId);
             rs = pst.executeQuery();
             
             if (rs.next()) {
-                // Close previous statement before reuse
+                
                 rs.close();
                 pst.close();
 
-                // If project_id exists, update the record
+          
                 String updateQuery = "UPDATE project_status SET project_name = ?, project_status = ?, status_submitted_by = ? WHERE project_id = ?";
                 pst = conn.prepareStatement(updateQuery);
                 pst.setString(1, projectName);
@@ -60,10 +60,10 @@ public class SaveProjectStatusServlet extends HttpServlet {
                     jsonResponse.put("error", "Failed to Update");
                 }
             } else {
-                // Close previous statement before reuse
+               
                 pst.close();
 
-                // If project_id does not exist, insert a new record
+                
                 String insertQuery = "INSERT INTO project_status (project_id, project_name, project_status, status_submitted_by) VALUES (?, ?, ?, ?)";
                 pst = conn.prepareStatement(insertQuery);
                 pst.setInt(1, projectId);

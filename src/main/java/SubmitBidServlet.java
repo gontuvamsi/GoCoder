@@ -20,8 +20,8 @@ public class SubmitBidServlet extends HttpServlet {
 		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
 
-		// Retrieve all parameters, including the new project_id
-		String projectId = request.getParameter("project_id"); // New project_id parameter
+		
+		String projectId = request.getParameter("project_id"); 
 		String bidAmt = request.getParameter("bid_amt");
 		String completionDate = request.getParameter("completion_date");
 		String bidDesc = request.getParameter("bid_desc");

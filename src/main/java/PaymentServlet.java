@@ -28,23 +28,22 @@ public class PaymentServlet extends HttpServlet {
         PreparedStatement pstmt = null;
 
         try {
-            // Get database connection from JDBCApp.java
+            
             conn = JDBCApp.getConnection();
 
-            // SQL Insert Query
+           
             String sql = "INSERT INTO payments (project_id, project_name, amount_paid, transaction_id) VALUES (?, ?, ?, ?)";
             pstmt = conn.prepareStatement(sql);
 
-            // Set values
+           
             pstmt.setInt(1, Integer.parseInt(projectId));
             pstmt.setString(2, projectName);
             pstmt.setBigDecimal(3, new java.math.BigDecimal(amountPaid));
             pstmt.setString(4, transactionId);
 
-            // Execute Update
             int rowsInserted = pstmt.executeUpdate();
 
-            // JSON Response
+            
             if (rowsInserted > 0) {
                 out.print("{\"status\":\"success\"}");
             } else {

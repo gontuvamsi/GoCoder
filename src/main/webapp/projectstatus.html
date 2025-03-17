@@ -24,7 +24,7 @@ body {
 		</div>
 	</nav>
 
-	<!-- Main Content -->
+	
 	<div class="max-w-4xl mx-auto mt-6 p-6 bg-white shadow-md rounded">
 		<h2 class="text-2xl font-bold text-center mb-6">Project Completion Status</h2>
 		
@@ -67,9 +67,9 @@ body {
 
 	<script>
 	document.getElementById("projectStatusForm").addEventListener("submit", function(event) {
-	    event.preventDefault(); // Prevent default form submission
+	    event.preventDefault(); 
 	    
-	    // Collect form data
+	    
 	    var formData = {
 	        project_id: document.getElementById("project_id").value.trim(),
 	        project_name: document.getElementById("project_name").value.trim(),
