@@ -52,7 +52,7 @@ public class RegisterCustomerServlet extends HttpServlet {
             if (rowsInserted > 0) {
                 out.println("<script>alert('Registration successful!'); window.location='login.html';</script>");
             } }else {
-                out.println("<script>alert('User Already Exists ! Please Login'); window.location='signup.html';</script>");
+                out.println("<script>alert('Error in registration!'); window.location='signup.html';</script>");
             }
 
             
