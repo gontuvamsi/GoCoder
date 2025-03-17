@@ -1,14 +1,13 @@
+<!DOCTYPE html>
 <html>
- <head>
-  <title>
-   CustomerRegistration
-  </title>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
-  <style>
-   body {
+<head>
+    <title>Customer Registration</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet"/>
+    <style>
+        body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -16,8 +15,7 @@
             flex-direction: column;
             align-items: center;
             background: rgb(124, 214, 155);
-            background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%, rgba(219, 235, 27, 0.3029586834733894) 100%);
-
+            background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%, rgba(219, 235, 27, 0.3) 100%);
         }
         .navbar {
             width: 100%;
@@ -86,6 +84,10 @@
             background-color: grey;
             cursor: not-allowed;
         }
+        #passwordError {
+            color: red;
+            display: none;
+        }
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -94,93 +96,70 @@
                 opacity: 1;
             }
         }
-  </style>
- </head>
- <body>
-  <div class="navbar">
-   <div class="logo">
-    GoCoders
-   </div>
-   <div class="user-icon">
-    <i class="fas fa-user">
-    </i>
-   </div>
-  </div>
-  <div class="container">
-   <div class="logo">
-    <img alt="GoCoder logo with a stylized face wearing glasses and the text 'GO CODER' below it" height="300" src="https://storage.googleapis.com/a1aa/image/HPUxl1KOo8eX59koVsuOqUNt4bv2IpV8ZXqE75GDXMQ.jpg" width="300"/>
-   </div>
-   <div class="card animate__animated animate__fadeIn">
-    <h2>
-     Registration
-    </h2>
-    <form action="registerCustomer" method="POST" >
-     <div class="form-group">
-      <label for="name">
-       Name
-      </label>
-      <input class="form-control" id="name" name="name" type="text" required="required" oninput="checkForm()"/>
-     </div>
-     <div class="form-group">
-      <label for="email">
-       Email ID
-      </label>
-      <input class="form-control" id="email" name="email" type="email" required="required" oninput="checkForm()"/>
-     </div>
-     <div class="form-group">
-      <label for="password">
-       Password
-      </label>
-      <input class="form-control" id="password" name="password" type="password" required="required" oninput="checkForm()"/>
-     </div>
-     <div class="mb-6">
-      <label class="block text-gray-700 mb-2" for="role">
-       Role
-      </label>
-      <select class="w-full p-2 border border-gray-300 rounded" id="role" name="role" oninput="checkForm()" required="">
-       <option value="">
-        Select Role
-       </option>
-       <option value="Coder">
-        Coder
-       </option>
-       <option value="Customer">
-        Customer
-       </option>
-      </select>
-     </div>
-     <button class="btn btn-success btn-block" type="submit" id="submitBtn" disabled="disabled">
-      Submit
-     </button>
-    </form>
-   </div>
-  </div>
-  <script>
-   function checkForm() {
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">GoCoders</div>
+        <div class="user-icon"><i class="fas fa-user"></i></div>
+    </div>
+    <div class="container">
+        <div class="logo">
+            <img alt="GoCoder logo with a stylized face wearing glasses and the text 'GO CODER' below it" height="300" src="https://storage.googleapis.com/a1aa/image/HPUxl1KOo8eX59koVsuOqUNt4bv2IpV8ZXqE75GDXMQ.jpg" width="300"/>
+        </div>
+        <div class="card animate__animated animate__fadeIn">
+            <h2>Registration</h2>
+            <form action="registerCustomer" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input class="form-control" id="name" name="name" type="text" required oninput="checkForm()"/>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email ID</label>
+                    <input class="form-control" id="email" name="email" type="email" required oninput="checkForm()"/>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" required oninput="checkForm()"/>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input class="form-control" id="confirmPassword" name="confirmPassword" type="password" required oninput="checkForm()"/>
+                    <p id="passwordError">Passwords do not match</p>
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 mb-2" for="role">Role</label>
+                    <select class="w-full p-2 border border-gray-300 rounded" id="role" name="role" required oninput="checkForm()">
+                        <option value="">Select Role</option>
+                        <option value="Coder">Coder</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                </div>
+                <button class="btn btn-success btn-block" type="submit" id="submitBtn" disabled>Submit</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function checkForm() {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const role = document.getElementById('role').value;
             const submitBtn = document.getElementById('submitBtn');
-            
-            if (name && email && password) {
-                submitBtn.disabled = false;
-            } else {
-                submitBtn.disabled = true;
-                
-            }
-            
-        }
+            const passwordError = document.getElementById('passwordError');
 
-        function showPopup(event) {
-            event.preventDefault();
-            alert("Congratulations! You have registered successfully.");
+            if (password !== confirmPassword) {
+                passwordError.style.display = "block";
+                submitBtn.disabled = true;
+            } else {
+                passwordError.style.display = "none";
+                submitBtn.disabled = !(name && email && password && confirmPassword && role);
+            }
         }
-  </script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js">
-  </script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js">
-  </script>
- </body>
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
 </html>
