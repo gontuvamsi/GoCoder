@@ -167,7 +167,7 @@ public class ProjectServlet extends HttpServlet {
 		String maxBudgetStr = request.getParameter("max_budget");
 		String visibility = request.getParameter("visibility");
 
-		// Validate input fields
+		
 		if (title == null || title.isEmpty() || description == null || description.isEmpty() || technology == null
 				|| technology.isEmpty() || category == null || category.isEmpty() || deadlineStr == null
 				|| deadlineStr.isEmpty() || minBudgetStr == null || minBudgetStr.isEmpty() || maxBudgetStr == null
