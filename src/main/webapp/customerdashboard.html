@@ -103,6 +103,8 @@
 					<th>Description</th>
 					<th>Completion Date</th>
 					<th>Status</th>
+					
+					
 					<!--  <th>Action</th>-->
 				</tr>
 			</thead>
@@ -149,6 +151,67 @@
             $("#dropdownMenu").hide();
         }
     });
+</script>
+<script>
+function fetchBids() {
+    $.ajax({
+        url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
+        type: "POST",
+        success: function (response) {
+            if (response.status === "success") {
+                let bids = response.bids;
+                let html = "";
+
+                bids.forEach(function (bid) {
+                    let statusText = bid.status;
+                    let actionButtons = "";
+
+                    // If bid is still pending, show action buttons
+                    if (bid.status === "Pending") {
+                        actionButtons = `
+                            <button class="btn btn-success btn-sm" onclick="updateBidStatus(${bid.bid_id}, 'Active', this)">Accept</button>
+                            <button class="btn btn-danger btn-sm ml-2" onclick="updateBidStatus(${bid.bid_id}, 'Inactive', this)">Reject</button>
+                        `;
+                    } else {
+                        // Show status instead of buttons
+                        actionButtons = `<span class="font-weight-bold text-${bid.status === 'Active' ? 'success' : 'danger'}">${bid.status}</span>`;
+                    }
+
+                    html += `
+                        <tr>
+                            <td>${bid.title}</td>
+                            <td>${bid.Coder_Name}</td>
+                            <td>$${bid.bid_amt}</td>
+                            <td>${bid.bid_desc}</td>
+                            <td>${bid.completion_date}</td>
+                            <td>${statusText}</td>
+                            //<td>${actionButtons}</td>
+                        </tr>`;
+                });
+
+                $("#bids-table-body").html(html);
+            }
+        }
+    });
+}
+
+function updateBidStatus(bidId, status, buttonElement) {
+    $.ajax({
+        url: "http://localhost:7050/GoCoder/UpdateBidStatusServlet",
+        type: "POST",
+        data: { bid_id: bidId, status: status },
+        success: function (response) {
+            if (response.status === "success") {
+                let row = $(buttonElement).closest("tr");
+                row.find("td:nth-child(6)").text(status);  // Update status column
+                row.find("td:nth-child(7)").html(`<span class="font-weight-bold text-${status === 'Active' ? 'success' : 'danger'}">${status}</span>`); // Remove buttons and show status
+            } else {
+                alert("Failed to update bid status.");
+            }
+        }
+    });
+}
+
 </script>
 	<script>
         $(document).ready(function () {

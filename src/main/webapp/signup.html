@@ -170,25 +170,35 @@ to {
 
 	</div>
 	<script>
-		function checkForm() {
-			const name = document.getElementById('name').value;
-			const email = document.getElementById('email').value;
-			const password = document.getElementById('password').value;
-			const confirmPassword = document.getElementById('confirmPassword').value;
-			const role = document.getElementById('role').value;
-			const submitBtn = document.getElementById('submitBtn');
-			const passwordError = document.getElementById('passwordError');
+    function checkForm() {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const role = document.getElementById('role').value;
+        const submitBtn = document.getElementById('submitBtn');
+        const passwordError = document.getElementById('passwordError');
 
-			if (password !== confirmPassword) {
-				passwordError.style.display = "block";
-				submitBtn.disabled = true;
-			} else {
-				passwordError.style.display = "none";
-				submitBtn.disabled = !(name && email && password
-						&& confirmPassword && role);
-			}
-		}
-	</script>
+        // Password validation regex
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+        if (!passwordPattern.test(password)) {
+            passwordError.textContent = "Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character.";
+            passwordError.style.display = "block";
+            submitBtn.disabled = true;
+            return;
+        } else if (password !== confirmPassword) {
+            passwordError.textContent = "Passwords do not match";
+            passwordError.style.display = "block";
+            submitBtn.disabled = true;
+            return;
+        } else {
+            passwordError.style.display = "none";
+            submitBtn.disabled = !(name && email && password && confirmPassword && role);
+        }
+    }
+</script>
+
 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
