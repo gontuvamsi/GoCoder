@@ -4,8 +4,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Post a New Project</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 <style>
 .navbar-custom {
 	background-color: #3822a7;
@@ -13,7 +15,8 @@
 
 body {
 	font-family: 'Clash Display', sans-serif;
-	background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%, rgba(219, 235, 27, 0.3) 100%);
+	background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%,
+		rgba(219, 235, 27, 0.3) 100%);
 }
 </style>
 </head>
@@ -21,14 +24,21 @@ body {
 
 	<div class="max-w-4xl mx-auto p-4">
 		<div class="bg-white shadow-md rounded p-4">
-			<div class="flex justify-between items-center border-b pb-2 mb-4 bg-[#3822a7] text-white">
+			<div
+				class="flex justify-between items-center border-b pb-2 mb-4 bg-[#3822a7] text-white">
 				<div class="text-lg font-bold ml-4">GoCoders</div>
 				<div class="flex space-x-4">
-					<a href="customerdashboard.html" class="text-white font-bold mr-2">Dashboard</a> 
-					<!-- <a href="#" class="text-white font-bold mr-2">My Projects</a>--> 
+					<a href="customerdashboard.html" class="text-white font-bold mr-2">Dashboard</a>
+					<!-- <a href="#" class="text-white font-bold mr-2">My Projects</a>-->
 					<a href="home.html" class="text-white font-bold mr-2">Logout</a>
 				</div>
 			</div>
+			<div class="flex justify-start mb-4">
+				<a href="customerdashboard.html" class="text-[#3822a7] font-bold mr-2">
+					<i class="fas fa-arrow-left"></i> Back
+				</a>
+			</div>
+
 
 			<div class="text-center mb-6">
 				<h2 class="text-xl font-bold">Post a New Project</h2>
@@ -36,16 +46,20 @@ body {
 
 			<form id="project-form" class="space-y-4">
 				<div>
-					<label class="block text-lg font-medium">Project Title:</label> 
-					<input type="text" class="w-full border rounded p-2" name="title" id="title" required>
+					<label class="block text-lg font-medium">Project Title:</label> <input
+						type="text" class="w-full border rounded p-2" name="title"
+						id="title" required>
 				</div>
 				<div>
-					<label class="block text-lg font-medium">Project Description:</label>
-					<textarea class="w-full border rounded p-2 h-32" name="description" id="description" required></textarea>
+					<label class="block text-lg font-medium">Project
+						Description:</label>
+					<textarea class="w-full border rounded p-2 h-32" name="description"
+						id="description" required></textarea>
 				</div>
 				<div>
-					<label class="block text-lg font-medium">Technology/Stack Required:</label>
-					<select class="w-full border rounded p-2" name="technology" id="technology" required>
+					<label class="block text-lg font-medium">Technology/Stack
+						Required:</label> <select class="w-full border rounded p-2"
+						name="technology" id="technology" required>
 						<option value="" disabled selected>Select Technology</option>
 						<option>Java</option>
 						<option>Python</option>
@@ -57,7 +71,8 @@ body {
 				</div>
 				<div>
 					<label class="block text-lg font-medium">Project Category:</label>
-					<select class="w-full border rounded p-2" name="category" id="category" required>
+					<select class="w-full border rounded p-2" name="category"
+						id="category" required>
 						<option value="" disabled selected>Select Category</option>
 						<option>Web Development</option>
 						<option>Android Development</option>
@@ -67,75 +82,85 @@ body {
 					</select>
 				</div>
 				<div>
-					<label class="block text-lg font-medium">Target Deadline:</label>
-					<input type="date" class="w-full border rounded p-2" name="deadline" id="deadline" required>
+					<label class="block text-lg font-medium">Target Deadline:</label> <input
+						type="date" class="w-full border rounded p-2" name="deadline"
+						id="deadline" required>
 				</div>
 				<div>
 					<label class="block text-lg font-medium">Budget Range:</label>
 					<div class="flex space-x-4">
-						<input type="number" class="w-1/2 border rounded p-2" name="min_budget" id="min_budget" min="0" placeholder="Min $" required>
-						<input type="number" class="w-1/2 border rounded p-2" name="max_budget" id="max_budget" min="0" placeholder="Max $" required>
+						<input type="number" class="w-1/2 border rounded p-2"
+							name="min_budget" id="min_budget" min="0" placeholder="Min $"
+							required> <input type="number"
+							class="w-1/2 border rounded p-2" name="max_budget"
+							id="max_budget" min="0" placeholder="Max $" required>
 					</div>
 				</div>
 				<div>
-					<label class="block text-lg font-medium">Visibility:</label>
-					<select class="w-full border rounded p-2" name="visibility" id="visibility" required>
+					<label class="block text-lg font-medium">Visibility:</label> <select
+						class="w-full border rounded p-2" name="visibility"
+						id="visibility" required>
 						<option value="" disabled selected>Select Visibility</option>
 						<option>Public</option>
 						<option>Private</option>
 					</select>
 				</div>
 				<div class="text-center">
-					<button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded">Submit Project</button>
+					<button type="submit"
+						class="bg-green-500 text-white font-bold py-2 px-4 rounded">Submit
+						Project</button>
 				</div>
 			</form>
 		</div>
 	</div>
 
-	<div id="error-message" class="hidden text-red-500 text-center mt-4">Please fix the errors above and try again.</div>
-	<div id="success-message" class="hidden text-green-500 text-center mt-4">Project posted successfully!</div>
+	<div id="error-message" class="hidden text-red-500 text-center mt-4">Please
+		fix the errors above and try again.</div>
+	<div id="success-message"
+		class="hidden text-green-500 text-center mt-4">Project posted
+		successfully!</div>
 
 	<script>
-	document.addEventListener("DOMContentLoaded", function () {
-		const deadlineInput = document.getElementById("deadline");
-		const today = new Date().toISOString().split("T")[0];
-		deadlineInput.setAttribute("min", today);
-	});
+		document.addEventListener("DOMContentLoaded", function() {
+			const deadlineInput = document.getElementById("deadline");
+			const today = new Date().toISOString().split("T")[0];
+			deadlineInput.setAttribute("min", today);
+		});
 
-	$(document).ready(function() {
-		$("#project-form").submit(function(event) {
-			event.preventDefault();
+		$(document).ready(function() {
+			$("#project-form").submit(function(event) {
+				event.preventDefault();
 
-			var formData = {
-				title: $("#title").val(),
-				description: $("#description").val(),
-				technology: $("#technology").val(),
-				category: $("#category").val(),
-				deadline: $("#deadline").val(),
-				min_budget: $("#min_budget").val(),
-				max_budget: $("#max_budget").val(),
-				visibility: $("#visibility").val()
-			};
+				var formData = {
+					title : $("#title").val(),
+					description : $("#description").val(),
+					technology : $("#technology").val(),
+					category : $("#category").val(),
+					deadline : $("#deadline").val(),
+					min_budget : $("#min_budget").val(),
+					max_budget : $("#max_budget").val(),
+					visibility : $("#visibility").val()
+				};
 
-			$.ajax({
-				type: "POST",
-				url: "ProjectServlet/ProjectPostingServlet",
-				data: formData,
-				dataType: "json",
-				success: function(response) {
-					if (response.status === "success") {
-						alert(response.message);
-						$("#project-form")[0].reset();
-					} else {
-						alert("Error: " + response.message);
+				$.ajax({
+					type : "POST",
+					url : "ProjectServlet/ProjectPostingServlet",
+					data : formData,
+					dataType : "json",
+					success : function(response) {
+						if (response.status === "success") {
+							alert(response.message);
+							$("#project-form")[0].reset();
+						} else {
+							alert("Error: " + response.message);
+						}
+					},
+					error : function(xhr) {
+						alert("An error occurred: " + xhr.responseText);
 					}
-				},
-				error: function(xhr) {
-					alert("An error occurred: " + xhr.responseText);
-				}
+				});
 			});
 		});
-	});
 	</script>
 
 </body>

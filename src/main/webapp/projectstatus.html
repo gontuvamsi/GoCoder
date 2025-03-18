@@ -10,7 +10,8 @@
 <style>
 body {
 	font-family: 'Clash Display', sans-serif;
-	background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%, rgba(219, 235, 27, 0.3) 100%);
+	background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%,
+		rgba(219, 235, 27, 0.3) 100%);
 }
 </style>
 </head>
@@ -19,29 +20,39 @@ body {
 	<!-- Navbar -->
 	<nav class="bg-[#3822a7] p-4">
 		<div class="max-w-4xl mx-auto flex justify-between items-center">
-			<span class="text-white text-xl font-bold">GoCoders</span>
-			<a href="login.html" class="text-white font-bold hover:underline">Logout</a>
+			<span class="text-white text-xl font-bold">GoCoders</span> <a
+				href="login.html" class="text-white font-bold hover:underline">Logout</a>
 		</div>
 	</nav>
+	<div class="flex justify-start mb-4">
+		<a href="coderdashboard.html" class="text-[#3822a7] font-bold mr-2">
+			<i class="fas fa-arrow-left"></i> Back
+		</a>
+	</div>
 
-	
+
+
 	<div class="max-w-4xl mx-auto mt-6 p-6 bg-white shadow-md rounded">
-		<h2 class="text-2xl font-bold text-center mb-6">Project Completion Status</h2>
-		
+		<h2 class="text-2xl font-bold text-center mb-6">Project
+			Completion Status</h2>
+
 		<form id="projectStatusForm" class="space-y-4">
 			<div>
-				<label class="block text-lg font-medium">Project ID:</label> 
-				<input type="number" name="project_id" id="project_id" class="w-full border rounded p-2" required>
+				<label class="block text-lg font-medium">Project ID:</label> <input
+					type="number" name="project_id" id="project_id"
+					class="w-full border rounded p-2" required>
 			</div>
 
 			<div>
-				<label class="block text-lg font-medium">Project Name:</label> 
-				<input type="text" name="project_name" id="project_name" class="w-full border rounded p-2" required>
+				<label class="block text-lg font-medium">Project Name:</label> <input
+					type="text" name="project_name" id="project_name"
+					class="w-full border rounded p-2" required>
 			</div>
 
 			<div>
-				<label class="block text-lg font-medium">Project Status:</label> 
-				<select name="project_status" id="project_status" class="w-full border rounded p-2" required>
+				<label class="block text-lg font-medium">Project Status:</label> <select
+					name="project_status" id="project_status"
+					class="w-full border rounded p-2" required>
 					<option value="In Planning">In Planning</option>
 					<option value="In Design">In Design</option>
 					<option value="In Development">In Development</option>
@@ -52,18 +63,23 @@ body {
 			</div>
 
 			<div>
-				<label class="block text-lg font-medium">Status Submitted By (User ID):</label> 
-				<input type="number" name="status_submitted_by" id="status_submitted_by" class="w-full border rounded p-2" required>
+				<label class="block text-lg font-medium">Status Submitted By
+					(User ID):</label> <input type="number" name="status_submitted_by"
+					id="status_submitted_by" class="w-full border rounded p-2" required>
 			</div>
 
 			<div class="text-center">
-				<button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded">Submit</button>
+				<button type="submit"
+					class="bg-green-500 text-white font-bold py-2 px-4 rounded">Submit</button>
 			</div>
 		</form>
 	</div>
 
-	<div id="error-message" class="hidden text-red-500 text-center mt-4">Please fix the errors above and try again.</div>
-	<div id="success-message" class="hidden text-green-500 text-center mt-4">Project status updated successfully!</div>
+	<div id="error-message" class="hidden text-red-500 text-center mt-4">Please
+		fix the errors above and try again.</div>
+	<div id="success-message"
+		class="hidden text-green-500 text-center mt-4">Project status
+		updated successfully!</div>
 
 	<script>
 	document.getElementById("projectStatusForm").addEventListener("submit", function(event) {
