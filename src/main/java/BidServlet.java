@@ -29,17 +29,18 @@ public class BidServlet extends HttpServlet {
         
         JSONArray jsonArray = new JSONArray();
         try (Connection con = JDBCApp.getConnection()) {
-            String query = "SELECT projects.title, users.name, bids.bid_amt, bids.completion_date, bids.bid_desc, bids.status "
+            String query = "SELECT bids.id , projects.title, users.name, bids.bid_amt, bids.completion_date, bids.bid_desc, bids.status "
                          + "FROM bids "
                          + "JOIN users ON bids.user_id = users.id "
                          + "JOIN projects ON bids.project_id = projects.id "
-                         + "WHERE bids.user_id = ?";
+                         + "WHERE bids.user_id = ? and bids.status = 'pending'";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setInt(1, Integer.parseInt(userId));
             ResultSet rs = ps.executeQuery();
             
             while (rs.next()) {
                 JSONObject obj = new JSONObject();
+                obj.put("bids_id", rs.getInt("id"));
                 obj.put("title", rs.getString("title"));
                 obj.put("name", rs.getString("name"));
                 obj.put("bid_amt", rs.getDouble("bid_amt"));

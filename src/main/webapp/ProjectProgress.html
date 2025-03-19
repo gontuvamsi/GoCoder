@@ -3,100 +3,198 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Progress</title>
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
-    
+    <title>Project Progress - GoCoders</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Poppins', sans-serif;
+            background-color: #E5F6FD;
+            color: #333333;
+            min-height: 100vh;
         }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
-        }
-        .header {
-            background: #007bff;
-            padding: 15px;
-            border-radius: 8px;
+
+        .navbar {
+            width: 100%;
+            background-color: #6200ea;
+            padding: 15px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .header span {
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
+
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: 1px;
         }
-        .nav-links a {
-            color: white;
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
             text-decoration: none;
-            margin-left: 15px;
+            transition: color 0.3s ease;
         }
+
+        .navbar .nav-links a:hover {
+            color: #E5F6FD;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6200ea;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
         .table-container {
+            overflow-x: auto;
             margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            border: 1px solid #6200ea;
+        }
+
+        th {
+            background-color: #6200ea;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+
+        tr:hover {
+            background-color: #E5F6FD;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .navbar .logo {
+                font-size: 20px;
+            }
+
+            .navbar .nav-links a {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 30px auto;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card h2 {
+                font-size: 20px;
+            }
+
+            th, td {
+                font-size: 12px;
+                padding: 10px;
+            }
         }
     </style>
 </head>
 <body>
-
-<div class="container">
-    <!-- Header -->
-    <header class="header">
-        <span>GoCoders</span>
-        <nav class="nav-links">
-            
+    <div class="navbar">
+        <div class="logo">GoCoders</div>
+        <div class="nav-links">
             <a href="home.html">Logout</a>
-        </nav>
-    </header>
-
-    
-    <h2 class="text-center mt-4">Project Status</h2>
-    
-    <div class="table-container">
-        <table class="table table-bordered table-striped">
-            <thead class="table-dark">
-                <tr>
-                    <th>Project ID</th>
-                    <th>Project Name</th>
-                    <th>Project Status</th>
-                    <th>Submitted By</th>
-                </tr>
-            </thead>
-            <tbody id="project-status-table">
-                <!-- Dynamic Data will be loaded here -->
-            </tbody>
-        </table>
+        </div>
     </div>
-</div>
 
+    <div class="container">
+        <div class="card">
+            <h2>Project Status</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project ID</th>
+                            <th>Project Name</th>
+                            <th>Project Status</th>
+                            <th>Submitted By</th>
+                        </tr>
+                    </thead>
+                    <tbody id="project-status-table">
+                        <!-- Dynamic Data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        
-        $.ajax({
-            url: "ProjectStatusServlet",
-            type: "GET",
-            dataType: "html",
-            success: function(data) {
-                $("#project-status-table").html(data);
-            },
-            error: function(xhr, status, error) {
-                alert("Error fetching project status: " + xhr.responseText);
-            }
+    <!-- JavaScript (Unchanged from Original) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: "ProjectStatusServlet",
+                type: "GET",
+                dataType: "html",
+                success: function(data) {
+                    $("#project-status-table").html(data);
+                },
+                error: function(xhr, status, error) {
+                    alert("Error fetching project status: " + xhr.responseText);
+                }
+            });
         });
-    });
-</script>
-
+    </script>
 </body>
 </html>

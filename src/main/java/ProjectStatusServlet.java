@@ -27,7 +27,7 @@ public class ProjectStatusServlet extends HttpServlet {
             
             out.println("<table class='table table-bordered table-striped'>");
             out.println("<thead class='thead-dark'><tr>");
-            out.println("<th>Project ID</th><th>Project Name</th><th>Project Status</th><th>Submitted By</th>");
+            //out.println("<th>Project ID</th><th>Project Name</th><th>Project Status</th><th>Submitted By</th>");
             out.println("</tr></thead><tbody>");
             
             while (rs.next()) {

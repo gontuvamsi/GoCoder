@@ -1,192 +1,246 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<title>Login</title>
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-	rel="stylesheet" />
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-	rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-	rel="stylesheet" />
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-	rel="stylesheet" />
-<style>
-body {
-	font-family: 'Roboto', sans-serif;
-	margin: 0;
-	padding: 0;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background: rgb(124, 214, 155);
-	background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%,
-		rgba(219, 235, 27, 0.3029586834733894) 100%);
-}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GoCoders</title>
+  <!-- External Libraries -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-.navbar {
-	width: 100%;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px;
-	border-bottom: 1px solid #000;
-	background-color: #6200ea;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #E5F6FD; /* New background color */
+      color: #333333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-.navbar .logo {
-	font-size: 24px;
-	font-weight: bold;
-	color: #fff;
-}
+    /* Navbar */
+    .navbar {
+      width: 100%;
+      background-color: #6200ea;
+      padding: 15px 25px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
 
-.navbar .user-icon {
-	font-size: 24px;
-	color: #fff;
-}
+    .navbar .logo {
+      font-size: 26px;
+      font-weight: 600;
+      color: #FFFFFF;
+      letter-spacing: 1px;
+    }
 
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 50px;
-}
+    .navbar .user-icon {
+      font-size: 24px;
+      color: #FFFFFF;
+      transition: color 0.3s ease;
+    }
 
-.logo img {
-	width: 300px;
-	height: auto;
-}
+    .navbar .user-icon:hover {
+      color: #E5F6FD;
+    }
 
-.card {
-	width: 400px;
-	border: 1px solid #000;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	padding: 20px;
-	margin-left: 20px;
-	background-color: #fff;
-	animation: fadeIn 1s;
-}
+    /* Container */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 50px; /* Original margin */
+      max-width: 1200px;
+      padding: 0 20px;
+    }
 
-.card h2 {
-	text-align: center;
-	margin-bottom: 20px;
-	color: #6200ea;
-	font-size: 28px;
-	font-weight: bold;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	border-bottom: 2px solid #6200ea;
-	padding-bottom: 10px;
-}
+    .logo img {
+      width: 300px; /* Original width */
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      margin-left: 0; /* Keeps image on the left */
+    }
 
-.card label {
-	display: block;
-	margin-bottom: 10px;
-	color: #6200ea;
-}
+    /* Card */
+    .card {
+      width: 400px; /* Original width */
+      background-color: #FFFFFF;
+      border-radius: 15px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      padding: 35px;
+      margin-left: 20px; /* Original margin-left to keep it to the right of the image */
+      animation: fadeIn 0.8s ease-in-out;
+    }
 
-.card input[type="text"], .card input[type="email"], .card input[type="password"]
-	{
-	width: 100%;
-	padding: 10px;
-	margin-bottom: 20px;
-	border: 1px solid #000;
-	border-radius: 5px;
-}
+    .card h2 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 600;
+      color: #6200ea;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 2px solid #6200ea;
+      padding-bottom: 10px;
+    }
 
-.card button[type="submit"] {
-	width: 100%;
-	padding: 10px;
-	background-color: #6200ea;
-	color: #fff;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-}
+    /* Form Elements */
+    .form-group {
+      margin-bottom: 25px;
+    }
 
-.card button[type="submit"]:hover {
-	background-color: #3700b3;
-}
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: #6200ea;
+      margin-bottom: 8px;
+    }
 
-.card button[type="submit"]:disabled {
-	background-color: grey;
-	cursor: not-allowed;
-}
+    .form-group input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #6200ea;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #333333;
+      background-color: #F9F9F9;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
+    .form-group input:focus {
+      outline: none;
+      border-color: #3700b3;
+      box-shadow: 0 0 6px rgba(98, 0, 234, 0.3);
+    }
 
+    /* Button */
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #6200ea;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-to {
-	opacity: 1;
+    .btn:hover:not(:disabled) {
+      background-color: #3700b3;
+      transform: translateY(-2px);
+    }
 
-}
-</style>
+    .btn:disabled {
+      background-color: grey;
+      cursor: not-allowed;
+    }
+
+    /* Forgot Password Link */
+    .text-center {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .text-center a {
+      color: #6200ea;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .text-center a:hover {
+      color: #3700b3;
+    }
+
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        margin-top: 30px;
+      }
+      .logo img {
+        width: 220px;
+        margin-left: 0;
+      }
+      .card {
+        width: 100%;
+        max-width: 360px;
+        margin-left: 0;
+        padding: 25px;
+      }
+      .navbar {
+        padding: 10px 15px;
+      }
+    }
+  </style>
 </head>
 <body>
-	<div class="navbar">
-		<div class="logo">GoCoders</div>
-		<div class="user-icon">
-			<i class="fas fa-user"></i>
-		</div>
-	</div>
-	<div class="container">
-		<div class="logo">
-			<img alt="Image" height="300"
-				src="https://storage.googleapis.com/a1aa/image/HPUxl1KOo8eX59koVsuOqUNt4bv2IpV8ZXqE75GDXMQ.jpg"
-				width="300" />
-		</div>
-		<div class="card animate__animated animate__fadeIn">
-			<h2>LOGIN</h2>
-			<form action="LoginServlet" method="POST">
-				<div class="form-group">
-					<label for="email">Email ID</label> <input class="form-control"
-						id="email" name="email" oninput="checkForm()" required="required"
-						type="text" />
-				</div>
-				<div class="form-group">
-					<label for="password">Password</label> <input class="form-control"
-						id="password" name="password" oninput="checkForm()"
-						required="required" type="password" />
-				</div>
-				<button class="btn btn-primary btn-block" disabled="disabled"
-					id="submitBtn" type="submit">Submit</button>
-				<div class="text-center mt-3">
-					<a href="resetpassword.html" class="text-primary">Forgot
-						Password?</a>
-				</div>
-			</form>
-		</div>
-	</div>
+  <!-- Navbar -->
+  <div class="navbar">
+    <div class="logo">GoCoders</div>
+    <div class="user-icon">
+      <i class="fas fa-user"></i>
+    </div>
+  </div>
 
-	<script>
-		function checkForm() {
-			const email = document.getElementById('email').value;
-			const password = document.getElementById('password').value;
-			const submitBtn = document.getElementById('submitBtn');
+  <!-- Main Content -->
+  <div class="container">
+    <div class="logo">
+      <img alt="Image" src="https://storage.googleapis.com/a1aa/image/HPUxl1KOo8eX59koVsuOqUNt4bv2IpV8ZXqE75GDXMQ.jpg" />
+    </div>
+    <div class="card">
+      <h2>Login</h2>
+      <form action="LoginServlet" method="POST">
+        <div class="form-group">
+          <label for="email">Email ID</label>
+          <input id="email" name="email" oninput="checkForm()" required type="text" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" name="password" oninput="checkForm()" required type="password" />
+        </div>
+        <button class="btn" disabled id="submitBtn" type="submit">Submit</button>
+        <div class="text-center">
+          <a href="resetpassword.html">Forgot Password?</a>
+        </div>
+      </form>
+    </div>
+  </div>
 
-			if (email && password) {
-				submitBtn.disabled = false;
-			} else {
-				submitBtn.disabled = true;
-			}
-		}
-	</script>
+  <!-- JavaScript -->
+  <script>
+    function checkForm() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = !(email && password);
+    }
 
-	<script>
-		window.onload = function() {
-			const urlParams = new URLSearchParams(window.location.search);
-			const errorMessage = urlParams.get('error');
-			if (errorMessage) {
-				alert(errorMessage);
-			}
-		};
-	</script>
-
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    window.onload = function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const errorMessage = urlParams.get('error');
+      if (errorMessage) alert(errorMessage);
+    };
+  </script>
 </body>
 </html>

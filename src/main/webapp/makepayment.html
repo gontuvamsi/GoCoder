@@ -1,123 +1,307 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Payment Success</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<style>
-.navbar-custom {
-	background-color: #3822a7;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success - GoCoders</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-	font-family: 'Clash Display', sans-serif;
-	background: linear-gradient(194deg, rgba(124, 214, 155, 1) 0%,
-		rgba(219, 235, 27, 0.3) 100%);
-}
-</style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #E5F6FD;
+            color: #333333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #6200ea;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #E5F6FD;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6200ea;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #6200ea;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #3700b3;
+        }
+
+        .back-link i {
+            margin-right: 8px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 16px;
+            font-weight: 500;
+            color: #333333;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #6200ea;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #F9F9F9;
+            color: #333333;
+        }
+
+        .btn {
+            background-color: #28a745;
+            color: #FFFFFF;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        .dialog {
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .dialog-content {
+            background-color: #FFFFFF;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .dialog-content h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6200ea;
+            margin-bottom: 15px;
+        }
+
+        .dialog-content p {
+            font-size: 16px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .dialog-content .btn-close {
+            background-color: #6200ea;
+        }
+
+        .dialog-content .btn-close:hover {
+            background-color: #3700b3;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .navbar .logo {
+                font-size: 20px;
+            }
+
+            .navbar .nav-links a {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 30px auto;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card h2 {
+                font-size: 20px;
+            }
+
+            .form-group label {
+                font-size: 14px;
+            }
+
+            .form-group input {
+                font-size: 12px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
+<body>
+    <div class="navbar">
+        <div class="logo">GoCoders</div>
+        <div class="nav-links">
+            <a href="home.html">Logout</a>
+        </div>
+    </div>
 
-	<div class="max-w-4xl mx-auto p-4">
-		<div class="bg-white shadow-md rounded p-4">
-			<div
-				class="flex justify-between items-center border-b pb-2 mb-4 bg-[#3822a7] text-white">
-				<div class="text-lg font-bold ml-4">GoCoders</div>
-				<div class="flex space-x-4">
-					<a href="home.html" class="text-white font-bold mr-2">Logout</a>
-				</div>
-			</div>
-			<div class="flex justify-start mb-4">
-				<a href="customerdashboard.html" class="text-[#3822a7] font-bold mr-2">
-					<i class="fas fa-arrow-left"></i> Back
-				</a>
-			</div>
+    <div class="container">
+        <div class="card">
+            <a href="customerdashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+            <h2>Payment Details</h2>
+            <form id="paymentForm" class="space-y-4">
+                <div class="form-group">
+                    <label>Project ID:</label>
+                    <input type="text" name="project_id" id="project_id">
+                </div>
+                <div class="form-group">
+                    <label>Project Name:</label>
+                    <input type="text" name="project_name" id="project_name">
+                </div>
+                <div class="form-group">
+                    <label>Amount Paid (in $):</label>
+                    <input type="text" name="amount_paid" id="amount_paid">
+                </div>
+                <div class="form-group">
+                    <label>Transaction ID:</label>
+                    <input type="text" name="transaction_id" id="transaction_id">
+                </div>
+                <button type="button" id="submitPayment" class="btn">Submit</button>
+            </form>
+        </div>
+    </div>
 
+    <div id="successDialog" class="dialog hidden">
+        <div class="dialog-content">
+            <h2>Success</h2>
+            <p>Your payment has been recorded successfully!</p>
+            <button id="closeDialog" class="btn btn-close">Close</button>
+        </div>
+    </div>
 
-			<div class="text-center mb-6">
-				<h2 class="text-xl font-bold">Payment Details</h2>
-			</div>
+    <script>
+        $(document).ready(function() {
+            $("#submitPayment").click(function() {
+                var paymentData = $("#paymentForm").serialize();
 
-			<form id="paymentForm" class="space-y-4">
-				<div>
-					<label class="block text-lg font-medium">Project ID :</label> <input
-						type="text" class="w-full border rounded p-2" name="project_id"
-						id="project_id">
-				</div>
-				<div>
-					<label class="block text-lg font-medium">Project Name :</label> <input
-						type="text" class="w-full border rounded p-2" name="project_name"
-						id="project_name">
-				</div>
-				<div>
-					<label class="block text-lg font-medium">Amount Paid (in $)
-						:</label> <input type="text" class="w-full border rounded p-2"
-						name="amount_paid" id="amount_paid">
-				</div>
-				<div>
-					<label class="block text-lg font-medium">Transaction ID :</label> <input
-						type="text" class="w-full border rounded p-2"
-						name="transaction_id" id="transaction_id">
-				</div>
-				<div class="text-center">
-					<button type="button" id="submitPayment"
-						class="bg-green-500 text-white font-bold py-2 px-4 rounded">Submit</button>
-				</div>
-			</form>
-		</div>
-	</div>
+                $.ajax({
+                    url: "PaymentServlet",
+                    type: "POST",
+                    data: paymentData,
+                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+                    success: function(response) {
+                        if (response.status === "success") {
+                            $("#successDialog").removeClass("hidden");
+                            $("#paymentForm")[0].reset();
+                        } else {
+                            alert("Failed to Record Payment: " + response.message);
+                        }
+                    },
+                    error: function() {
+                        alert("Something went wrong! Please try again.");
+                    }
+                });
+            });
 
-	<div id="successDialog"
-		class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 hidden">
-		<div class="bg-white p-6 rounded shadow-lg text-center">
-			<h2 class="text-2xl font-bold mb-4">Success</h2>
-			<p>Your payment has been recorded successfully!</p>
-			<button id="closeDialog"
-				class="mt-4 bg-blue-500 text-white font-bold py-2 px-4 rounded">Close</button>
-		</div>
-	</div>
-
-	<script>
-		$(document)
-				.ready(
-						function() {
-							$("#submitPayment")
-									.click(
-											function() {
-												var paymentData = $(
-														"#paymentForm")
-														.serialize();
-
-												$
-														.ajax({
-															url : "PaymentServlet",
-															type : "POST",
-															data : paymentData,
-															contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-															success : function(
-																	response) {
-																if (response.status === "success") {
-																	alert("Payment Recorded Successfully!");
-																	$("#paymentForm")[0]
-																			.reset();
-																} else {
-																	alert("Failed to Record Payment: "
-																			+ response.message);
-																}
-															},
-															error : function() {
-																alert("Something went wrong! Please try again.");
-															}
-														});
-											});
-						});
-	</script>
-
-
+            $("#closeDialog").click(function() {
+                $("#successDialog").addClass("hidden");
+            });
+        });
+    </script>
 </body>
 </html>

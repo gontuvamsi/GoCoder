@@ -1,80 +1,224 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+    <title>Project - GoCoders</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #e0f7fa;
+            font-family: 'Poppins', sans-serif;
+            background-color: #E5F6FD;
+            color: #333333;
+            min-height: 100vh;
         }
-        .table-hover tbody tr:hover {
-            background-color: #b2ebf2;
-        }
+
         .navbar {
-            background-color: #00796b; /* Teal */
-            color: white;
+            width: 100%;
+            background-color: #6200ea;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
-        .navbar a {
-            color: #b2dfdb; /* Light teal */
-            font-weight: bold;
+
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: 1px;
         }
-        .navbar a:hover {
-            color: white;
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #E5F6FD;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6200ea;
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            border: 1px solid #6200ea;
+        }
+
+        th {
+            background-color: #6200ea;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+
+        tr:hover {
+            background-color: #E5F6FD;
+        }
+
+        .btn-delete {
+            background-color: #dc3545; /* Red color */
+            color: #FFFFFF;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn-delete:hover {
+            background-color: #c82333; /* Darker red on hover */
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .navbar .logo {
+                font-size: 20px;
+            }
+
+            .navbar .nav-links a {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 30px auto;
+            }
+
+            .card {
+                padding: 20px;
+            }
+
+            .card h3 {
+                font-size: 20px;
+            }
+
+            th, td {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .btn-delete {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container-fluid p-0">
-        <div class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-4 navbar px-4">
-            <div class="h4 font-weight-bold">GoCoders - Projects</div>
-            <div class="d-flex gap-3">
-                <a href="#" onclick="window.location.href='home.html'" class="text-white">Back</a>
-            </div>
-        </div>
-
-        <div class="container my-4">
-            <h3 class="text-center font-weight-bold mb-4">Projects List</h3>
-            <table class="table table-hover bg-white shadow-sm">
-                <thead class="thead-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Technology</th>
-                        <th>Category</th>
-                        <th>Deadline</th>
-                        <th>Budget Range</th>
-                        <th>Visibility</th>
-                        
-                    </tr>
-                </thead>
-                <tbody id="projectsTable">
-                   
-                </tbody>
-            </table>
+    <div class="navbar">
+        <div class="logo">GoCoders - Projects</div>
+        <div class="nav-links">
+            <a href="#" onclick="window.location.href='home.html'">Back</a>
         </div>
     </div>
 
+    <div class="container">
+        <div class="card">
+            <h3>Projects List</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Technology</th>
+                            <th>Category</th>
+                            <th>Deadline</th>
+                            <th>Budget Range</th>
+                            <th>Visibility</th>
+                            <th>Action</th> <!-- Added column for Delete button -->
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTable">
+                        <!-- Dynamic Data will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript (Unchanged from Original) -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            loadProjects(); 
+            loadProjects();
         });
 
         function loadProjects() {
-            fetch("AdminProjectServlet") 
-            .then(response => response.text()) 
+            fetch("AdminProjectServlet")
+            .then(response => response.text())
             .then(data => {
-                document.getElementById("projectsTable").innerHTML = data; 
+                document.getElementById("projectsTable").innerHTML = data;
             })
             .catch(error => console.error("Error loading projects:", error));
         }
     </script>
-    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

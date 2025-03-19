@@ -1,7 +1,6 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.servlet.ServletException;
@@ -55,6 +54,7 @@ public class BidsReceivedServlet extends HttpServlet {
                 bid.put("bid_desc", rs.getString("bid_desc"));
                 bid.put("status", rs.getString("status"));
                 bid.put("created_at", rs.getTimestamp("created_at"));
+                
 
                 bidArray.put(bid);
             }

@@ -1,225 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Customer Dashboard</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard - GoCoders</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-.table th, .table td {
-	font-size: 1rem;
-	padding: 1rem;
-	border: 1px solid #e2e8f0;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #E5F6FD;
+            color: #333333;
+            min-height: 100vh;
+        }
 
-.table-striped tbody tr:nth-child(odd) {
-	background-color: #f9fafb;
-}
+        .navbar {
+            width: 100%;
+            background-color: #6200ea;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-.table-striped tbody tr:hover {
-	background-color: #f1f5f9;
-}
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+        }
 
-.navbar {
-	background-color: #007bff;
-	padding: 1rem;
-	border-radius: 8px;
-}
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
 
-.navbar a {
-	color: white;
-	font-weight: bold;
-	margin-right: 15px;
-}
+        .navbar .nav-links a,
+        .navbar .nav-links span {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
-.navbar .dropdown-menu {
-	right: 0;
-	left: auto;
-}
-</style>
+        .navbar .nav-links a:hover {
+            color: #E5F6FD;
+        }
+
+        .navbar .dropdown {
+            position: relative;
+        }
+
+        .navbar .dropdown i {
+            color: #FFFFFF;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .navbar .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #FFFFFF;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            min-width: 120px;
+            z-index: 1001;
+        }
+
+        .navbar .dropdown-menu a {
+            color: #333333;
+            padding: 10px 15px;
+            font-size: 14px;
+            display: block;
+        }
+
+        .navbar .dropdown-menu a:hover {
+            background-color: #E5F6FD;
+        }
+
+        .navbar .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6200ea;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #6200ea;
+            padding-bottom: 5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            border: 1px solid #6200ea;
+        }
+
+        th {
+            background-color: #6200ea;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+
+        tr:hover {
+            background-color: #E5F6FD;
+        }
+
+        .btn {
+            background-color: #6200ea;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #3700b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-accept {
+            background-color: #28a745;
+        }
+
+        .btn-accept:hover {
+            background-color: #218838;
+        }
+
+        .btn-reject {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+
+        .btn-reject:hover {
+            background-color: #c82333;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #6200ea;
+            color: #6200ea;
+        }
+
+        .btn-outline:hover {
+            background-color: #6200ea;
+            color: #FFFFFF;
+            transform: translateY(-2px);
+        }
+
+        .status-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: #666666;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .navbar .nav-links {
+                gap: 10px;
+            }
+
+            .navbar .nav-links a,
+            .navbar .nav-links span {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 30px auto;
+            }
+        }
+    </style>
 </head>
-<body class="bg-gray-100 p-4">
+<body>
+    <div class="navbar">
+        <div class="logo">GoCoders</div>
+        <div class="nav-links">
+            <a href="projectposting.html">Post Project</a>
+            <a href="ProjectProgress.html">Project Status</a>
+            <span id="user-name"></span>
+            <div class="dropdown">
+                <i class="fas fa-ellipsis-v"></i>
+                <div class="dropdown-menu">
+                    <a href="support.html">Help</a>
+                    <a href="#" onclick="Logout()" class="text-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-	<div class="container bg-white p-4 shadow-md rounded-lg">
-		<nav class="navbar d-flex justify-content-between align-items-center">
-			<div>
-				<a href="#">GoCoders</a> <a href="projectposting.html">Post
-					Project</a> <a href="ProjectProgress.html">Project Status</a>
-
-			</div>
-			<div class="d-flex align-items-center">
-				<span class="text-white" id="user-name"></span>
-				<div class="dropdown ml-3">
-					<!-- White Button without Background -->
-					<button class="btn btn-white border" id="dropdownMenuButton"
-						onclick="toggleDropdown()">
-						<i class="material-icons text-dark">more_vert</i>
-					</button>
-
-					<!-- Normal Dropdown with Black Text & White Background -->
-					<div class="dropdown-menu dropdown-menu-right shadow"
-						id="dropdownMenu">
-						<!-- <a class="dropdown-item text-dark" href="editcustprof.html">Edit Profile</a>-->
-						<a class="dropdown-item text-dark" href="support.html">Help</a> <a
-							class="dropdown-item text-danger font-weight-bold"
-							onclick="Logout()">Logout</a>
-					</div>
-				</div>
-		</nav>
-	</div>
-
-	<div class="container mt-4">
-		<div class="bg-white shadow-md rounded-lg p-4">
-			<h2 class="bg-gray-800 text-white text-lg p-2">Open Projects</h2>
-			<table class="table table-bordered table-striped mt-2">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Technology</th>
-						<th>Deadline</th>
-						<th>Budget (in $)</th>
-					</tr>
-				</thead>
-				<tbody id="project-table-body"></tbody>
-			</table>
-		</div>
-	</div>
-
-	<div class="container mt-4">
-		<h2 class="text-2xl font-bold">Bids Received</h2>
-		<table class="table table-bordered table-striped">
-			<thead>
-				<tr>
-					<th>Project Name</th>
-					<th>Coder Name</th>
-					<th>Bid Amount (in $)</th>
-					<th>Description</th>
-					<th>Completion Date</th>
-					<th>Status</th>
-					
-					
-					<!--  <th>Action</th>-->
-				</tr>
-			</thead>
-			<tbody id="bids-table-body">
-
-			</tbody>
-		</table>
-	</div>
-
-	<div class="container mt-4">
-		<h2 class="text-2xl font-bold">Payments</h2>
-		<div class="border p-4 rounded bg-white shadow-sm">
-			<p>Total Spent: Loading...</p>
-			<p>Pending Payments: Loading...</p>
-			<div class="d-flex mt-2">
-				<button class="btn btn-outline-success mr-2"
-					onclick="window.location.href='makepayment.html'">Make
-					Payment</button>
-				<button class="btn btn-outline-primary"
-					onclick="window.location.href='payments.html'">Payment
-					Summary</button>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="container mt-4">
-		<h2 class="text-2xl font-bold">Payment Summary</h2>
-		<div class="border p-4 rounded bg-white shadow-sm">
-			<p>Total Spent: Loading</p>
-			<p>Pending Payments: Loading</p>
-		</div>
-	</div>
-
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script>
-    function toggleDropdown() {
-        $("#dropdownMenu").toggle();
-    }
-
-    // Close dropdown when clicking outside
-    $(document).click(function (event) {
-        if (!$(event.target).closest("#dropdownMenuButton, #dropdownMenu").length) {
-            $("#dropdownMenu").hide();
-        }
-    });
-</script>
-<script>
-function fetchBids() {
-    $.ajax({
-        url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
-        type: "POST",
-        success: function (response) {
-            if (response.status === "success") {
-                let bids = response.bids;
-                let html = "";
-
-                bids.forEach(function (bid) {
-                    let statusText = bid.status;
-                    let actionButtons = "";
-
-                    // If bid is still pending, show action buttons
-                    if (bid.status === "Pending") {
-                        actionButtons = `
-                            <button class="btn btn-success btn-sm" onclick="updateBidStatus(${bid.bid_id}, 'Active', this)">Accept</button>
-                            <button class="btn btn-danger btn-sm ml-2" onclick="updateBidStatus(${bid.bid_id}, 'Inactive', this)">Reject</button>
-                        `;
-                    } else {
-                        // Show status instead of buttons
-                        actionButtons = `<span class="font-weight-bold text-${bid.status === 'Active' ? 'success' : 'danger'}">${bid.status}</span>`;
-                    }
-
-                    html += `
+    <div class="container">
+        <div class="card">
+            <h2>Open Projects</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
                         <tr>
-                            <td>${bid.title}</td>
-                            <td>${bid.Coder_Name}</td>
-                            <td>$${bid.bid_amt}</td>
-                            <td>${bid.bid_desc}</td>
-                            <td>${bid.completion_date}</td>
-                            <td>${statusText}</td>
-                            //<td>${actionButtons}</td>
-                        </tr>`;
-                });
+                            <th>Title</th>
+                            <th>Technology</th>
+                            <th>Deadline</th>
+                            <th>Budget (in $)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="project-table-body"></tbody>
+                </table>
+            </div>
+        </div>
 
-                $("#bids-table-body").html(html);
-            }
-        }
-    });
-}
+        <div class="card">
+            <h2>Bids Received</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                        	<th> Bid ID </th>
+                            <th>Project Name</th>
+                            <th>Coder Name</th>
+                            <th>Bid Amount (in $)</th>
+                            <th>Description</th>
+                            <th>Completion Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="bids-table-body"></tbody>
+                </table>
+            </div>
+        </div>
 
-function updateBidStatus(bidId, status, buttonElement) {
-    $.ajax({
-        url: "http://localhost:7050/GoCoder/UpdateBidStatusServlet",
-        type: "POST",
-        data: { bid_id: bidId, status: status },
-        success: function (response) {
-            if (response.status === "success") {
-                let row = $(buttonElement).closest("tr");
-                row.find("td:nth-child(6)").text(status);  // Update status column
-                row.find("td:nth-child(7)").html(`<span class="font-weight-bold text-${status === 'Active' ? 'success' : 'danger'}">${status}</span>`); // Remove buttons and show status
-            } else {
-                alert("Failed to update bid status.");
-            }
-        }
-    });
-}
+        <div class="card">
+            <h2>Payments</h2>
+            <p>Total Spent: Loading...</p>
+            <p>Pending Payments: Loading...</p>
+            <div style="margin-top: 15px; display: flex; gap: 10px;">
+                <button class="btn btn-outline" onclick="window.location.href='makepayment.html'">Make Payment</button>
+                <button class="btn btn-outline" onclick="window.location.href='payments.html'">Payment Summary</button>
+            </div>
+        </div>
 
-</script>
-	<script>
+        <div class="card">
+            <h2>Payment Summary</h2>
+            <p>Total Spent: Loading</p>
+            <p>Pending Payments: Loading</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
         $(document).ready(function () {
-        	
             getUserDets();
             fetchProjects();
-            fetchBids();
-            
         });
 
         function getUserDets() {
@@ -229,11 +314,14 @@ function updateBidStatus(bidId, status, buttonElement) {
                 success: function (response) {
                     if (response.status === "success") {
                         $("#user-name").html(`Hi ${response.user_name}`);
-                        getAllBids(parseInt(response.user_id))
+                        getAllBids(parseInt(response.user_id));
                     } else {
                         alert("No Login Details Found");
                         window.location.href = "login.html";
                     }
+                },
+                error: function () {
+                    console.error("Error fetching user details");
                 }
             });
         }
@@ -256,49 +344,26 @@ function updateBidStatus(bidId, status, buttonElement) {
                                 </tr>`;
                         });
                         $("#project-table-body").html(html);
+                    } else {
+                        $("#project-table-body").html("<tr><td colspan='4' class='text-center'>No Projects Found</td></tr>");
                     }
+                },
+                error: function () {
+                    $("#project-table-body").html("<tr><td colspan='4' class='text-center'>Failed to fetch projects</td></tr>");
                 }
             });
         }
 
-        function fetchBids() {
-            $.ajax({
-                url: "http://localhost:7050/GoCoder/BidsReceivedServlet",
-                type: "POST",
-                success: function (response) {
-                    if (response.status === "success") {
-                        let bids = response.bids;
-                        let html = "";
-                        bids.forEach(function (bid) {
-                            html += `
-                                <tr>
-                                    <td>${bid.project_id}</td>
-                                    <td>${bid.user_id}</td>
-                                    <td>${bid.bid_amt}</td>
-                                    <td>${bid.status}</td>
-                                    <td>
-                                        <button class="btn btn-success">Accept</button>
-                                        <button class="btn btn-danger">Reject</button>
-                                    </td>
-                                </tr>`;
-                        });
-                        $("#bids-table-body").html(html);
-                    }
-                }
-            });
-            
-        }
         function getAllBids(userId) {
-            
             $.ajax({
                 url: "http://localhost:7050/GoCoder/GetProjectBids",
                 type: "POST",
                 contentType: "application/x-www-form-urlencoded",
                 data: $.param({ user_id: userId }),
                 dataType: "json",
-                success: function(response) {
+                success: function (response) {
                     let tableBody = $("#bids-table-body");
-                    tableBody.empty(); // Clear existing table data
+                    tableBody.empty();
 
                     if (response.length === 0) {
                         tableBody.append(`<tr><td colspan="7" class="text-center">No data found</td></tr>`);
@@ -308,6 +373,7 @@ function updateBidStatus(bidId, status, buttonElement) {
                     response.forEach(bid => {
                         let row = `
                             <tr>
+                        		<td>${bid.id}</td>
                                 <td>${bid.title}</td>
                                 <td>${bid.Coder_Name}</td>
                                 <td>$${bid.bid_amt}</td>
@@ -315,24 +381,44 @@ function updateBidStatus(bidId, status, buttonElement) {
                                 <td>${bid.completion_date}</td>
                                 <td>${bid.status}</td>
                                 <td>
-                                    <!--<button class="btn btn-sm btn-primary">View</button>-->
+                                    ${bid.status === "pending" ? `
+                                        <button class="btn btn-accept" onclick="updateStatus(this, 'Accepted', ${bid.bid_id})">Accept</button>
+                                        <button class="btn btn-reject" onclick="updateStatus(this, 'Rejected', ${bid.bid_id})">Reject</button>
+                                    ` : `<span class="status-text">${bid.status}</span>`}
                                 </td>
-                            </tr>
-                        `;
+                            </tr>`;
                         tableBody.append(row);
                     });
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     console.log("Error:", error);
-                    alert("Failed to fetch data. Please try again.");
+                    alert("Failed to fetch bids. Please try again.");
                 }
             });
         }
 
+        function updateStatus(button, status, bidId) {
+            let td = button.parentElement;
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/UpdateBidStatusServlet",
+                type: "POST",
+                data: { bid_id: bidId, status: status },
+                success: function (response) {
+                    if (response.status === "success") {
+                        td.innerHTML = `<span class="status-text">${status}</span>`;
+                    } else {
+                        alert("Failed to update bid status: " + response.message);
+                    }
+                },
+                error: function () {
+                    alert("Error updating bid status. Please try again.");
+                }
+            });
+        }
 
-     
-    </script>
-	<script src="./js/main.js" defer>
+        function Logout() {
+            window.location.href = "login.html";
+        }
     </script>
 </body>
 </html>
