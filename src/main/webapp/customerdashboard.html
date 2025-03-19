@@ -268,7 +268,7 @@
                 <table>
                     <thead>
                         <tr>
-                        	<th> Bid ID </th>
+                            <th>Bid ID</th>
                             <th>Project Name</th>
                             <th>Coder Name</th>
                             <th>Bid Amount (in $)</th>
@@ -373,7 +373,7 @@
                     response.forEach(bid => {
                         let row = `
                             <tr>
-                        		<td>${bid.id}</td>
+                                <td>${bid.id}</td>
                                 <td>${bid.title}</td>
                                 <td>${bid.Coder_Name}</td>
                                 <td>$${bid.bid_amt}</td>
@@ -382,9 +382,9 @@
                                 <td>${bid.status}</td>
                                 <td>
                                     ${bid.status === "pending" ? `
-                                        <button class="btn btn-accept" onclick="updateStatus(this, 'Accepted', ${bid.bid_id})">Accept</button>
-                                        <button class="btn btn-reject" onclick="updateStatus(this, 'Rejected', ${bid.bid_id})">Reject</button>
-                                    ` : `<span class="status-text">${bid.status}</span>`}
+                                        <button class="btn btn-accept" onclick="updateStatus(this, 'Accepted', ${bid.id})">Accept</button>
+                                        <button class="btn btn-reject" onclick="updateStatus(this, 'Rejected', ${bid.id})">Reject</button>
+                                    ` : `<span class="status-text">${toUpperCase(bid.status)}</span>`}
                                 </td>
                             </tr>`;
                         tableBody.append(row);
@@ -400,7 +400,7 @@
         function updateStatus(button, status, bidId) {
             let td = button.parentElement;
             $.ajax({
-                url: "http://localhost:7050/GoCoder/UpdateBidStatusServlet",
+                url: "http://localhost:7050/GoCoder/BidStatusUpdater",
                 type: "POST",
                 data: { bid_id: bidId, status: status },
                 success: function (response) {
@@ -414,6 +414,10 @@
                     alert("Error updating bid status. Please try again.");
                 }
             });
+        }
+
+        function toUpperCase(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
         }
 
         function Logout() {
