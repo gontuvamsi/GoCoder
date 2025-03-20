@@ -1,261 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project Completion Status - GoCoders</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Completion Status - GoCoders</title>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+	rel="stylesheet">
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #E5F6FD;
-            color: #333333;
-            min-height: 100vh;
-        }
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #E5F6FD;
+	color: #333333;
+	min-height: 100vh;
+}
 
-        .navbar {
-            width: 100%;
-            background-color: #6200ea;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+.navbar {
+	width: 100%;
+	background-color: #6200ea;
+	padding: 15px 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
 
-        .navbar .logo {
-            font-size: 26px;
-            font-weight: 600;
-            color: #FFFFFF;
-            letter-spacing: 1px;
-        }
+.navbar .logo {
+	font-size: 26px;
+	font-weight: 600;
+	color: #FFFFFF;
+	letter-spacing: 1px;
+}
 
-        .navbar .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.navbar .nav-links {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
 
-        .navbar .nav-links a {
-            color: #FFFFFF;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+.navbar .nav-links a {
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
 
-        .navbar .nav-links a:hover {
-            color: #E5F6FD;
-        }
+.navbar .nav-links a:hover {
+	color: #E5F6FD;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-        }
+.container {
+	max-width: 800px;
+	margin: 50px auto;
+	padding: 20px;
+}
 
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            padding: 30px;
-            transition: transform 0.3s ease;
-        }
+.card {
+	background-color: #FFFFFF;
+	border-radius: 15px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	padding: 30px;
+	transition: transform 0.3s ease;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.card:hover {
+	transform: translateY(-5px);
+}
 
-        .card h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #6200ea;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+.card h2 {
+	font-size: 24px;
+	font-weight: 600;
+	color: #6200ea;
+	text-align: center;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #6200ea;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            margin: 0 0 20px 20px; /* Adjusted to match container padding */
-            transition: color 0.3s ease;
-        }
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	color: #6200ea;
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	margin: 0 0 20px 20px; /* Adjusted to match container padding */
+	transition: color 0.3s ease;
+}
 
-        .back-link:hover {
-            color: #3700b3;
-        }
+.back-link:hover {
+	color: #3700b3;
+}
 
-        .back-link i {
-            margin-right: 8px;
-        }
+.back-link i {
+	margin-right: 8px;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+.form-group {
+	margin-bottom: 20px;
+}
 
-        .form-group label {
-            display: block;
-            font-size: 16px;
-            font-weight: 500;
-            color: #333333;
-            margin-bottom: 8px;
-        }
+.form-group label {
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333333;
+	margin-bottom: 8px;
+}
 
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #6200ea;
-            border-radius: 6px;
-            font-size: 14px;
-            background-color: #F9F9F9;
-            color: #333333;
-        }
+.form-group input, .form-group select {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #6200ea;
+	border-radius: 6px;
+	font-size: 14px;
+	background-color: #F9F9F9;
+	color: #333333;
+}
 
-        .btn {
-            background-color: #28a745;
-            color: #FFFFFF;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            display: block;
-            margin: 0 auto;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+.btn {
+	background-color: #28a745;
+	color: #FFFFFF;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	display: block;
+	margin: 0 auto;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        .btn:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
+.btn:hover {
+	background-color: #218838;
+	transform: translateY(-2px);
+}
 
-        #error-message,
-        #success-message {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 16px;
-            font-weight: 500;
-        }
+#error-message, #success-message {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 16px;
+	font-weight: 500;
+}
 
-        #success-message {
-            color: #28a745;
-        }
+#success-message {
+	color: #28a745;
+}
 
-        #error-message {
-            color: #dc3545;
-        }
+#error-message {
+	color: #dc3545;
+}
 
-        .hidden {
-            display: none;
-        }
+.hidden {
+	display: none;
+}
 
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 10px 15px;
-            }
-
-            .navbar .logo {
-                font-size: 20px;
-            }
-
-            .navbar .nav-links a {
-                font-size: 14px;
-            }
-
-            .container {
-                padding: 10px;
-                margin: 30px auto;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .card h2 {
-                font-size: 20px;
-            }
-
-            .form-group label {
-                font-size: 14px;
-            }
-
-            .form-group input,
-            .form-group select {
-                font-size: 12px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-        }
-    </style>
+@media ( max-width : 768px) {
+	.navbar {
+		padding: 10px 15px;
+	}
+	.navbar .logo {
+		font-size: 20px;
+	}
+	.navbar .nav-links a {
+		font-size: 14px;
+	}
+	.container {
+		padding: 10px;
+		margin: 30px auto;
+	}
+	.card {
+		padding: 20px;
+	}
+	.card h2 {
+		font-size: 20px;
+	}
+	.form-group label {
+		font-size: 14px;
+	}
+	.form-group input, .form-group select {
+		font-size: 12px;
+	}
+	.btn {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+}
+</style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">GoCoders</div>
-        <div class="nav-links">
-            <a href="login.html">Logout</a>
-        </div>
-    </div>
+	<div class="navbar">
+		<div class="logo">GoCoders</div>
+		<div class="nav-links">
+			<span id="user-name" style="color:white"></span> <a href="login.html">Logout</a>
+		</div>
+	</div>
 
-    <a href="coderdashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+	<a href="coderdashboard.html" class="back-link"><i
+		class="fas fa-arrow-left"></i> Back</a>
 
-    <div class="container">
-        <div class="card">
-            <h2>Project Completion Status</h2>
-            <form id="projectStatusForm" class="space-y-4">
-                <div class="form-group">
-                    <label>Project ID:</label>
-                    <input type="number" name="project_id" id="project_id" required>
-                </div>
-                <div class="form-group">
-                    <label>Project Name:</label>
-                    <input type="text" name="project_name" id="project_name" required>
-                </div>
-                <div class="form-group">
-                    <label>Project Status:</label>
-                    <select name="project_status" id="project_status" required>
-                        <option value="In Planning">In Planning</option>
-                        <option value="In Design">In Design</option>
-                        <option value="In Development">In Development</option>
-                        <option value="In Testing">In Testing</option>
-                        <option value="In Production">In Production</option>
-                        <option value="Completed">Completed</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Status Submitted By (User ID):</label>
-                    <input type="number" name="status_submitted_by" id="status_submitted_by" required>
-                </div>
-                <div>
-                    <button type="submit" class="btn">Submit</button>
-                </div>
-            </form>
-            <div id="error-message" class="hidden text-red-500 text-center mt-4">Please fix the errors above and try again.</div>
-            <div id="success-message" class="hidden text-green-500 text-center mt-4">Project status updated successfully!</div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="card">
+			<h2>Project Completion Status</h2>
+			<form id="projectStatusForm" class="space-y-4">
+				<div class="form-group">
+					<label>Project ID:</label> <input type="number" name="project_id"
+						id="project_id" required>
+				</div>
+				<div class="form-group">
+					<label>Project Name:</label> <input type="text" name="project_name"
+						id="project_name" required>
+				</div>
+				<div class="form-group">
+					<label>Project Status:</label> <select name="project_status"
+						id="project_status" required>
+						<option value="In Planning">In Planning</option>
+						<option value="In Design">In Design</option>
+						<option value="In Development">In Development</option>
+						<option value="In Testing">In Testing</option>
+						<option value="In Production">In Production</option>
+						<option value="Completed">Completed</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label>Status Submitted By (User ID):</label> <input type="number"
+						name="status_submitted_by" id="status_submitted_by" required>
+				</div>
+				<div>
+					<button type="submit" class="btn">Submit</button>
+				</div>
+			</form>
+			<div id="error-message" class="hidden text-red-500 text-center mt-4">Please
+				fix the errors above and try again.</div>
+			<div id="success-message"
+				class="hidden text-green-500 text-center mt-4">Project status
+				updated successfully!</div>
+		</div>
+	</div>
 
-    <!-- JavaScript (Unchanged from Original) -->
-    <script>
+	<!-- JavaScript (Unchanged from Original) -->
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+    $(document).ready(function() {
+    	getUserDets()
+        // Function to get URL parameters
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                project_id: params.get("project_id") || "",
+                project_name: decodeURIComponent(params.get("project_name") || ""),
+                status_submitted_by: params.get("status_submitted_by") || ""
+            };
+        }
+
+        // Populate form fields with URL parameters
+        const params = getUrlParams();
+        $("#project_id").val(params.project_id);
+        $("#project_name").val(params.project_name);
+        $("#status_submitted_by").val(params.status_submitted_by);
+
+        // Form submission logic
+        $("#projectStatusForm").on("submit", function(event) {
+            event.preventDefault();
+            
+            var formData = {
+                project_id: $("#project_id").val().trim(),
+                project_name: $("#project_name").val().trim(),
+                project_status: $("#project_status").val(),
+                status_submitted_by: $("#status_submitted_by").val().trim()
+            };
+
+            $.ajax({
+                url: "SaveProjectStatusServlet",
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function(data) {
+                    console.log("Response:", data);
+                    if (data.status === "success") {
+                        $("#success-message").removeClass("hidden");
+                        $("#error-message").addClass("hidden");
+                        $("#projectStatusForm")[0].reset();
+                        setTimeout(() => {
+                            window.location.href = "coderdashboard.html";
+                        }, 2000);
+                    } else {
+                        $("#error-message").text(data.error || "An error occurred.");
+                        $("#error-message").removeClass("hidden");
+                        $("#success-message").addClass("hidden");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error:", error);
+                    $("#error-message").text("An error occurred while processing the request.");
+                    $("#error-message").removeClass("hidden");
+                    $("#success-message").addClass("hidden");
+                }
+            });
+        });
+        function getUserDets() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/session/getId",
+                type: "POST",
+                success: function (response) {
+                    if (response.status === "success") {
+                        $("#user-name").html(`Hi ${response.user_name}`);
+                        fetchBids(response.user_id);
+                        fetchMyProjects(response.user_id);
+                    } else {
+                        alert("No Login Details Found");
+                        redirectToPage("login.html");
+                    }
+                },
+                error: function () {
+                    console.error("Error fetching user details");
+                }
+            });
+        }
+    });
+    </script>
+	<script>
+    
         document.getElementById("projectStatusForm").addEventListener("submit", function(event) {
             event.preventDefault();
             

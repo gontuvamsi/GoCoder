@@ -228,6 +228,7 @@
     <div class="navbar">
         <div class="logo">GoCoders</div>
         <div class="nav-links">
+        <a href="customerlist.html">Customers</a>
             <a href="support.html">Support</a>
             <a href="projectstatus.html">Post Project Status</a>
             <span id="user-name"></span>
@@ -291,6 +292,27 @@
                     <tbody id="bidsTableBody">
                         <tr>
                             <td colspan="3" class="text-center">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>My Projects</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Project ID</th>
+                            <th>Project Name</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="myProjectsTableBody">
+                        <tr>
+                            <td colspan="4" class="text-center">Loading...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -377,6 +399,44 @@
             xhr.send(params);
         }
 
+        function fetchMyProjects(userId) {
+            let xhr = new XMLHttpRequest();
+            let url = "http://localhost:7050/GoCoder/GetMyProjects";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    let tableBody = document.getElementById("myProjectsTableBody");
+                    tableBody.innerHTML = "";
+
+                    if (xhr.status === 200) {
+                        let data = JSON.parse(xhr.responseText);
+                        if (data.length === 0) {
+                            tableBody.innerHTML = `<tr><td colspan="4" class="text-center">No projects found</td></tr>`;
+                            return;
+                        }
+                        data.forEach(project => {
+                            let row = `
+                                <tr>
+                                    <td>${project.project_id}</td>
+                                    <td>${project.project_name}</td>
+                                    <td>${project.project_status}</td>
+                                    <td><button class="btn" onclick="redirectToPostStatus('${project.project_id}', '${encodeURIComponent(project.project_name)}', '${userId}')">Post Status</button></td>
+                                </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                    } else {
+                        console.error("Error fetching projects:", xhr.statusText);
+                        tableBody.innerHTML = `<tr><td colspan="4" class="text-center text-danger">Failed to load projects</td></tr>`;
+                    }
+                }
+            };
+
+            let params = "user_id=" + encodeURIComponent(userId);
+            xhr.send(params);
+        }
+
         function getUserDets() {
             $.ajax({
                 url: "http://localhost:7050/GoCoder/session/getId",
@@ -385,6 +445,7 @@
                     if (response.status === "success") {
                         $("#user-name").html(`Hi ${response.user_name}`);
                         fetchBids(response.user_id);
+                        fetchMyProjects(response.user_id);
                     } else {
                         alert("No Login Details Found");
                         redirectToPage("login.html");
@@ -435,12 +496,15 @@
             window.location.href = 'bidsubmission.html?project_id=' + projectId;
         }
 
+        function redirectToPostStatus(projectId, projectName, statusSubmittedBy) {
+            window.location.href = `projectstatus.html?project_id=${projectId}&project_name=${projectName}&status_submitted_by=${statusSubmittedBy}`;
+        }
+
         function redirectToPage(page) {
             window.location.href = page;
         }
 
         function Logout() {
-            // Add logout logic here if needed, e.g., clear session and redirect
             window.location.href = "login.html";
         }
     </script>

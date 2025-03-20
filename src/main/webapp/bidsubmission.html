@@ -1,305 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bid Submission - GoCoders</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bid Submission - GoCoders</title>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+	rel="stylesheet">
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #E5F6FD;
-            color: #333333;
-            min-height: 100vh;
-        }
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #E5F6FD;
+	color: #333333;
+	min-height: 100vh;
+}
 
-        .navbar {
-            width: 100%;
-            background-color: #6200ea;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+.navbar {
+	width: 100%;
+	background-color: #6200ea;
+	padding: 15px 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
 
-        .navbar .logo {
-            font-size: 26px;
-            font-weight: 600;
-            color: #FFFFFF;
-            letter-spacing: 1px;
-        }
+.navbar .logo {
+	font-size: 26px;
+	font-weight: 600;
+	color: #FFFFFF;
+	letter-spacing: 1px;
+}
 
-        .navbar .nav-links a {
-            color: #FFFFFF;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+.navbar .nav-links a {
+	color: #FFFFFF;
+	text-decoration: none;
+	font-size: 16px;
+	font-weight: 500;
+	transition: color 0.3s ease;
+}
 
-        .navbar .nav-links a:hover {
-            color: #E5F6FD;
-        }
+.navbar .nav-links a:hover {
+	color: #E5F6FD;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-        }
+.container {
+	max-width: 800px;
+	margin: 50px auto;
+	padding: 20px;
+}
 
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            padding: 35px;
-            animation: fadeIn 0.8s ease-in-out;
-        }
+.card {
+	background-color: #FFFFFF;
+	border-radius: 15px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	padding: 35px;
+	animation: fadeIn 0.8s ease-in-out;
+}
 
-        .card h2 {
-            font-size: 28px;
-            font-weight: 600;
-            color: #6200ea;
-            text-align: center;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 2px solid #6200ea;
-            padding-bottom: 10px;
-        }
+.card h2 {
+	font-size: 28px;
+	font-weight: 600;
+	color: #6200ea;
+	text-align: center;
+	margin-bottom: 30px;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	border-bottom: 2px solid #6200ea;
+	padding-bottom: 10px;
+}
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #6200ea;
-            font-size: 14px;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
-        }
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	color: #6200ea;
+	font-size: 14px;
+	font-weight: 500;
+	text-decoration: none;
+	margin-bottom: 20px;
+	transition: color 0.3s ease;
+}
 
-        .back-link i {
-            margin-right: 5px;
-        }
+.back-link i {
+	margin-right: 5px;
+}
 
-        .back-link:hover {
-            color: #3700b3;
-        }
+.back-link:hover {
+	color: #3700b3;
+}
 
-        .form-group {
-            margin-bottom: 25px;
-        }
+.form-group {
+	margin-bottom: 25px;
+}
 
-        .form-group label {
-            display: block;
-            font-size: 14px;
-            font-weight: 500;
-            color: #6200ea;
-            margin-bottom: 8px;
-        }
+.form-group label {
+	display: block;
+	font-size: 14px;
+	font-weight: 500;
+	color: #6200ea;
+	margin-bottom: 8px;
+}
 
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #6200ea;
-            border-radius: 6px;
-            font-size: 14px;
-            color: #333333;
-            background-color: #F9F9F9;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
+.form-group input, .form-group textarea {
+	width: 100%;
+	padding: 12px 15px;
+	border: 1px solid #6200ea;
+	border-radius: 6px;
+	font-size: 14px;
+	color: #333333;
+	background-color: #F9F9F9;
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
 
-        .form-group input[readonly] {
-            background-color: #E5F6FD;
-            cursor: not-allowed;
-        }
+.form-group input[readonly] {
+	background-color: #E5F6FD;
+	cursor: not-allowed;
+}
 
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #3700b3;
-            box-shadow: 0 0 6px rgba(98, 0, 234, 0.3);
-        }
+.form-group input:focus, .form-group textarea:focus {
+	outline: none;
+	border-color: #3700b3;
+	box-shadow: 0 0 6px rgba(98, 0, 234, 0.3);
+}
 
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
+.form-group textarea {
+	height: 120px;
+	resize: vertical;
+}
 
-        .btn {
-            width: 100%;
-            padding: 12px;
-            background-color: #6200ea;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+.btn {
+	width: 100%;
+	padding: 12px;
+	background-color: #6200ea;
+	color: #FFFFFF;
+	border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        .btn:hover {
-            background-color: #3700b3;
-            transform: translateY(-2px);
-        }
+.btn:hover {
+	background-color: #3700b3;
+	transform: translateY(-2px);
+}
 
-        .dialog {
-            position: fixed;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
+.dialog {
+	position: fixed;
+	inset: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: none;
+	align-items: center;
+	justify-content: center;
+	z-index: 2000;
+}
 
-        .dialog-content {
-            background-color: #FFFFFF;
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            animation: fadeIn 0.8s ease-in-out;
-        }
+.dialog-content {
+	background-color: #FFFFFF;
+	border-radius: 15px;
+	padding: 30px;
+	text-align: center;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	animation: fadeIn 0.8s ease-in-out;
+}
 
-        .dialog-content h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #6200ea;
-            margin-bottom: 20px;
-        }
+.dialog-content h2 {
+	font-size: 24px;
+	font-weight: 600;
+	color: #6200ea;
+	margin-bottom: 20px;
+}
 
-        .dialog-content p {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
+.dialog-content p {
+	font-size: 16px;
+	margin-bottom: 20px;
+}
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+@keyframes fadeIn {from { opacity:0;
+	transform: translateY(15px);
+}
 
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 10px 15px;
-            }
+to {
+	opacity: 1;
+	transform: translateY(0);
+}
 
-            .container {
-                padding: 10px;
-                margin: 30px auto;
-            }
-
-            .card {
-                padding: 25px;
-            }
-        }
-    </style>
+}
+@media ( max-width : 768px) {
+	.navbar {
+		padding: 10px 15px;
+	}
+	.container {
+		padding: 10px;
+		margin: 30px auto;
+	}
+	.card {
+		padding: 25px;
+	}
+}
+</style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">GoCoders</div>
-        <div class="nav-links">
-            <a href="home.html">Logout</a>
-        </div>
-    </div>
+	<div class="navbar">
+		<div class="logo">GoCoders</div>
+		<div class="nav-links">
+			<span id="user-name" style="color: white"></span> <a href="home.html"><b>Logout</b></a>
+		</div>
+	</div>
 
-    <div class="container">
-        <div class="card">
-            <a href="coderdashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
-            <h2>Submit Your Bid</h2>
-            <form id="bidForm" class="space-y-4">
-                <div class="form-group">
-                    <label for="project_id">Project ID</label>
-                    <input type="text" name="project_id" id="project_id" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="bid_amt">Bid Amount (in $)</label>
-                    <input type="text" name="bid_amt" id="bid_amt">
-                </div>
-                <div class="form-group">
-                    <label for="completion_date">Completion Date</label>
-                    <input type="date" name="completion_date" id="completion_date">
-                </div>
-                <div class="form-group">
-                    <label for="bid_desc">Bid Description</label>
-                    <textarea name="bid_desc" id="bid_desc"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="user_id">Bid Submitted By (User ID)</label>
-                    <input type="text" name="user_id" id="user_id" value="2">
-                </div>
-                <button type="button" id="submitBid" class="btn">Submit</button>
-            </form>
-        </div>
-    </div>
+	<div class="container">
+		<div class="card">
+			<a href="coderdashboard.html" class="back-link"><i
+				class="fas fa-arrow-left"></i> Back</a>
+			<h2>Submit Your Bid</h2>
+			<form id="bidForm" class="space-y-4">
+				<div class="form-group">
+					<label for="project_id">Project ID</label> <input type="text"
+						name="project_id" id="project_id" readonly>
+				</div>
+				<div class="form-group">
+					<label for="bid_amt">Bid Amount (in $)</label> <input type="text"
+						name="bid_amt" id="bid_amt">
+				</div>
+				<div class="form-group">
+					<label for="completion_date">Completion Date</label> <input
+						type="date" name="completion_date" id="completion_date">
+				</div>
+				<div class="form-group">
+					<label for="bid_desc">Bid Description</label>
+					<textarea name="bid_desc" id="bid_desc"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="user_id">Bid Submitted By (User ID)</label> <input
+						type="text" name="user_id" id="user_id" readonly>
+				</div>
+				<button type="button" id="submitBid" class="btn">Submit</button>
+			</form>
+		</div>
+	</div>
 
-    <div id="successDialog" class="dialog">
-        <div class="dialog-content">
-            <h2>Success</h2>
-            <p>Your bid has been submitted successfully!</p>
-            <button id="closeDialog" class="btn">Close</button>
-        </div>
-    </div>
+	<div id="successDialog" class="dialog">
+		<div class="dialog-content">
+			<h2>Success</h2>
+			<p>Your bid has been submitted successfully!</p>
+			<button id="closeDialog" class="btn">Close</button>
+		</div>
+	</div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Get URL parameters
-            let urlParams = new URLSearchParams(window.location.search);
-            let projectId = urlParams.get("project_id");
-            console.log("Extracted project ID:", projectId);
-
-            if (projectId) {
-                $("#project_id").val(projectId);
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+function getUserDets() {
+    $.ajax({
+        url: "http://localhost:7050/GoCoder/session/getId",
+        type: "POST",
+        success: function (response) {
+            if (response.status === "success") {
+                $("#user-name").html(`Hi ${response.user_name}`);
+                // Dynamically set the user_id field with the session user_id
+                $("#user_id").val(response.user_id);
+                fetchBids(response.user_id);
+                fetchMyProjects(response.user_id);
             } else {
-                alert("Project ID not found in URL. Please try again.");
+                alert("No Login Details Found");
+                redirectToPage("login.html");
             }
+        },
+        error: function () {
+            console.error("Error fetching user details");
+        }
+    });
+}
 
-            // Set minimum date for completion date input
-            const today = new Date().toISOString().split("T")[0];
-            $("#completion_date").attr("min", today);
+function redirectToPage(page) {
+    window.location.href = page;
+}
 
-            // Submit bid
-            $("#submitBid").click(function() {
-                var bidData = $("#bidForm").serialize();
+$(document).ready(function () {
+    // Call getUserDets to populate user_id and user_name
+    getUserDets();
 
-                $.ajax({
-                    url: "SubmitBidServlet",
-                    type: "POST",
-                    data: bidData,
-                    contentType: "application/x-www-form-urlencoded; charset=UTF-8",
-                    success: function(response) {
-                        if (response.status === "success") {
-                            $("#successDialog").show();
-                            $("#bidForm")[0].reset();
-                        } else {
-                            alert("Failed to Submit Bid: " + response.message);
-                        }
-                    },
-                    error: function() {
-                        alert("Something went wrong! Please try again.");
-                    }
-                });
-            });
+    // Get URL parameters
+    let urlParams = new URLSearchParams(window.location.search);
+    let projectId = urlParams.get("project_id");
+    console.log("Extracted project ID:", projectId);
 
-            // Close dialog
-            $("#closeDialog").click(function() {
-                $("#successDialog").hide();
-            });
+    if (projectId) {
+        $("#project_id").val(projectId);
+    } else {
+        alert("Project ID not found in URL. Please try again.");
+    }
+
+    // Set minimum date for completion date input
+    const today = new Date().toISOString().split("T")[0];
+    $("#completion_date").attr("min", today);
+
+    // Submit bid
+    $("#submitBid").click(function() {
+        var bidData = $("#bidForm").serialize();
+
+        $.ajax({
+            url: "SubmitBidServlet",
+            type: "POST",
+            data: bidData,
+            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+            success: function(response) {
+                if (response.status === "success") {
+                    $("#successDialog").show();
+                    $("#bidForm")[0].reset();
+                } else {
+                    alert("Failed to Submit Bid: " + response.message);
+                }
+            },
+            error: function() {
+                alert("Something went wrong! Please try again.");
+            }
         });
-    </script>
+    });
+
+    // Close dialog
+    $("#closeDialog").click(function() {
+        $("#successDialog").hide();
+    });
+});
+</script>
 </body>
 </html>
