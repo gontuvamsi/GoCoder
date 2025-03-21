@@ -49,9 +49,9 @@ public class RegisterCustomerServlet extends HttpServlet {
                 int rowsInserted = stmt.executeUpdate();
                 
                 if (rowsInserted > 0) {
-                    out.println("<script>alert('Registration Successful!'); window.location='login.html';</script>");
+                    out.println("<script>alert('Registration Successful!'); window.location='home.html';</script>");
                 } else {
-                    out.println("<script>alert('Error in Registration! Please Try Again.'); window.location='signup.html';</script>");
+                    out.println("<script>alert('Error in Registration! Please Try Again.'); window.location='home.html';</script>");
                 }
                 stmt.close();
             }
@@ -62,7 +62,7 @@ public class RegisterCustomerServlet extends HttpServlet {
             
         } catch (Exception e) {
             e.printStackTrace();
-            out.println("<script>alert('Database error: " + e.getMessage() + "'); window.location='signup.html';</script>");
+            out.println("<script>alert('Database error: " + e.getMessage() + "'); window.location='home.html';</script>");
         }
     }
 }
