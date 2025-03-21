@@ -29,7 +29,7 @@ public class BidServlet extends HttpServlet {
         
         JSONArray jsonArray = new JSONArray();
         try (Connection con = JDBCApp.getConnection()) {
-            String query = "SELECT bids.id , projects.title, users.name, bids.bid_amt, bids.completion_date, bids.bid_desc, bids.status "
+            String query = "SELECT bids.id , bids.project_id ,projects.title, users.name, bids.bid_amt, bids.completion_date, bids.bid_desc, bids.status "
                          + "FROM bids "
                          + "JOIN users ON bids.user_id = users.id "
                          + "JOIN projects ON bids.project_id = projects.id "
@@ -40,7 +40,8 @@ public class BidServlet extends HttpServlet {
             
             while (rs.next()) {
                 JSONObject obj = new JSONObject();
-                obj.put("bids_id", rs.getInt("id"));
+                
+                obj.put("bids_id", rs.getInt("id"));obj.put("project_id", rs.getInt("project_id"));
                 obj.put("title", rs.getString("title"));
                 obj.put("name", rs.getString("name"));
                 obj.put("bid_amt", rs.getDouble("bid_amt"));

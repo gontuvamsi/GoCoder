@@ -284,6 +284,7 @@
                 <table>
                     <thead>
                         <tr>
+                        	<th>Project ID </th>
                             <th>Project Name</th>
                             <th>Bid Amount</th>
                             <th>Status</th>
@@ -400,8 +401,10 @@
                             return;
                         }
                         data.forEach(bid => {
+                        	console.log(bid)
                             let row = `
                                 <tr>
+                        			<td>${bid.project_id}</td>
                                     <td>${bid.title}</td>
                                     <td>$${bid.bid_amt}</td>
                                     <td>${bid.status}</td>
