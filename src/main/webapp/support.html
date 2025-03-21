@@ -25,7 +25,7 @@
             background-color: #6200ea;
             padding: 15px 25px;
             display: flex;
-            justify-content: space-between; /* Changed from center to space-between */
+            justify-content: space-between;
             align-items: center;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
             position: sticky;
@@ -272,7 +272,7 @@
     <div class="navbar">
         <div class="logo">GoCoder</div>
         <div class="nav-links">
-        <span id="user-name" style="color:white"></span>
+            <span id="user-name" style="color:white"></span>
             <a href="#" onclick="window.location.href='home.html'">Logout</a>
         </div>
     </div>
@@ -331,6 +331,31 @@
             </form>
         </div>
     </div>
-  
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        getUserDets();
+
+        function getUserDets() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/session/getId",
+                type: "POST",
+                success: function (response) {
+                    if (response.status === "success") {
+                        $("#user-name").html(`Hi ${response.user_name}`);
+                    } else {
+                        alert("No Login Details Found");
+                        window.location.href = "login.html";
+                    }
+                },
+                error: function () {
+                    console.error("Error fetching user details");
+                    $("#user-name").html("Hi Guest");
+                }
+            });
+        }
+    });
+    </script>
 </body>
 </html>
