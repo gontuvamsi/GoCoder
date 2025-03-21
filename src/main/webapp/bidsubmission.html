@@ -106,7 +106,8 @@
                 </div>
                 <button type="button" id="submitBid" class="btn">Submit</button>
             </form>
-        </div>
+            <!-- <p style="text-align: center; margin-top: 10px; cursor: pointer; color: #6200ea; font-weight: 500;" onclick="resetForm()">Reset</p>
+        --> </div>
 
         <!-- Project Details Card -->
         <div class="project-card" id="project-card">
@@ -233,6 +234,13 @@
             $("#successModal").modal("hide"); // Hide Bootstrap modal
         });
     });
+    
+    /* function resetForm() {
+        document.querySelector("form").reset();
+        document.getElementById("emailError").style.display = "none";
+        document.getElementById("passwordError").style.display = "none";
+        document.getElementById("submitBtn").disabled = true;
+    } */
     </script>
 </body>
 </html>

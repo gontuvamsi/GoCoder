@@ -229,26 +229,42 @@
   </div>
 
   <!-- JavaScript -->
-  <script>
-    function checkForm() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const submitBtn = document.getElementById('submitBtn');
-      submitBtn.disabled = !(email && password);
-    }
+<!-- Replace the existing JavaScript with this -->
+<script>
+function checkForm() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = !(email && password);
+}
 
-    window.onload = function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const errorMessage = urlParams.get('error');
-      if (errorMessage) alert(errorMessage);
-    };
-  </script>
-  <script>
-    function resetForm() {
-        document.querySelector("form").reset();
-        document.getElementById("passwordError").style.display = "none";
-        document.getElementById("submitBtn").disabled = true;
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const errorMessage = urlParams.get('error');
+    if (errorMessage) {
+        if (errorMessage === 'Invalid email') {
+            // Clear only the email field, keep password
+            document.getElementById('email').value = '';
+            document.getElementById('submitBtn').disabled = true;
+            alert('Invalid email. Please check your email address.');
+        } else if (errorMessage === 'Invalid password') {
+            // Clear only the password field, keep email
+            document.getElementById('password').value = '';
+            document.getElementById('submitBtn').disabled = true;
+            alert('Invalid password. Please try again.');
+        } else {
+            // For other errors (e.g., "Database error"), reset form fully
+            document.querySelector("form").reset();
+            document.getElementById('submitBtn').disabled = true;
+            alert(errorMessage);
+        }
     }
+};
+
+function resetForm() {
+    document.querySelector("form").reset();
+    document.getElementById('submitBtn').disabled = true;
+}
 </script>
   
 </body>
