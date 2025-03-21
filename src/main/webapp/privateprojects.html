@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Projects - GoCoders</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #E5F6FD;
+            color: #333333;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #6200ea;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 26px;
+            font-weight: 600;
+            color: #FFFFFF;
+            letter-spacing: 1px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .navbar .nav-links a,
+        .navbar .nav-links span {
+            color: #FFFFFF;
+            font-size: 16px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #E5F6FD;
+        }
+
+        .navbar .dropdown {
+            position: relative;
+        }
+
+        .navbar .dropdown i {
+            color: #FFFFFF;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .navbar .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #FFFFFF;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 6px;
+            min-width: 120px;
+            z-index: 1001;
+        }
+
+        .navbar .dropdown-menu a {
+            color: #333333;
+            padding: 10px 15px;
+            font-size: 14px;
+            display: block;
+        }
+
+        .navbar .dropdown-menu a:hover {
+            background-color: #E5F6FD;
+        }
+
+        .navbar .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: #FFFFFF;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6200ea;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #6200ea;
+            padding-bottom: 5px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            border: 1px solid #6200ea;
+        }
+
+        th {
+            background-color: #6200ea;
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+
+        tr:hover {
+            background-color: #E5F6FD;
+        }
+
+        .error-message {
+            color: #ff0000;
+            text-align: center;
+            padding: 10px;
+        }
+        .suc-message {
+    color: #008000;
+    text-align: center;
+    padding: 10px;
+}
+        
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: #6200ea;
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link i {
+            margin-right: 5px;
+        }
+
+        .back-link:hover {
+            color: #3700b3;
+        }
+
+        .action-btn {
+            padding: 6px 12px;
+            border: none;
+            background-color: #6200ea;
+            color: #FFFFFF;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .action-btn:hover {
+            background-color: #3700b3;
+            transform: scale(1.05);
+        }
+
+        .action-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 15px;
+            }
+
+            .navbar .nav-links {
+                gap: 10px;
+            }
+
+            .navbar .nav-links a,
+            .navbar .nav-links span {
+                font-size: 14px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 30px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">GoCoders</div>
+        <div class="nav-links">
+            <span id="user-name"></span>
+            <div class="dropdown">
+                <i class="fas fa-ellipsis-v"></i>
+                <div class="dropdown-menu">
+                    <a href="support.html">Help</a>
+                    <a href="login.html" onclick="Logout()" class="text-danger">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <a href="admindashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
+            <h2>Private Projects</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Technology</th>
+                            <th>Category</th>
+                            <th>Deadline</th>
+                            <th>Min Budget</th>
+                            <th>Max Budget</th>
+                            <th>Visibility</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="private-projects-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        getUserDets();
+        fetchPrivateProjects();
+
+        function getUserDets() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/session/getId", // Adjust URL as needed
+                type: "POST",
+                success: function (response) {
+                    if (response && response.status === "success") {
+                        $("#user-name").html(`Hi ${response.user_name}`);
+                    } else {
+                        alert("No Login Details Found");
+                        window.location.href = "login.html";
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching user details:", error);
+                    $("#user-name").html("Hi Guest");
+                }
+            });
+        }
+
+        function fetchPrivateProjects() {
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/PrivateProjects", // Adjust URL to match your Servlet deployment
+                type: "GET",
+                success: function (response) {
+                    try {
+                        let parser = new DOMParser();
+                        let doc = parser.parseFromString(response, 'text/html');
+                        let rows = $(doc).find('table tr');
+
+                        let html = "";
+                        if (rows.length > 0) {
+                            rows.each(function() {
+                                let cells = $(this).find('td');
+                                if (cells.length === 12) { // Expecting 12 columns from Servlet
+                                    html += `
+                                        <tr>
+                                            <td>${cells.eq(0).text()}</td>
+                                            <td>${cells.eq(1).text()}</td>
+                                            <td>${cells.eq(2).text()}</td>
+                                            <td>${cells.eq(3).text()}</td>
+                                            <td>${cells.eq(4).text()}</td>
+                                            <td>${cells.eq(5).text()}</td>
+                                            <td>${cells.eq(6).text()}</td>
+                                            <td>${cells.eq(7).text()}</td>
+                                            <td>${cells.eq(8).text()}</td>
+                                            <td>${cells.eq(9).text()}</td>
+                                            <td>${cells.eq(10).text()}</td>
+                                            <td>${cells.eq(11).text()}</td>
+                                            <td>
+                                                <button class="action-btn accept-btn" data-id="${cells.eq(0).text()}">
+                                                    Accept
+                                                </button>
+                                            </td>
+                                        </tr>`;
+                                }
+                            });
+                            if (html === "") {
+                                html = "<tr><td colspan='13' class='suc-message'>No Projects are Pending for Approval ! </td></tr>";
+                            }
+                        } else {
+                            html = "<tr><td colspan='13' class='error-message'>No private projects found</td></tr>";
+                        }
+                        $("#private-projects-body").html(html);
+
+                        // Add click event handler for Accept buttons
+                        $('.accept-btn').on('click', function() {
+                            const $button = $(this);
+                            const projectId = $button.data('id');
+
+                            $button.prop('disabled', true); // Disable button to prevent multiple clicks
+
+                            $.ajax({
+                                url: "http://localhost:7050/GoCoder/AcceptProject", // Adjust URL to match new Servlet
+                                type: "POST",
+                                data: { id: projectId },
+                                success: function(response) {
+                                    if (response === "success") {
+                                        alert("Project visibility changed to Public!");
+                                        $button.closest('tr').remove(); // Remove row from table
+                                    } else {
+                                        alert("Failed to update visibility: " + response);
+                                        $button.prop('disabled', false);
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error("Error updating project:", error);
+                                    alert("Error updating project: " + status);
+                                    $button.prop('disabled', false);
+                                }
+                            });
+                        });
+                    } catch (e) {
+                        console.error("Error parsing response:", e);
+                        $("#private-projects-body").html("<tr><td colspan='13' class='error-message'>Error processing project data</td></tr>");
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("AJAX error:", status, error);
+                    $("#private-projects-body").html(`<tr><td colspan='13' class='error-message'>Failed to fetch private projects: ${status}</td></tr>`);
+                }
+            });
+        }
+
+        function Logout() {
+            window.location.href = "login.html";
+        }
+    });
+    </script>
+</body>
+</html>

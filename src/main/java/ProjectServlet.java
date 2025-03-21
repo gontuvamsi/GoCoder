@@ -112,7 +112,7 @@ public class ProjectServlet extends HttpServlet {
 
     private void getProjectsByTechnology(HttpServletRequest request, Connection con, JSONObject jsonResponse) throws Exception {
         String technology = request.getParameter("technology");
-        String sql = "SELECT * FROM projects WHERE status = 'active'";
+        String sql = "SELECT * FROM projects WHERE status = 'active'and visibility = 'Public'";
 
         if (technology != null && !technology.isEmpty()) {
             sql += " AND technology = ?";

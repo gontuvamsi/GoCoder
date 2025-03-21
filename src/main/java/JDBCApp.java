@@ -15,4 +15,9 @@ public class JDBCApp {
 		return con;
 	}
 
+	public static void closeConnection(Connection conn) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

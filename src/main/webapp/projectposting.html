@@ -1,337 +1,340 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post a New Project - GoCoders</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Post a New Project - GoCoders</title>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+	rel="stylesheet" />
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
+	rel="stylesheet">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #E5F6FD;
-            color: #333333;
-            min-height: 100vh;
-        }
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #E5F6FD;
+	color: #333333;
+	min-height: 100vh;
+}
 
-        .navbar {
-            width: 100%;
-            background-color: #6200ea;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+.navbar {
+	width: 100%;
+	background-color: #6200ea;
+	padding: 15px 25px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
 
-        .navbar .logo {
-            font-size: 26px;
-            font-weight: 600;
-            color: #FFFFFF;
-            letter-spacing: 1px;
-        }
+.navbar .logo {
+	font-size: 26px;
+	font-weight: 600;
+	color: #FFFFFF;
+	letter-spacing: 1px;
+}
 
-        .navbar .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.navbar .nav-links {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
 
-        .navbar .nav-links a {
-            color: #FFFFFF;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+.navbar .nav-links a {
+	color: #FFFFFF;
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
 
-        .navbar .nav-links a:hover {
-            color: #E5F6FD;
-        }
+.navbar .nav-links a:hover {
+	color: #E5F6FD;
+}
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-        }
+.container {
+	max-width: 800px;
+	margin: 50px auto;
+	padding: 20px;
+}
 
-        .card {
-            background-color: #FFFFFF;
-            border-radius: 15px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            padding: 30px;
-            transition: transform 0.3s ease;
-        }
+.card {
+	background-color: #FFFFFF;
+	border-radius: 15px;
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+	padding: 30px;
+	transition: transform 0.3s ease;
+}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.card:hover {
+	transform: translateY(-5px);
+}
 
-        .card h2 {
-            font-size: 24px;
-            font-weight: 600;
-            color: #6200ea;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+.card h2 {
+	font-size: 24px;
+	font-weight: 600;
+	color: #6200ea;
+	text-align: center;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
 
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            color: #6200ea;
-            font-size: 16px;
-            font-weight: 500;
-            text-decoration: none;
-            margin-bottom: 20px;
-            transition: color 0.3s ease;
-        }
+.back-link {
+	display: inline-flex;
+	align-items: center;
+	color: #6200ea;
+	font-size: 16px;
+	font-weight: 500;
+	text-decoration: none;
+	margin-bottom: 20px;
+	transition: color 0.3s ease;
+}
 
-        .back-link:hover {
-            color: #3700b3;
-        }
+.back-link:hover {
+	color: #3700b3;
+}
 
-        .back-link i {
-            margin-right: 8px;
-        }
+.back-link i {
+	margin-right: 8px;
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+.form-group {
+	margin-bottom: 20px;
+}
 
-        .form-group label {
-            display: block;
-            font-size: 16px;
-            font-weight: 500;
-            color: #333333;
-            margin-bottom: 8px;
-        }
+.form-group label {
+	display: block;
+	font-size: 16px;
+	font-weight: 500;
+	color: #333333;
+	margin-bottom: 8px;
+}
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #6200ea;
-            border-radius: 6px;
-            font-size: 14px;
-            background-color: #F9F9F9;
-            color: #333333;
-        }
+.form-group input, .form-group select, .form-group textarea {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #6200ea;
+	border-radius: 6px;
+	font-size: 14px;
+	background-color: #F9F9F9;
+	color: #333333;
+}
 
-        .form-group textarea {
-            height: 128px; /* Matches original h-32 (8rem at default font size) */
-            resize: vertical;
-        }
+.form-group textarea {
+	height: 128px; /* Matches original h-32 (8rem at default font size) */
+	resize: vertical;
+}
 
-        .form-group .budget-range {
-            display: flex;
-            gap: 15px;
-        }
+.form-group .budget-range {
+	display: flex;
+	gap: 15px;
+}
 
-        .form-group .budget-range input {
-            width: 50%;
-        }
+.form-group .budget-range input {
+	width: 50%;
+}
 
-        .btn {
-            background-color: #28a745;
-            color: #FFFFFF;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            display: block;
-            margin: 0 auto;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+.btn {
+	background-color: #28a745;
+	color: #FFFFFF;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 6px;
+	font-size: 16px;
+	font-weight: 500;
+	cursor: pointer;
+	display: block;
+	margin: 0 auto;
+	transition: background-color 0.3s ease, transform 0.2s ease;
+}
 
-        .btn:hover {
-            background-color: #218838;
-            transform: translateY(-2px);
-        }
+.btn:hover {
+	background-color: #218838;
+	transform: translateY(-2px);
+}
 
-        #error-message,
-        #success-message {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 16px;
-            font-weight: 500;
-        }
+#error-message, #success-message {
+	text-align: center;
+	margin-top: 20px;
+	font-size: 16px;
+	font-weight: 500;
+}
 
-        #success-message {
-            color: #28a745;
-        }
+#success-message {
+	color: #28a745;
+}
 
-        #error-message {
-            color: #dc3545;
-        }
+#error-message {
+	color: #dc3545;
+}
 
-        .hidden {
-            display: none;
-        }
+.hidden {
+	display: none;
+}
 
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 10px 15px;
-            }
-
-            .navbar .logo {
-                font-size: 20px;
-            }
-
-            .navbar .nav-links a {
-                font-size: 14px;
-            }
-
-            .container {
-                padding: 10px;
-                margin: 30px auto;
-            }
-
-            .card {
-                padding: 20px;
-            }
-
-            .card h2 {
-                font-size: 20px;
-            }
-
-            .form-group label {
-                font-size: 14px;
-            }
-
-            .form-group input,
-            .form-group select,
-            .form-group textarea {
-                font-size: 12px;
-            }
-
-            .btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-        }
-    </style>
+@media ( max-width : 768px) {
+	.navbar {
+		padding: 10px 15px;
+	}
+	.navbar .logo {
+		font-size: 20px;
+	}
+	.navbar .nav-links a {
+		font-size: 14px;
+	}
+	.container {
+		padding: 10px;
+		margin: 30px auto;
+	}
+	.card {
+		padding: 20px;
+	}
+	.card h2 {
+		font-size: 20px;
+	}
+	.form-group label {
+		font-size: 14px;
+	}
+	.form-group input, .form-group select, .form-group textarea {
+		font-size: 12px;
+	}
+	.btn {
+		padding: 10px 20px;
+		font-size: 14px;
+	}
+}
+</style>
 </head>
 <body>
-    <div class="navbar">
-        <div class="logo">GoCoders</div>
-        <div class="nav-links">
-            <a href="customerdashboard.html">Dashboard</a>
-            <a href="home.html">Logout</a>
-        </div>
-    </div>
+	<div class="navbar">
+		<div class="logo">GoCoders</div>
+		<div class="nav-links">
+			<a href="customerdashboard.html">Dashboard</a> <a href="home.html">Logout</a>
+		</div>
+	</div>
 
-    <div class="container">
-        <div class="card">
-            <a href="customerdashboard.html" class="back-link"><i class="fas fa-arrow-left"></i> Back</a>
-            <h2>Post a New Project</h2>
-            <form id="project-form" method="post">
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Project Title:</label>
-                    <input type="text" class="w-full border rounded p-2" name="title" id="title" required>
-                </div>
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Project Description:</label>
-                    <textarea class="w-full border rounded p-2 h-32" name="description" id="description" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Technology/Stack Required:</label>
-                    <select class="w-full border rounded p-2" name="technology" id="technology" required>
-                        <option value="" disabled selected>Select Technology</option>
-                        <option>Java</option>
-                        <option>Python</option>
-                        <option>UI/UX</option>
-                        <option>React</option>
-                        <option>Machine Learning</option>
-                        <option>Others</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Project Category:</label>
-                    <select class="w-full border rounded p-2" name="category" id="category" required>
-                        <option value="" disabled selected>Select Category</option>
-                        <option>Web Development</option>
-                        <option>Android Development</option>
-                        <option>DevOps</option>
-                        <option>Mean Stack</option>
-                        <option>Mern Stack</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Target Deadline:</label>
-                    <input type="date" class="w-full border rounded p-2" name="deadline" id="deadline" required>
-                </div>
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Budget Range:</label>
-                    <div class="budget-range">
-                        <input type="number" class="w-1/2 border rounded p-2" name="min_budget" id="min_budget" min="0" placeholder="Min $" required>
-                        <input type="number" class="w-1/2 border rounded p-2" name="max_budget" id="max_budget" min="0" placeholder="Max $" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="block text-lg font-medium">Visibility:</label>
-                    <select class="w-full border rounded p-2" name="visibility" id="visibility" required>
-                        <option value="" disabled selected>Select Visibility</option>
-                        <option>Public</option>
-                        <option>Private</option>
-                    </select>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn">Submit Project</button>
-                </div>
-            </form>
-            <div id="error-message" class="hidden text-red-500 text-center mt-4">Please fix the errors above and try again.</div>
-            <div id="success-message" class="hidden text-green-500 text-center mt-4">Project posted successfully!</div>
-        </div>
-    </div>
+	<div class="container">
+		<div class="card">
+			<a href="customerdashboard.html" class="back-link"><i
+				class="fas fa-arrow-left"></i> Back</a>
+			<h2>Post a New Project</h2>
+			<form id="project-form" method="post">
+				<div class="form-group">
+					<label class="block text-lg font-medium">Project Title:</label> <input
+						type="text" class="w-full border rounded p-2" name="title"
+						id="title" required>
+				</div>
+				<div class="form-group">
+					<label class="block text-lg font-medium">Project
+						Description:</label>
+					<textarea class="w-full border rounded p-2 h-32" name="description"
+						id="description" required></textarea>
+				</div>
+				<div class="form-group">
+					<label class="block text-lg font-medium">Technology/Stack
+						Required:</label> <select class="w-full border rounded p-2"
+						name="technology" id="technology" required>
+						<option value="" disabled selected>Select Technology</option>
+						<option>Java</option>
+						<option>Python</option>
+						<option>UI/UX</option>
+						<option>React</option>
+						<option>Machine Learning</option>
+						<option>Others</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="block text-lg font-medium">Project Category:</label>
+					<select class="w-full border rounded p-2" name="category"
+						id="category" required>
+						<option value="" disabled selected>Select Category</option>
+						<option>Web Development</option>
+						<option>Android Development</option>
+						<option>DevOps</option>
+						<option>Mean Stack</option>
+						<option>Mern Stack</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label class="block text-lg font-medium">Target Deadline:</label> <input
+						type="date" class="w-full border rounded p-2" name="deadline"
+						id="deadline" required>
+				</div>
+				<div class="form-group">
+					<label class="block text-lg font-medium">Budget Range:</label>
+					<div class="budget-range">
+						<input type="number" class="w-1/2 border rounded p-2"
+							name="min_budget" id="min_budget" min="0" placeholder="Min $"
+							required> <input type="number"
+							class="w-1/2 border rounded p-2" name="max_budget"
+							id="max_budget" min="0" placeholder="Max $" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="block text-lg font-medium">Visibility:</label> <input
+						type="text"
+						class="w-full border rounded p-2 bg-gray-200 cursor-not-allowed"
+						name="visibility" id="visibility" value="Private" readonly>
+				</div>
 
-    <!-- JavaScript (Unchanged from Original) -->
-    <script>
-        // Restrict past dates for the deadline
-        document.addEventListener("DOMContentLoaded", function() {
-            const deadlineInput = document.getElementById("deadline");
-            const today = new Date().toISOString().split("T")[0];
-            deadlineInput.setAttribute("min", today);
-        });
+				<div class="text-center">
+					<button type="submit" class="btn">Submit Project</button>
+				</div>
+			</form>
+			<div id="error-message" class="hidden text-red-500 text-center mt-4">Please
+				fix the errors above and try again.</div>
+			<div id="success-message"
+				class="hidden text-green-500 text-center mt-4">Project posted
+				successfully!</div>
+		</div>
+	</div>
 
-        // AJAX Submission
-        $(document).ready(function() {
-            $("#project-form").submit(function(event) {
-                event.preventDefault(); // Prevent default form submission
+	<!-- JavaScript (Unchanged from Original) -->
+	<script>
+		// Restrict past dates for the deadline
+		document.addEventListener("DOMContentLoaded", function() {
+			const deadlineInput = document.getElementById("deadline");
+			const today = new Date().toISOString().split("T")[0];
+			deadlineInput.setAttribute("min", today);
+		});
 
-                var formData = $("#project-form").serialize(); // Serialize form data for proper submission
+		// AJAX Submission
+		$(document).ready(function() {
+			$("#project-form").submit(function(event) {
+				event.preventDefault(); // Prevent default form submission
 
-                console.log("Submitting form data:", formData); // Debugging: Log form data
+				var formData = $("#project-form").serialize(); // Serialize form data for proper submission
 
-                $.ajax({
-                    type: "POST",
-                    url: "ProjectPostingServlet",
-                    data: formData,
-                    success: function(response) {
-                        console.log("Server response:", response);
-                        alert(response); // Show response message
-                        $("#project-form")[0].reset(); // Reset form after successful submission
-                    },
-                    error: function(xhr) {
-                        console.error("Error: " + xhr.responseText);
-                        alert("An error occurred: " + xhr.responseText);
-                    }
-                });
-            });
-        });
-    </script>
+				console.log("Submitting form data:", formData); // Debugging: Log form data
+
+				$.ajax({
+					type : "POST",
+					url : "ProjectPostingServlet",
+					data : formData,
+					success : function(response) {
+						console.log("Server response:", response);
+						alert(response); // Show response message
+						$("#project-form")[0].reset(); // Reset form after successful submission
+					},
+					error : function(xhr) {
+						console.error("Error: " + xhr.responseText);
+						alert("An error occurred: " + xhr.responseText);
+					}
+				});
+			});
+		});
+	</script>
 </body>
 </html>
