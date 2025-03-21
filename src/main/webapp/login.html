@@ -223,6 +223,7 @@
         <div class="text-center">
           <a href="resetpassword.html">Forgot Password?</a>
         </div>
+        <p style="text-align: center; margin-top: 10px; cursor: pointer; color: #6200ea; font-weight: 300;" onclick="resetForm()">Reset</p>
       </form>
     </div>
   </div>
@@ -242,5 +243,13 @@
       if (errorMessage) alert(errorMessage);
     };
   </script>
+  <script>
+    function resetForm() {
+        document.querySelector("form").reset();
+        document.getElementById("passwordError").style.display = "none";
+        document.getElementById("submitBtn").disabled = true;
+    }
+</script>
+  
 </body>
 </html>

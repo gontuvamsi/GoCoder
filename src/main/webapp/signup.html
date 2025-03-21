@@ -104,7 +104,7 @@
             color: #333333;
         }
 
-        .form-group #passwordError {
+        .form-group .error-message {
             color: #dc3545;
             font-size: 14px;
             display: none;
@@ -203,6 +203,7 @@
                 <div class="form-group">
                     <label for="email">Email ID</label>
                     <input id="email" name="email" type="email" required oninput="checkForm()" />
+                    <p id="emailError" class="error-message">Please enter a valid email address</p>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
@@ -211,7 +212,7 @@
                 <div class="form-group">
                     <label for="confirmPassword">Confirm Password</label>
                     <input id="confirmPassword" name="confirmPassword" type="password" required oninput="checkForm()" />
-                    <p id="passwordError">Passwords do not match</p>
+                    <p id="passwordError" class="error-message">Passwords do not match</p>
                 </div>
                 <div class="form-group">
                     <label for="role">Role</label>
@@ -222,40 +223,76 @@
                     </select>
                 </div>
                 <button class="btn" type="submit" id="submitBtn" disabled>Submit</button>
+                <p style="text-align: center; margin-top: 10px; cursor: pointer; color: #6200ea; font-weight: 500;" onclick="resetForm()">Reset</p>
             </form>
         </div>
     </div>
 
-    <!-- JavaScript (Unchanged from Original) -->
+    <!-- Updated JavaScript with Email Validation -->
     <script>
-        function checkForm() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirmPassword').value;
-            const role = document.getElementById('role').value;
-            const submitBtn = document.getElementById('submitBtn');
-            const passwordError = document.getElementById('passwordError');
+    function checkForm() {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+        const role = document.getElementById('role').value;
+        const submitBtn = document.getElementById('submitBtn');
+        const emailError = document.getElementById('emailError');
+        const passwordError = document.getElementById('passwordError');
 
-            // Password validation regex
-            const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        // Validation patterns
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email format check
+        const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
+        // Initially hide all error messages
+        emailError.style.display = "none";
+        passwordError.style.display = "none";
+        submitBtn.disabled = true;
+
+        // Email validation (only if user has started typing)
+        if (email.length > 0) {
+            if (!emailPattern.test(email)) {
+                emailError.textContent = "Please enter a valid email address";
+                emailError.style.display = "block";
+                return;
+            }
+        }
+
+        // Password validation (only if user has started typing)
+        if (password.length > 0) {
             if (!passwordPattern.test(password)) {
                 passwordError.textContent = "Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character.";
                 passwordError.style.display = "block";
-                submitBtn.disabled = true;
                 return;
-            } else if (password !== confirmPassword) {
-                passwordError.textContent = "Passwords do not match";
-                passwordError.style.display = "block";
-                submitBtn.disabled = true;
-                return;
-            } else {
-                passwordError.style.display = "none";
-                submitBtn.disabled = !(name && email && password && confirmPassword && role);
             }
         }
+
+        // Confirm password validation (only if both fields have input)
+        if (confirmPassword.length > 0 && password.length > 0) {
+            if (password !== confirmPassword) {
+                passwordError.textContent = "Passwords do not match";
+                passwordError.style.display = "block";
+                return;
+            }
+        }
+
+        // Enable submit button only if all fields are filled and valid
+        if (name && email && password && confirmPassword && role && 
+            emailPattern.test(email) && 
+            passwordPattern.test(password) && 
+            password === confirmPassword) {
+            submitBtn.disabled = false;
+        }
+    }
+
+    function resetForm() {
+        document.querySelector("form").reset();
+        document.getElementById("emailError").style.display = "none";
+        document.getElementById("passwordError").style.display = "none";
+        document.getElementById("submitBtn").disabled = true;
+    }
     </script>
+
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
