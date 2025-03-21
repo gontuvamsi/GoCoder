@@ -173,6 +173,7 @@
 
         .btn-accept {
             background-color: #28a745;
+            padding: 8px 15px;
         }
 
         .btn-accept:hover {
@@ -181,7 +182,8 @@
 
         .btn-reject {
             background-color: #dc3545;
-            margin-left: 10px;
+            padding: 8px 15px;
+            margin-left: 5px; /* Reduced margin for better spacing */
         }
 
         .btn-reject:hover {
@@ -206,6 +208,13 @@
             color: #666666;
         }
 
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 padding: 10px 15px;
@@ -224,6 +233,16 @@
                 padding: 10px;
                 margin: 30px auto;
             }
+
+            .action-buttons {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .btn-accept, .btn-reject {
+                width: 100%;
+                margin-left: 0;
+            }
         }
     </style>
 </head>
@@ -231,7 +250,7 @@
     <div class="navbar">
         <div class="logo">GoCoders</div>
         <div class="nav-links">
-        	<a href="coderreport.html">Coders</a>
+            <a href="coderreport.html">Coders</a>
             <a href="projectposting.html">Post Project</a>
             <a href="ProjectProgress.html">Project Status</a>
             <span id="user-name"></span>
@@ -252,6 +271,7 @@
                 <table>
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>Title</th>
                             <th>Technology</th>
                             <th>Deadline</th>
@@ -264,7 +284,20 @@
         </div>
 
         <div class="card">
-            <h2>Bids Received</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Bids Received</h2>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <input type="text" 
+                           id="bid-search" 
+                           placeholder="Search by Project Name..." 
+                           style="padding: 8px; border-radius: 4px; border: 1px solid #6200ea; font-size: 14px;">
+                    <button class="btn" 
+                            onclick="searchBids()" 
+                            style="padding: 8px 15px;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
             <div class="table-container">
                 <table>
                     <thead>
@@ -272,7 +305,7 @@
                             <th>Bid ID</th>
                             <th>Project Name</th>
                             <th>Coder Name</th>
-                            <th>Bid Amount (in $)</th>
+                            <th>Bid Amount<br>(in $)</th>
                             <th>Description</th>
                             <th>Completion Date</th>
                             <th>Status</th>
@@ -338,19 +371,20 @@
                         projects.forEach(function (project) {
                             html += `
                                 <tr>
+                                    <td>${project.id}</td>
                                     <td>${project.title}</td>
                                     <td>${project.technology}</td>
                                     <td>${project.deadline}</td>
                                     <td>${project.min_budget} - ${project.max_budget}</td>
                                 </tr>`;
-                        });
+                        });                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
                         $("#project-table-body").html(html);
                     } else {
-                        $("#project-table-body").html("<tr><td colspan='4' class='text-center'>No Projects Found</td></tr>");
+                        $("#project-table-body").html("<tr><td colspan='5' class='text-center'>No Projects Found</td></tr>");
                     }
                 },
                 error: function () {
-                    $("#project-table-body").html("<tr><td colspan='4' class='text-center'>Failed to fetch projects</td></tr>");
+                    $("#project-table-body").html("<tr><td colspan='5' class='text-center'>Failed to fetch projects</td></tr>");
                 }
             });
         }
@@ -367,7 +401,7 @@
                     tableBody.empty();
 
                     if (response.length === 0) {
-                        tableBody.append(`<tr><td colspan="7" class="text-center">No data found</td></tr>`);
+                        tableBody.append(`<tr><td colspan="8" class="text-center">No data found</td></tr>`);
                         return;
                     }
 
@@ -383,13 +417,19 @@
                                 <td>${bid.status}</td>
                                 <td>
                                     ${bid.status === "pending" ? `
-                                        <button class="btn btn-accept" onclick="updateStatus(this, 'Accepted', ${bid.id})">Accept</button>
-                                        <button class="btn btn-reject" onclick="updateStatus(this, 'Rejected', ${bid.id})">Reject</button>
+                                        <div class="action-buttons">
+                                            <button class="btn btn-accept" onclick="updateStatus(this, 'Accepted', ${bid.id})">Accept</button>
+                                            <button class="btn btn-reject" onclick="updateStatus(this, 'Rejected', ${bid.id})">Reject</button>
+                                        </div>
                                     ` : `<span class="status-text">${toUpperCase(bid.status)}</span>`}
                                 </td>
                             </tr>`;
                         tableBody.append(row);
                     });
+                    
+                    // Reset search input and show all rows
+                    $("#bid-search").val("");
+                    $("#bids-table-body tr").show();
                 },
                 error: function (xhr, status, error) {
                     console.log("Error:", error);
@@ -399,7 +439,7 @@
         }
 
         function updateStatus(button, status, bidId) {
-            let td = button.parentElement;
+            let td = button.parentElement.parentElement; // Changed to get the td element
             $.ajax({
                 url: "http://localhost:7050/GoCoder/BidStatusUpdater",
                 type: "POST",
@@ -420,6 +460,34 @@
         function toUpperCase(str) {
             return str.charAt(0).toUpperCase() + str.slice(1);
         }
+
+        function searchBids() {
+            const searchTerm = $("#bid-search").val().toLowerCase();
+            const rows = $("#bids-table-body tr");
+
+            rows.each(function() {
+                const projectName = $(this).find("td:nth-child(2)").text().toLowerCase();
+                if (projectName.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+
+            // Show message if no results found
+            if ($("#bids-table-body tr:visible").length === 0 && rows.length > 0) {
+                $("#bids-table-body").append(
+                    '<tr id="no-results"><td colspan="8" class="text-center">No matching bids found</td></tr>'
+                );
+            } else {
+                $("#no-results").remove();
+            }
+        }
+
+        // Add real-time search functionality
+        $("#bid-search").on("keyup", function() {
+            searchBids();
+        });
 
         function Logout() {
             window.location.href = "login.html";
