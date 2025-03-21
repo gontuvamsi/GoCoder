@@ -228,7 +228,7 @@
     <div class="navbar">
         <div class="logo">GoCoders</div>
         <div class="nav-links">
-        <a href="customerlist.html">Customers</a>
+            <a href="customerlist.html">Customers</a>
             <a href="support.html">Support</a>
             <a href="projectstatus.html">Post Project Status</a>
             <span id="user-name"></span>
@@ -313,6 +313,26 @@
                     <tbody id="myProjectsTableBody">
                         <tr>
                             <td colspan="4" class="text-center">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Favourite Customers</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                        </tr>
+                    </thead>
+                    <tbody id="favCustomersTableBody">
+                        <tr>
+                            <td colspan="3" class="text-center">Loading...</td>
                         </tr>
                     </tbody>
                 </table>
@@ -437,6 +457,43 @@
             xhr.send(params);
         }
 
+        function fetchFavouriteCustomers(userId) {
+            let xhr = new XMLHttpRequest();
+            let url = "http://localhost:7050/GoCoder/GetFavouriteCustomers";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    let tableBody = document.getElementById("favCustomersTableBody");
+                    tableBody.innerHTML = "";
+
+                    if (xhr.status === 200) {
+                        let data = JSON.parse(xhr.responseText);
+                        if (data.length === 0) {
+                            tableBody.innerHTML = `<tr><td colspan="3" class="text-center">No favourite customers found</td></tr>`;
+                            return;
+                        }
+                        data.forEach(customer => {
+                            let row = `
+                                <tr>
+                                    <td>${customer.id}</td>
+                                    <td>${customer.name}</td>
+                                    <td>${customer.email}</td>
+                                </tr>`;
+                            tableBody.innerHTML += row;
+                        });
+                    } else {
+                        console.error("Error fetching favourite customers:", xhr.statusText);
+                        tableBody.innerHTML = `<tr><td colspan="3" class="text-center text-danger">Failed to load favourite customers</td></tr>`;
+                    }
+                }
+            };
+
+            let params = "user_id=" + encodeURIComponent(userId);
+            xhr.send(params);
+        }
+
         function getUserDets() {
             $.ajax({
                 url: "http://localhost:7050/GoCoder/session/getId",
@@ -446,6 +503,7 @@
                         $("#user-name").html(`Hi ${response.user_name}`);
                         fetchBids(response.user_id);
                         fetchMyProjects(response.user_id);
+                        fetchFavouriteCustomers(response.user_id); // Call the new function here
                     } else {
                         alert("No Login Details Found");
                         redirectToPage("login.html");

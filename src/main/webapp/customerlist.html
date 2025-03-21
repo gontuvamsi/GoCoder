@@ -182,7 +182,7 @@
         .action-btn {
             padding: 6px 12px;
             border: none;
-            background-color: #6200ea;
+            background-color: #6200ea; /* Default purple */
             color: #FFFFFF;
             border-radius: 4px;
             cursor: pointer;
@@ -197,13 +197,17 @@
         }
 
         .action-btn:hover {
-            background-color: #3700b3;
+            background-color: #3700b3; /* Darker purple on hover */
             transform: scale(1.05);
         }
 
         .action-btn.active {
-            background-color: #ffca28;
-            color: #333333;
+            background-color: #ffca28; /* Yellow when favorited */
+            color: #333333; /* Dark text for contrast */
+        }
+
+        .action-btn.active:hover {
+            background-color: #ffb300; /* Slightly darker yellow on hover */
         }
 
         .action-btn:disabled {
@@ -271,10 +275,9 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
     $(document).ready(function () {
-        let currentUserId = null; // Store user ID globally
-        
+        let currentUserId = null;
+
         getUserDets();
-        fetchCustomerList();
 
         function getUserDets() {
             $.ajax({
@@ -283,7 +286,8 @@
                 success: function (response) {
                     if (response && response.status === "success") {
                         $("#user-name").html(`Hi ${response.user_name}`);
-                        currentUserId = response.user_id; // Store user ID from session
+                        currentUserId = response.user_id;
+                        fetchCustomerList(); // Load list after user ID is set
                     } else {
                         alert("No Login Details Found");
                         window.location.href = "login.html";
@@ -297,9 +301,14 @@
         }
 
         function fetchCustomerList() {
+            if (!currentUserId) return; // Wait for user ID
+
             $.ajax({
                 url: "http://localhost:7050/GoCoder/CustomerList",
                 type: "GET",
+                beforeSend: function() {
+                    $("#customer-list-body").html("<tr><td colspan='4' class='error-message'>Loading...</td></tr>");
+                },
                 success: function (response) {
                     try {
                         let parser = new DOMParser();
@@ -311,13 +320,14 @@
                             rows.each(function() {
                                 let cells = $(this).find('td');
                                 if (cells.length === 3) {
+                                    const customerId = cells.eq(0).text();
                                     html += `
                                         <tr>
-                                            <td>${cells.eq(0).text()}</td>
+                                            <td>${customerId}</td>
                                             <td>${cells.eq(1).text()}</td>
                                             <td>${cells.eq(2).text()}</td>
                                             <td>
-                                                <button class="action-btn" data-id="${cells.eq(0).text()}">
+                                                <button class="action-btn" data-id="${customerId}">
                                                     <i class="fas fa-star"></i> Star
                                                 </button>
                                             </td>
@@ -332,44 +342,8 @@
                         }
                         $("#customer-list-body").html(html);
 
-                        // Add click event handler for star buttons
-                        $('.action-btn').on('click', function() {
-                            const $button = $(this);
-                            const customerId = $button.data('id');
-                            
-                            if (!currentUserId) {
-                                alert("User not logged in");
-                                return;
-                            }
-
-                            // Disable button to prevent multiple clicks
-                            $button.prop('disabled', true);
-
-                            // Make AJAX call to save favorite
-                            $.ajax({
-                                url: "http://localhost:7050/GoCoder/favoriteCustomer",
-                                type: "POST",
-                                data: {
-                                    user_id: currentUserId,
-                                    customer_id: customerId
-                                },
-                                success: function(response) {
-                                    if (response && response.status === "success") {
-                                        $button.toggleClass('active');
-                                        alert("Customer marked as favorite!");
-                                    } else {
-                                        alert("Failed to save favorite: " + (response.message || "Unknown error"));
-                                    }
-                                },
-                                error: function(xhr, status, error) {
-                                    console.error("Error saving favorite:", error);
-                                    alert("Error saving favorite: " + status);
-                                },
-                                complete: function() {
-                                    $button.prop('disabled', false); // Re-enable button
-                                }
-                            });
-                        });
+                        // Check initial favorite status
+                        checkFavoriteStatus();
                     } catch (e) {
                         console.error("Error parsing response:", e);
                         $("#customer-list-body").html("<tr><td colspan='4' class='error-message'>Error processing customer data</td></tr>");
@@ -382,8 +356,92 @@
             });
         }
 
+        function checkFavoriteStatus() {
+            $('.action-btn').each(function() {
+                const $button = $(this);
+                const customerId = $button.data('id');
+
+                $.ajax({
+                    url: "http://localhost:7050/GoCoder/favoriteCustomer/check",
+                    type: "POST",
+                    data: { user_id: currentUserId, customer_id: customerId },
+                    success: function(response) {
+                        if (response && response.isFavorite) {
+                            $button.addClass('active'); // Yellow if already favorited
+                        } else {
+                            $button.removeClass('active'); // Purple if not favorited
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Error checking favorite status for customer " + customerId + ":", error);
+                        $button.removeClass('active'); // Default to purple on error
+                    }
+                });
+            });
+        }
+
+        // Debounce function to prevent rapid clicks
+        function debounce(func, wait) {
+            let timeout;
+            return function(...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        // Event delegation with debounce
+        $("#customer-list-body").on('click', '.action-btn', debounce(function(e) {
+            e.preventDefault();
+            const $button = $(this);
+            const customerId = $button.data('id');
+
+            if (!currentUserId) {
+                alert("User not logged in");
+                return;
+            }
+
+            $button.prop('disabled', true);
+
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/favoriteCustomer",
+                type: "POST",
+                data: {
+                    user_id: currentUserId,
+                    customer_id: customerId
+                },
+                success: function(response) {
+                    if (response && response.status === "success") {
+                        if (response.message.includes("added")) {
+                            $button.addClass('active'); // Turn yellow
+                        } else if (response.message.includes("removed")) {
+                            $button.removeClass('active'); // Turn purple
+                        }
+                        alert(response.message);
+                    } else {
+                        alert("Failed to save favorite: " + (response.message || "Unknown error"));
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error saving favorite:", error);
+                    alert("Error saving favorite: " + xhr.statusText);
+                },
+                complete: function() {
+                    $button.prop('disabled', false);
+                }
+            });
+        }, 300));
+
         function Logout() {
-            window.location.href = "login.html";
+            $.ajax({
+                url: "http://localhost:7050/GoCoder/session/logout",
+                type: "POST",
+                success: function() {
+                    window.location.href = "login.html";
+                },
+                error: function() {
+                    window.location.href = "login.html"; // Fallback
+                }
+            });
         }
     });
     </script>
