@@ -17,7 +17,7 @@ public class AcceptProjectServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/plain"); // Simple text response for AJAX
+        response.setContentType("text/plain"); 
         String projectId = request.getParameter("id");
 
         if (projectId == null || projectId.trim().isEmpty()) {
@@ -29,10 +29,9 @@ public class AcceptProjectServlet extends HttpServlet {
         PreparedStatement stmt = null;
 
         try {
-            // Get connection from JDBCApp
+            
             conn = JDBCApp.getConnection();
 
-            // SQL Query to update visibility
             String sql = "UPDATE projects SET visibility = 'Public' WHERE id = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(projectId));
@@ -50,10 +49,10 @@ public class AcceptProjectServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             response.getWriter().write("Invalid ID format");
         } finally {
-            // Clean up resources
+            
             try {
                 if (stmt != null) stmt.close();
-                JDBCApp.closeConnection(conn); // Assuming this method exists in JDBCApp
+                JDBCApp.closeConnection(conn); 
             } catch (SQLException e) {
                 e.printStackTrace();
             }

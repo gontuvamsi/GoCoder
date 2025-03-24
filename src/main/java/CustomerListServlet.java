@@ -18,27 +18,27 @@ public class CustomerListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // Set response content type
+        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         
-        // Database connection variables
+        
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         
         try {
-            // Get connection from JDBCApp
+            
             conn = JDBCApp.getConnection();
             
-            // Prepare SQL query
+
             String sql = "SELECT id, name, email FROM users WHERE role = 'Customer'";
             pstmt = conn.prepareStatement(sql);
             
-            // Execute query
+
             rs = pstmt.executeQuery();
             
-            // HTML output
+
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -58,7 +58,7 @@ public class CustomerListServlet extends HttpServlet {
             out.println("<th>Email</th>");
             out.println("</tr>");
             
-            // Process result set
+
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -82,11 +82,11 @@ public class CustomerListServlet extends HttpServlet {
             e.printStackTrace();
             out.println("Error: " + e.getMessage());
         } finally {
-            // Clean up resources
+
             try {
                 if (rs != null) rs.close();
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close(); // Assuming JDBCApp doesn't handle this
+                if (conn != null) conn.close(); 
             } catch (SQLException se) {
                 se.printStackTrace();
             }

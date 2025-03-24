@@ -261,7 +261,7 @@
         // Password validation (only if user has started typing)
         if (password.length > 0) {
             if (!passwordPattern.test(password)) {
-                passwordError.textContent = "Password must be at least 8 characters long and contain an uppercase letter, a lowercase letter, a number, and a special character.";
+                passwordError.textContent = "Password must be at least 8 characters. Must contain an uppercase letter, a lowercase letter, a number, and a special character.";
                 passwordError.style.display = "block";
                 return;
             }

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/PrivateProjects")
-public class PrivateProjectsServlet extends HttpServlet {
+@WebServlet("/RejectedProjects")
+public class RejectedProjectsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,12 +25,12 @@ public class PrivateProjectsServlet extends HttpServlet {
 
         try {
             conn = JDBCApp.getConnection();
-            String sql = "SELECT * FROM projects WHERE visibility = 'Private' AND status = 'active'";
+            String sql = "SELECT * FROM projects WHERE status = 'inactive'";
             stmt = conn.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             out.println("<html><body>");
-            out.println("<h2>Private Projects</h2>");
+            out.println("<h2>Rejected Projects</h2>");
             out.println("<table border='1'>");
             out.println("<tr>" +
                         "<th>ID</th>" +
@@ -108,25 +108,21 @@ public class PrivateProjectsServlet extends HttpServlet {
         try {
             conn = JDBCApp.getConnection();
             
-            String sql;
             if ("accept".equals(action)) {
-                sql = "UPDATE projects SET visibility = 'Public' WHERE id = ?";
-            } else if ("reject".equals(action)) {
-                sql = "UPDATE projects SET status = 'inactive' WHERE id = ?";
+                // Change both visibility to Public and status to active
+                String sql = "UPDATE projects SET visibility = 'Public', status = 'active' WHERE id = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setInt(1, Integer.parseInt(projectId));
+                
+                int rowsAffected = stmt.executeUpdate();
+                
+                if (rowsAffected > 0) {
+                    out.write("success");
+                } else {
+                    out.write("Project not found");
+                }
             } else {
                 out.write("Invalid action");
-                return;
-            }
-
-            stmt = conn.prepareStatement(sql);
-            stmt.setInt(1, Integer.parseInt(projectId));
-            
-            int rowsAffected = stmt.executeUpdate();
-            
-            if (rowsAffected > 0) {
-                out.write("success");
-            } else {
-                out.write("Project not found");
             }
             
         } catch (SQLException e) {
