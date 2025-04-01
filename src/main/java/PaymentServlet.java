@@ -18,7 +18,7 @@ public class PaymentServlet extends HttpServlet {
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        // Retrieve form data
+        
         String projectId = request.getParameter("project_id");
         String projectName = request.getParameter("project_name");
         String amountPaid = request.getParameter("amount_paid");

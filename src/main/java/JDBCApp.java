@@ -16,7 +16,7 @@ public class JDBCApp {
 	}
 
 	public static void closeConnection(Connection conn) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

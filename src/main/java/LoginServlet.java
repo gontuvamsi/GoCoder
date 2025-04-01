@@ -21,22 +21,22 @@ public class LoginServlet extends HttpServlet {
         try {
             Connection con = JDBCApp.getConnection();
             
-            // Check if email exists first
+            
             String emailCheckQuery = "SELECT COUNT(*) FROM users WHERE email = ?";
             PreparedStatement emailCheckPs = con.prepareStatement(emailCheckQuery);
             emailCheckPs.setString(1, email);
             ResultSet emailRs = emailCheckPs.executeQuery();
             
             if (emailRs.next() && emailRs.getInt(1) == 0) {
-                // Email does not exist
+                
                 response.sendRedirect("login.html?error=Invalid email");
                 emailCheckPs.close();
                 emailRs.close();
                 con.close();
-                return; // Exit early
+                return; 
             }
             
-            // Email exists, now check password
+            
             String query = "SELECT id, name, role FROM users WHERE email = ? AND password = ?";
             PreparedStatement ps = con.prepareStatement(query);
             ps.setString(1, email);
@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // Successful login
+                
                 int userId = rs.getInt("id");
                 String name = rs.getString("name");
                 String roleFromDB = rs.getString("role");
@@ -69,7 +69,7 @@ public class LoginServlet extends HttpServlet {
                         response.sendRedirect("login.html?error=Unknown role. Contact admin.");
                 }
             } else {
-                // Email exists but password is wrong
+                
                 response.sendRedirect("login.html?error=Invalid password");
             }
 

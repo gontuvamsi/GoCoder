@@ -21,7 +21,7 @@ public class ProjectPostingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Check if the session exists
+        
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("userId") == null) {
             response.getWriter().println("Session Expired. Please log in again.");
@@ -31,7 +31,7 @@ public class ProjectPostingServlet extends HttpServlet {
 
         int user_id = (int) session.getAttribute("userId");
 
-        // Get parameters from the request
+        
         String title = request.getParameter("title");
         String description = request.getParameter("description");
         String technology = request.getParameter("technology");
@@ -41,7 +41,7 @@ public class ProjectPostingServlet extends HttpServlet {
         String maxBudgetStr = request.getParameter("max_budget");
         String visibility = request.getParameter("visibility");
 
-        // Debugging: Print all request parameters
+        
         System.out.println("Received Parameters:");
         System.out.println("Title: " + title);
         System.out.println("Description: " + description);
@@ -52,7 +52,7 @@ public class ProjectPostingServlet extends HttpServlet {
         System.out.println("Max Budget: " + maxBudgetStr);
         System.out.println("Visibility: " + visibility);
 
-        // Check for missing fields
+        
         if (title == null || title.isEmpty() || description == null || description.isEmpty()
                 || technology == null || technology.isEmpty() || category == null || category.isEmpty()
                 || deadlineStr == null || deadlineStr.isEmpty() || minBudgetStr == null || minBudgetStr.isEmpty()
@@ -64,27 +64,27 @@ public class ProjectPostingServlet extends HttpServlet {
         }
 
         try {
-            // Convert deadline string to SQL date format
+            
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date deadline = dateFormat.parse(deadlineStr);
             java.sql.Date sqlDeadline = new java.sql.Date(deadline.getTime());
 
-            // Convert budget values to double
+            
             double minBudget = Double.parseDouble(minBudgetStr);
             double maxBudget = Double.parseDouble(maxBudgetStr);
 
             System.out.println("Parsed Deadline: " + sqlDeadline);
             System.out.println("Parsed Budgets: Min - " + minBudget + ", Max - " + maxBudget);
 
-            // Database connection details
+            
             String jdbcUrl = "jdbc:mysql://localhost:3306/gocoder";
             String dbUser = "root";
             String dbPassword = "root";
 
-            // Load MySQL JDBC Driver
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Insert data into database
+            
             try (Connection connection = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
                  PreparedStatement preparedStatement = connection.prepareStatement(
                     "INSERT INTO projects (title, description, technology, category, deadline, min_budget, max_budget, visibility, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")) {

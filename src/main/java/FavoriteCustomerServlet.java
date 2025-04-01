@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/favoriteCustomer/*") // Updated to handle sub-paths like /check
+@WebServlet("/favoriteCustomer/*") 
 public class FavoriteCustomerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -22,14 +22,14 @@ public class FavoriteCustomerServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("application/json; charset=UTF-8");
-        String pathInfo = request.getPathInfo(); // Get the sub-path (e.g., /check)
+        String pathInfo = request.getPathInfo(); 
 
         try (PrintWriter out = response.getWriter()) {
             if (pathInfo != null && pathInfo.equals("/check")) {
-                // Handle the /favoriteCustomer/check endpoint
+                
                 handleCheckFavorite(request, response, out);
             } else {
-                // Handle the original /favoriteCustomer endpoint
+                
                 handleToggleFavorite(request, response, out);
             }
         }

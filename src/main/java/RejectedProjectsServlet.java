@@ -109,7 +109,7 @@ public class RejectedProjectsServlet extends HttpServlet {
             conn = JDBCApp.getConnection();
             
             if ("accept".equals(action)) {
-                // Change both visibility to Public and status to active
+                
                 String sql = "UPDATE projects SET visibility = 'Public', status = 'active' WHERE id = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, Integer.parseInt(projectId));

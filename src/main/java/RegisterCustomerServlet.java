@@ -27,7 +27,7 @@ public class RegisterCustomerServlet extends HttpServlet {
         String jdbcUser = "root";
         String jdbcPassword = "root";
 
-        // HTML structure with custom modal
+        
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");

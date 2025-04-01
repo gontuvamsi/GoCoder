@@ -17,20 +17,20 @@ public class UserProjectReportServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         
-        // Set response content type
+        
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        // Database connection variables
+        
         Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
         try {
-            // Get connection from JDBCApp
-            conn = JDBCApp.getConnection();  // Assuming getConnection() is a static method in JDBCApp
+            
+            conn = JDBCApp.getConnection();  
 
-            // SQL query
+            
             String sql = "SELECT u.id, u.name, u.email, " +
                         "COUNT(ps.project_id) AS completed_projects " +
                         "FROM users u " +
@@ -40,11 +40,11 @@ public class UserProjectReportServlet extends HttpServlet {
                         "GROUP BY u.id, u.name, u.email " +
                         "ORDER BY u.id";
 
-            // Prepare and execute statement
+            
             pstmt = conn.prepareStatement(sql);
             rs = pstmt.executeQuery();
 
-            // HTML output
+            
             out.println("<html><body>");
             out.println("<h2>User Project Report</h2>");
             out.println("<table border='1'>");
@@ -55,7 +55,7 @@ public class UserProjectReportServlet extends HttpServlet {
             out.println("<th>Completed Projects</th>");
             out.println("</tr>");
 
-            // Process result set
+            
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
@@ -80,7 +80,7 @@ public class UserProjectReportServlet extends HttpServlet {
             out.println("</body></html>");
             e.printStackTrace();
         } finally {
-            // Clean up resources
+            
             try {
                 if (rs != null) rs.close();
                 if (pstmt != null) pstmt.close();

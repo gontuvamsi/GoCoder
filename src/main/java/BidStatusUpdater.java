@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
-@WebServlet("/BidStatusUpdater")  // Changed servlet name and URL mapping
+@WebServlet("/BidStatusUpdater")  
 public class BidStatusUpdater extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

@@ -66,7 +66,7 @@ public class UpdateBidStatusServlet extends HttpServlet {
         }
 
         try (Connection conn = JDBCApp.getConnection()) {
-            // Check if bid_id exists before updating
+            
             String checkQuery = "SELECT COUNT(*) FROM bids WHERE id = ?";
             try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
                 checkStmt.setInt(1, bidId);
@@ -80,7 +80,7 @@ public class UpdateBidStatusServlet extends HttpServlet {
                 }
             }
 
-            // Perform the update
+            
             String sql = "UPDATE bids SET status = ? WHERE id = ?";
             try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
                 pstmt.setString(1, status);

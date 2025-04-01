@@ -81,7 +81,7 @@ public class ProjectServlet extends HttpServlet {
     }
 
     private void putProject(HttpSession session, HttpServletRequest request, Connection con, JSONObject jsonResponse) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 

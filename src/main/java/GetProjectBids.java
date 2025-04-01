@@ -22,7 +22,7 @@ public class GetProjectBids extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         
-        String projectOwnerId = request.getParameter("user_id"); // Get the project owner ID from the request
+        String projectOwnerId = request.getParameter("user_id"); 
         if (projectOwnerId == null || projectOwnerId.trim().isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             out.print("{\"error\":\"Missing required parameter: user_id\"}");

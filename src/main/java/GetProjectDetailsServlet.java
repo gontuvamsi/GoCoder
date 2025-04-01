@@ -30,7 +30,7 @@ public class GetProjectDetailsServlet extends HttpServlet {
         }
 
         try {
-            // Use JDBCApp to get the connection
+            
             try (Connection conn = JDBCApp.getConnection()) {
                 if (conn == null) {
                     jsonResponse.put("status", "error");

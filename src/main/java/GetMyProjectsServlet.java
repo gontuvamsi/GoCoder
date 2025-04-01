@@ -19,18 +19,18 @@ import org.json.JSONObject;
 public class GetMyProjectsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    // Database connection details (update these based on your setup)
+    
     private static final String DB_URL = "jdbc:mysql://localhost:3306/gocoder";
     private static final String DB_USER = "root";
     private static final String DB_PASSWORD = "root";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Set response content type to JSON
+        
         response.setContentType("application/json");
         PrintWriter out = response.getWriter();
 
-        // Get user_id from the request
+        
         String userId = request.getParameter("user_id");
         if (userId == null || userId.trim().isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -44,21 +44,21 @@ public class GetMyProjectsServlet extends HttpServlet {
         ResultSet rs = null;
 
         try {
-            // Load the MySQL JDBC driver
+            
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            // Establish database connection
+            
             conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            // Prepare SQL query
+            
             String sql = "SELECT project_id, project_name, project_status FROM project_status WHERE status_submitted_by = ?";
             stmt = conn.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(userId));
 
-            // Execute query
+            
             rs = stmt.executeQuery();
 
-            // Build JSON response
+            
             JSONArray projectsArray = new JSONArray();
             while (rs.next()) {
                 JSONObject project = new JSONObject();
@@ -68,7 +68,7 @@ public class GetMyProjectsServlet extends HttpServlet {
                 projectsArray.put(project);
             }
 
-            // Send JSON response
+            
             out.print(projectsArray.toString());
             out.flush();
 
@@ -88,7 +88,7 @@ public class GetMyProjectsServlet extends HttpServlet {
             out.flush();
             e.printStackTrace();
         } finally {
-            // Clean up resources
+            
             try {
                 if (rs != null) rs.close();
                 if (stmt != null) stmt.close();

@@ -38,7 +38,7 @@ public class GetFavouriteCustomers extends HttpServlet {
         List<JSONObject> customers = new ArrayList<>();
 
         try {
-            // Assuming JDBCApp.java has a static method getConnection() to get DB connection
+            
             conn = JDBCApp.getConnection();
 
             String sql = "SELECT users.id, users.name, users.email " +

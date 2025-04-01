@@ -19,7 +19,7 @@ public class ProjectStatusServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         
         try {
-            Connection conn = JDBCApp.getConnection(); // Using JDBCApp.java for connection
+            Connection conn = JDBCApp.getConnection(); 
             String query = "SELECT * FROM project_status";
             PreparedStatement ps = conn.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
